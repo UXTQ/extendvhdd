@@ -117,3 +117,41 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+          target: x86_64-unknown-linux-gnu
+      - uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --target x86_64-unknown-linux-gnu
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --target x86_64-unknown-linux-gnu
+  thumbv6m:
+    name: thumbv6m
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: thumbv6m-none-eabi
+      - uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --target thumbv6m-none-eabi --no-default-features
+  wasm32-unknown-unknown:
+    name: wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+      - uses: actions-rs/cargo@v1
+        with:
+          command: check
+          args: --target wasm32-unknown-unknown --no-default-features
