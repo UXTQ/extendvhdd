@@ -54,3 +54,59 @@ Attempting to use aHash as a secure hash will likely fail to hold up for several
 1. aHash relies on random keys which are assumed to not be observable by an attacker. For a cryptographic hash all inputs can be seen and controlled by the attacker.
 2. aHash has not yet gone through peer review, which is a pre-requisite for security critical algorithms.
 3. Because aHash uses reduced rounds of AES as opposed to the standard of 10. Things like the SQUARE attack apply to part of the internal state.
+(These are mitigated by other means to prevent producing collections, but would be a problem in other contexts).
+4. Like any cypher based hash, it will show certain statistical deviations from truly random output when comparing a (VERY) large number of hashes. 
+(By definition cyphers have fewer collisions than truly random data.)
+
+There are efforts to build a secure hash function that uses AES-NI for acceleration, but aHash is not one of them.
+
+## How is aHash so fast
+
+AHash uses a number of tricks. 
+
+One trick is taking advantage of specialization. If aHash is compiled on nightly it will take
+advantage of specialized hash implementations for strings, slices, and primitives. 
+
+Another is taking advantage of hardware instructions.
+When it is available aHash uses AES rounds using the AES-NI instruction. AES-NI is very fast (on an intel i7-6700 it 
+is as fast as a 64 bit multiplication.) and handles 16 bytes of input at a time, while being a very strong permutation.
+
+This is obviously much faster than most standard approaches to hashing, and does a better job of scrambling data than most non-secure hashes.
+
+On an intel i7-6700 compiled on nightly Rust with flags `-C opt-level=3 -C target-cpu=native -C codegen-units=1`:
+
+| Input   | SipHash 1-3 time | FnvHash time|FxHash time| aHash time| aHash Fallback* |
+|----------------|-----------|-----------|-----------|-----------|---------------|
+| u8             | 9.3271 ns | 0.808 ns  | **0.594 ns**  | 0.7704 ns | 0.7664 ns |
+| u16            | 9.5139 ns | 0.803 ns  | **0.594 ns**  | 0.7653 ns | 0.7704 ns |
+| u32            | 9.1196 ns | 1.4424 ns | **0.594 ns**  | 0.7637 ns | 0.7712 ns |
+| u64            | 10.854 ns | 3.0484 ns | **0.628 ns**  | 0.7788 ns | 0.7888 ns |
+| u128           | 12.465 ns | 7.0728 ns | 0.799 ns  | **0.6174 ns** | 0.6250 ns |
+| 1 byte string  | 11.745 ns | 2.4743 ns | 2.4000 ns | **1.4921 ns** | 1.5861 ns |
+| 3 byte string  | 12.066 ns | 3.5221 ns | 2.9253 ns | **1.4745 ns** | 1.8518 ns |
+| 4 byte string  | 11.634 ns | 4.0770 ns | 1.8818 ns | **1.5206 ns** | 1.8924 ns |
+| 7 byte string  | 14.762 ns | 5.9780 ns | 3.2282 ns | **1.5207 ns** | 1.8933 ns |
+| 8 byte string  | 13.442 ns | 4.0535 ns | 2.9422 ns | **1.6262 ns** | 1.8929 ns |
+| 15 byte string | 16.880 ns | 8.3434 ns | 4.6070 ns | **1.6265 ns** | 1.7965 ns |
+| 16 byte string | 15.155 ns | 7.5796 ns | 3.2619 ns | **1.6262 ns** | 1.8011 ns |
+| 24 byte string | 16.521 ns | 12.492 ns | 3.5424 ns | **1.6266 ns** | 2.8311 ns |
+| 68 byte string | 24.598 ns | 50.715 ns | 5.8312 ns | **4.8282 ns** | 5.4824 ns |
+| 132 byte string| 39.224 ns | 119.96 ns | 11.777 ns | **6.5087 ns** | 9.1459 ns |
+|1024 byte string| 254.00 ns | 1087.3 ns | 156.41 ns | **25.402 ns** | 54.566 ns |
+
+* Fallback refers to the algorithm aHash would use if AES instructions are unavailable.
+For reference a hash that does nothing (not even reads the input data takes) **0.520 ns**. So that represents the fastest
+possible time.
+
+As you can see above aHash like `FxHash` provides a large speedup over `SipHash-1-3` which is already nearly twice as fast as `SipHash-2-4`.
+
+Rust's HashMap by default uses `SipHash-1-3` because faster hash functions such as `FxHash` are predictable and vulnerable to denial of
+service attacks. While `aHash` has both very strong scrambling and very high performance.
+
+AHash performs well when dealing with large inputs because aHash reads 8 or 16 bytes at a time. (depending on availability of AES-NI)
+
+Because of this, and its optimized logic, `aHash` is able to outperform `FxHash` with strings.
+It also provides especially good performance dealing with unaligned input.
+(Notice the big performance gaps between 3 vs 4, 7 vs 8 and 15 vs 16 in `FxHash` above)
+
+### Which CPUs can use the hardware acceleration
