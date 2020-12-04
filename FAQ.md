@@ -110,3 +110,10 @@ It also provides especially good performance dealing with unaligned input.
 (Notice the big performance gaps between 3 vs 4, 7 vs 8 and 15 vs 16 in `FxHash` above)
 
 ### Which CPUs can use the hardware acceleration
+
+Hardware AES instructions are built into Intel processors built after 2010 and AMD processors after 2012.
+It is also available on [many other CPUs](https://en.wikipedia.org/wiki/AES_instruction_set) should in eventually
+be able to get aHash to work. However, only X86 and X86-64 are the only supported architectures at the moment, as currently
+they are the only architectures for which Rust provides an intrinsic.
+
+aHash also uses `sse2` and `sse3` instructions. X86 processors that have `aesni` also have these instruction sets.
