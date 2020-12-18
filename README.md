@@ -68,3 +68,41 @@ are available to do this.
 ## Comparison with other hashers
 
 A full comparison with other hashing algorithms can be found [here](https://github.com/tkaitchuck/aHash/blob/master/compare/readme.md)
+
+![Hasher performance](https://docs.google.com/spreadsheets/d/e/2PACX-1vSK7Li2nS-Bur9arAYF9IfT37MP-ohAe1v19lZu5fd9MajI1fSveLAQZyEie4Ea9k5-SWHTff7nL2DW/pubchart?oid=1323618938&format=image)
+
+For a more representative performance comparison which includes the overhead of using a HashMap, see [HashBrown's benchmarks](https://github.com/rust-lang/hashbrown#performance)
+as HashBrown now uses aHash as its hasher by default.
+
+## Hash quality
+
+AHash passes the full [SMHasher test suite](https://github.com/rurban/smhasher). 
+
+The code to reproduce the result, and the full output [are checked into the repo](https://github.com/tkaitchuck/aHash/tree/master/smhasher).
+
+## Additional FAQ
+
+A separate FAQ document is maintained [here](https://github.com/tkaitchuck/aHash/blob/master/FAQ.md). 
+If you have questions not covered there, open an issue [here](https://github.com/tkaitchuck/aHash/issues).
+
+## License
+
+Licensed under either of:
+
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
+at your option.
+
+## Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any
+additional terms or conditions.
+
+
+
+
+
+
+
