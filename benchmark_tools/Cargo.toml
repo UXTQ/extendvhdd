@@ -3,4 +3,6 @@ name = "aHash"
 version = "0.1.0"
 edition = "2018"
 publish = false
-description = "A tool for benchmarking hashing algor
+description = "A tool for benchmarking hashing algorithms"
+
+# See more keys and their definitions at https://doc.rust
