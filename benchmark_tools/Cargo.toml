@@ -5,4 +5,7 @@ edition = "2018"
 publish = false
 description = "A tool for benchmarking hashing algorithms"
 
-# See more keys and their definitions at https://doc.rust
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+o
