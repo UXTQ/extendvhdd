@@ -41,3 +41,12 @@ pub fn test_hasher<B: BuildHasher>(input_file: File, builder: B) -> Result<u64, 
                 input.read_exact(&mut slice[..])?;
                 hasher.write(&slice[..]);
             }
+            b'f' => {
+                result = result.wrapping_add(hasher.finish());
+                hasher = builder.build_hasher();
+            }
+            code => panic!("Unexpected code: {}", code)
+        }
+    }
+    Ok(result)
+}
