@@ -7,3 +7,5 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use once_cell::sync::OnceCell;
 use std::process::id;
 
+static GLOBAL_COUNT: AtomicU64 = AtomicU64::new(0);
+st
