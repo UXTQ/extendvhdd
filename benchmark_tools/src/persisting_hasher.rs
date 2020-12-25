@@ -8,4 +8,4 @@ use once_cell::sync::OnceCell;
 use std::process::id;
 
 static GLOBAL_COUNT: AtomicU64 = AtomicU64::new(0);
-st
+static GLOBAL_OUT: OnceCell<Arc<Mutex<BufWriter<File>>>> = OnceCe
