@@ -11,4 +11,8 @@ static GLOBAL_COUNT: AtomicU64 = AtomicU64::new(0);
 static GLOBAL_OUT: OnceCell<Arc<Mutex<BufWriter<File>>>> = OnceCell::new();
 
 pub struct PersistingHasherBuilder {
-    i
+    id: u64,
+    out: Arc<Mutex<BufWriter<File>>>,
+}
+
+impl Persis
