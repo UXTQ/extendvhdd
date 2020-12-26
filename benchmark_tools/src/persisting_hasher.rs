@@ -8,4 +8,7 @@ use once_cell::sync::OnceCell;
 use std::process::id;
 
 static GLOBAL_COUNT: AtomicU64 = AtomicU64::new(0);
-static GLOBAL_OUT: OnceCell<Arc<Mutex<BufWriter<File>>>> = OnceCe
+static GLOBAL_OUT: OnceCell<Arc<Mutex<BufWriter<File>>>> = OnceCell::new();
+
+pub struct PersistingHasherBuilder {
+    i
