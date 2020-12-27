@@ -15,4 +15,6 @@ pub struct PersistingHasherBuilder {
     out: Arc<Mutex<BufWriter<File>>>,
 }
 
-impl Persis
+impl PersistingHasherBuilder {
+    pub fn flush(&self) {
+        let mut
