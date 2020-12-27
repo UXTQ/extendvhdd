@@ -17,4 +17,5 @@ pub struct PersistingHasherBuilder {
 
 impl PersistingHasherBuilder {
     pub fn flush(&self) {
-        let mut
+        let mut guard = self.out.lock().unwrap();
+        guard.flush().unwrap()
