@@ -22,4 +22,6 @@ impl PersistingHasherBuilder {
     }
 }
 
-impl Default for PersistingHasherBuilde
+impl Default for PersistingHasherBuilder {
+    fn default() -> Self {
+        PersistingHasherB
