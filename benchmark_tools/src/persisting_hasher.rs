@@ -24,4 +24,5 @@ impl PersistingHasherBuilder {
 
 impl Default for PersistingHasherBuilder {
     fn default() -> Self {
-        PersistingHasherB
+        PersistingHasherBuilder {
+            id: GLOBAL_COUNT.fetch_add(
