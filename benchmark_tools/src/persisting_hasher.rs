@@ -26,4 +26,5 @@ impl Default for PersistingHasherBuilder {
     fn default() -> Self {
         PersistingHasherBuilder {
             id: GLOBAL_COUNT.fetch_add(1, Ordering::SeqCst),
-            out: GLOBAL_OUT.get_or_init(|
+            out: GLOBAL_OUT.get_or_init(||
+                Arc::new(Mutex::new(BufWriter::new(File::create(
