@@ -28,4 +28,9 @@ impl Default for PersistingHasherBuilder {
             id: GLOBAL_COUNT.fetch_add(1, Ordering::SeqCst),
             out: GLOBAL_OUT.get_or_init(||
                 Arc::new(Mutex::new(BufWriter::new(File::create(
-                    format!("hash_output-{}", id())).unwrap())))).c
+                    format!("hash_output-{}", id())).unwrap())))).clone(),
+        }
+    }
+}
+
+impl BuildHasher for Persis
