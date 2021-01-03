@@ -33,4 +33,5 @@ impl Default for PersistingHasherBuilder {
     }
 }
 
-impl BuildHasher for Persis
+impl BuildHasher for PersistingHasherBuilder {
+    type Hasher = PersistingHash
