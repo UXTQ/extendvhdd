@@ -34,4 +34,7 @@ impl Default for PersistingHasherBuilder {
 }
 
 impl BuildHasher for PersistingHasherBuilder {
-    type Hasher = PersistingHash
+    type Hasher = PersistingHasher;
+
+    fn build_hasher(&self) -> Self::Hasher {
+        Per
