@@ -37,4 +37,6 @@ impl BuildHasher for PersistingHasherBuilder {
     type Hasher = PersistingHasher;
 
     fn build_hasher(&self) -> Self::Hasher {
-        Per
+        PersistingHasher {
+            hash: self.id,
+            out: self.out.c
