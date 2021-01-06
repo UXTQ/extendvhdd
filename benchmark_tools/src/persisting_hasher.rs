@@ -39,4 +39,10 @@ impl BuildHasher for PersistingHasherBuilder {
     fn build_hasher(&self) -> Self::Hasher {
         PersistingHasher {
             hash: self.id,
-            out: self.out.c
+            out: self.out.clone(),
+        }
+    }
+}
+
+pub struct PersistingHasher {
+    /// Used to com
