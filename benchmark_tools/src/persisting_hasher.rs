@@ -48,4 +48,7 @@ pub struct PersistingHasher {
     /// Used to compute a hash
     hash: u64,
     /// File to write data out to
-   
+    out: Arc<Mutex<BufWriter<File>>>,
+}
+
+impl PersistingHashe
