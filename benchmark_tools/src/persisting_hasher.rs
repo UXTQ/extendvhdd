@@ -45,4 +45,7 @@ impl BuildHasher for PersistingHasherBuilder {
 }
 
 pub struct PersistingHasher {
-    /// Used to com
+    /// Used to compute a hash
+    hash: u64,
+    /// File to write data out to
+   
