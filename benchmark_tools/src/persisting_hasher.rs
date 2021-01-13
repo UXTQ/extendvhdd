@@ -51,4 +51,6 @@ pub struct PersistingHasher {
     out: Arc<Mutex<BufWriter<File>>>,
 }
 
-impl PersistingHashe
+impl PersistingHasher {
+    fn add_to_hash(&mut self, i: u64) {
+        self
