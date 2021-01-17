@@ -55,4 +55,6 @@ impl PersistingHasher {
     fn add_to_hash(&mut self, i: u64) {
         self.hash = self
             .hash
-            .rotate_ri
+            .rotate_right(31)
+            .wrapping_add(i)
+            .wrappi
