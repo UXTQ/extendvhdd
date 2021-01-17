@@ -53,4 +53,6 @@ pub struct PersistingHasher {
 
 impl PersistingHasher {
     fn add_to_hash(&mut self, i: u64) {
-        self
+        self.hash = self
+            .hash
+            .rotate_ri
