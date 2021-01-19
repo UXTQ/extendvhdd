@@ -57,4 +57,8 @@ impl PersistingHasher {
             .hash
             .rotate_right(31)
             .wrapping_add(i)
-            .wrappi
+            .wrapping_mul(0xcfee444d8b59a89b);
+    }
+}
+
+impl Hasher for Per
