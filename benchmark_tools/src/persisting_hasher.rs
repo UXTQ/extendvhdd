@@ -61,4 +61,6 @@ impl PersistingHasher {
     }
 }
 
-impl Hasher for Per
+impl Hasher for PersistingHasher {
+    fn finish(&self) -> u64 {
+        let mu
