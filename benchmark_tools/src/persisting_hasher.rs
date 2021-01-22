@@ -69,4 +69,6 @@ impl Hasher for PersistingHasher {
     }
 
     fn write(&mut self, mut bytes: &[u8]) {
-        let read_u64 = |bytes: &[u8]| u64:
+        let read_u64 = |bytes: &[u8]| u64::from_ne_bytes(bytes[..8].try_into().unwrap());
+
+        while
