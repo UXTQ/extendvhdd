@@ -64,4 +64,8 @@ impl PersistingHasher {
 impl Hasher for PersistingHasher {
     fn finish(&self) -> u64 {
         let mut guard = self.out.lock().unwrap();
-        write!(guard, "f").unwrap
+        write!(guard, "f").unwrap();
+        self.hash
+    }
+
+    fn write(&mut self, mut b
