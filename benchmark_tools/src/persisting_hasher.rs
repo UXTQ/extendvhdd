@@ -73,4 +73,6 @@ impl Hasher for PersistingHasher {
 
         while bytes.len() >= 8 {
             self.add_to_hash(read_u64(bytes));
- 
+            bytes = &bytes[8..];
+        }
+    
