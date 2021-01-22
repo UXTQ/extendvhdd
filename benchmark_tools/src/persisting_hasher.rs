@@ -75,4 +75,5 @@ impl Hasher for PersistingHasher {
             self.add_to_hash(read_u64(bytes));
             bytes = &bytes[8..];
         }
-    
+        if bytes.len() >= 4 {
+            self.add_to_hash(u32::from_ne_bytes
