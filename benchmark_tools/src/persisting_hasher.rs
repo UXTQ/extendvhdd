@@ -77,3 +77,6 @@ impl Hasher for PersistingHasher {
         }
         if bytes.len() >= 4 {
             self.add_to_hash(u32::from_ne_bytes(bytes[..4].try_into().unwrap()) as u64);
+            bytes = &bytes[4..];
+        }
+        if b
