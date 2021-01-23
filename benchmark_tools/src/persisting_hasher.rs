@@ -80,4 +80,5 @@ impl Hasher for PersistingHasher {
             bytes = &bytes[4..];
         }
         if bytes.len() >= 2 {
-            self.add_to_hash(u16::from_ne_bytes(bytes
+            self.add_to_hash(u16::from_ne_bytes(bytes[..2].try_into().unwrap()) as u64);
+            bytes = &bytes
