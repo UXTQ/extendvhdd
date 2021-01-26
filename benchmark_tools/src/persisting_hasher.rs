@@ -84,4 +84,7 @@ impl Hasher for PersistingHasher {
             bytes = &bytes[2..];
         }
         if bytes.len() >= 1 {
-            self
+            self.add_to_hash(bytes[0] as u64);
+        }
+
+    
