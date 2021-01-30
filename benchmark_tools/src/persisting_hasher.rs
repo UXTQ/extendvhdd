@@ -101,4 +101,7 @@ impl Hasher for PersistingHasher {
         guard.write_all(&i.to_le_bytes()).unwrap();
     }
 
-    fn write_u16(&mut self, i: u16) 
+    fn write_u16(&mut self, i: u16) {
+        self.add_to_hash(i as u64);
+
+        let mu
