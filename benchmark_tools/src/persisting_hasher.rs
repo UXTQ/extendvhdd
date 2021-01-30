@@ -93,4 +93,7 @@ impl Hasher for PersistingHasher {
         guard.write_all(bytes).unwrap();
     }
 
-    fn write_u8(
+    fn write_u8(&mut self, i: u8) {
+        self.add_to_hash(i as u64);
+
+        l
