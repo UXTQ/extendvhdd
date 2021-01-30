@@ -88,4 +88,5 @@ impl Hasher for PersistingHasher {
         }
 
         let mut guard = self.out.lock().unwrap();
-        write!(guard, 
+        write!(guard, "s").unwrap();
+        guard.write_all(&(bytes.len() as u
