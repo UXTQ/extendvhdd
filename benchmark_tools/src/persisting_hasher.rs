@@ -122,4 +122,7 @@ impl Hasher for PersistingHasher {
 
         let mut guard = self.out.lock().unwrap();
         write!(guard, "8").unwrap();
-        guard.write_all(&i.to_le_bytes()).u
+        guard.write_all(&i.to_le_bytes()).unwrap();
+    }
+
+    fn write_u128(&mut self, i: u128) {
