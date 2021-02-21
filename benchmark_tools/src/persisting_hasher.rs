@@ -121,4 +121,5 @@ impl Hasher for PersistingHasher {
         self.add_to_hash(i as u64);
 
         let mut guard = self.out.lock().unwrap();
-        write
+        write!(guard, "8").unwrap();
+        guard.write_all(&i.to_le_bytes()).u
