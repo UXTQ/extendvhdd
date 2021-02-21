@@ -120,4 +120,5 @@ impl Hasher for PersistingHasher {
     fn write_u64(&mut self, i: u64) {
         self.add_to_hash(i as u64);
 
-    
+        let mut guard = self.out.lock().unwrap();
+        write
