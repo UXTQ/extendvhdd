@@ -43,3 +43,61 @@ As a result this should not be relied on. For this reason it is strongly recomme
 
 
 # Why use aHash over X
+
+## SipHash
+
+For a hashmap: Because aHash nearly **10x** faster.
+
+SipHash is however useful in other contexts, such as for a HMAC, where aHash would be completely inappropriate.
+
+*SipHash-2-4* is designed to provide DOS attack resistance, and has no presently known attacks
+against this claim that doesn't involve learning bits of the key.
+
+SipHash is also available in the "1-3" variant which is about twice as fast as the standard version.
+The SipHash authors don't recommend using this variation when DOS attacks are a concern, but there are still no known
+practical DOS attacks against the algorithm. Rust has opted for the "1-3" version as the  default in `std::collections::HashMap`,
+because the speed trade off of "2-4" was not worth it.
+
+As you can see in the graph above, aHash is **much** faster than even *SipHash-1-3*, and also provides DOS resistance.
+
+## FxHash
+
+In terms of performance, aHash is faster than the FXhash for strings and byte arrays but not primitives.
+So it might seem like using Fxhash for hashmaps when the key is a primitive is a good idea. This is *not* the case.
+
+When FX hash is operating on a 4 or 8 byte input such as a u32 or a u64, it reduces to multiplying the input by a fixed
+constant. This is a bad hashing algorithm because it means that lower bits can never be influenced by any higher bit. In
+the context of a hashmap where the low order bits are used to determine which bucket to put an item in, this isn't
+any better than the identity function. Any keys that happen to end in the same bit pattern will all collide. 
+Some examples of where this is likely to occur are:
+
+* Strings encoded in base64
+* Null terminated strings (when working with C code)
+* Integers that have the lower bits as zeros. (IE any multiple of small power of 2, which isn't a rare pattern in computer programs.)  
+  * For example when taking lengths of data or locations in data it is common for values to
+have a multiple of 1024, if these were used as keys in a map they will collide and end up in the same bucket.
+
+Like any non-keyed hash FxHash can be attacked. But FxHash is so prone to this that you may find yourself doing it accidentally.
+
+For example, it is possible to [accidentally introduce quadratic behavior by reading from one map in iteration order and writing to another.](https://accidentallyquadratic.tumblr.com/post/153545455987/rust-hash-iteration-reinsertion)
+
+Fxhash flaws make sense when you understand it for what it is. It is a quick and dirty hash, nothing more.
+it was not published and promoted by its creator, it was **found**!
+
+Because it is error-prone, FxHash should never be used as a default. In specialized instances where the keys are understood
+it makes sense, but given that aHash is faster on almost any object, it's probably not worth it.
+
+## FnvHash
+
+FnvHash is also a poor default. It only handles one byte at a time, so its performance really suffers with large inputs.
+It is also non-keyed so it is still subject to DOS attacks and [accidentally quadratic behavior.](https://accidentallyquadratic.tumblr.com/post/153545455987/rust-hash-iteration-reinsertion)
+
+## MurmurHash, CityHash, MetroHash, FarmHash, and HighwayHash
+
+Murmur, City, Metro, Farm and Highway are all related, and appear to directly replace one another.
+
+They are all fine hashing algorithms, they do a good job of scrambling data, but they are all targeted at a different
+usecase. They are intended to work in distributed systems where the hash is expected to be the same over time and from one
+computer to the next, efficiently hashing large volumes of data.
+
+This is quite different from the needs of a Hasher used in a hashmap. In a map the typical value is under 10 bytes. None
