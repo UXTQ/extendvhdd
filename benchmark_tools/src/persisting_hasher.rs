@@ -131,4 +131,7 @@ impl Hasher for PersistingHasher {
 
         let mut guard = self.out.lock().unwrap();
         write!(guard, "B").unwrap();
-        guard.write_a
+        guard.write_all(&i.to_le_bytes()).unwrap();
+    }
+
+    fn write_usize(&mut self
