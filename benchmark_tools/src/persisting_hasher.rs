@@ -134,4 +134,7 @@ impl Hasher for PersistingHasher {
         guard.write_all(&i.to_le_bytes()).unwrap();
     }
 
-    fn write_usize(&mut self
+    fn write_usize(&mut self, i: usize) {
+        self.add_to_hash(i as u64);
+
+        le
