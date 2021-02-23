@@ -101,3 +101,24 @@ usecase. They are intended to work in distributed systems where the hash is expe
 computer to the next, efficiently hashing large volumes of data.
 
 This is quite different from the needs of a Hasher used in a hashmap. In a map the typical value is under 10 bytes. None
+of these algorithms scale down to handle that small of data at a competitive time. What's more the restriction that they
+provide consistent output prevents them from taking advantage of different hardware capabilities on different CPUs. It makes
+sense for a hashmap to work differently on a phone than on a server, or in WASM.
+
+If you need to persist or transmit a hash of a file, then using one of these is probably a good idea. 
+HighwayHash seems to be the preferred solution as it offers high throughput for large objects and is DOS resistant.
+
+## t1ha and XXHash
+Like aHash, t1ha and XXHash are targeted at hashmaps and uses hardware instructions including AES for different platforms rather than having a single standard.
+Both are fast, but AHash is faster than either one, both with and without AES. This is particularly true of smaller inputs such as integers.
+T1ha's hashes do not pass the full of the SMHasher test suite.
+
+Neither XXHash nor T1ha explicitly claim DOS resistance, but both are keyed hashes, and do not have any obvious way to force collisions.
+As of this writing there doesn't appear to be a maintained crate implementing the latest version of t1ha.
+
+## wyHash
+Similarly, wyHash is targeted at hashmaps. WyHash is quite fast, but is not DOS resistant. 
+
+There are fixed strings which when encountered caused the internal state to reset. This makes wyHash trivial to attack.
+
+AHash outperforms wyHash across all input sizes, regardless of which CPU instructions are available. 
