@@ -1,0 +1,12 @@
+
+[package]
+name = "ahash-compare"
+version = "0.0.1"
+authors = ["Tom Kaitchuck <Tom.Kaitchuck@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A hash algorithm benchmark"
+documentation = "https://docs.rs/ahash"
+repository = "https://github.com/tkaitchuck/ahash"
+keywords = ["hash", "hashmap", "aes", "aes-ni", "no-std"]
+edition = "2018"
+readme = "README.md"
