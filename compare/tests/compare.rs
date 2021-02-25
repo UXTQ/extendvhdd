@@ -12,4 +12,8 @@ fn ahash<K: Hash>(k: &K, builder: &RandomState) -> u64 {
 
 fn generic_hash<K: Hash, B: BuildHasher>(key: &K, builder: &B) -> u64 {
     let mut hasher = builder.build_hasher();
-    key.h
+    key.hash(&mut hasher);
+    hasher.finish()
+}
+
+fn create_string(len: usize) -> 
