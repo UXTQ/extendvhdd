@@ -5,4 +5,5 @@ use fnv::{FnvBuildHasher};
 use fxhash::FxBuildHasher;
 use std::hash::{BuildHasher, BuildHasherDefault, Hash, Hasher};
 
-fn ahash<K
+fn ahash<K: Hash>(k: &K, builder: &RandomState) -> u64 {
+    let ha
