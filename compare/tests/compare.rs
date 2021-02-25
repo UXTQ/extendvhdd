@@ -6,4 +6,5 @@ use fxhash::FxBuildHasher;
 use std::hash::{BuildHasher, BuildHasherDefault, Hash, Hasher};
 
 fn ahash<K: Hash>(k: &K, builder: &RandomState) -> u64 {
-    let ha
+    let hasher = builder.build_hasher();
+    k.get_hash(ha
