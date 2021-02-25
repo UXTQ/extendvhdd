@@ -7,4 +7,7 @@ use std::hash::{BuildHasher, BuildHasherDefault, Hash, Hasher};
 
 fn ahash<K: Hash>(k: &K, builder: &RandomState) -> u64 {
     let hasher = builder.build_hasher();
-    k.get_hash(ha
+    k.get_hash(hasher)
+}
+
+fn generic_hash<K: Hash, B: BuildHasher>(key: &K, buil
