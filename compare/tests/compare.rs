@@ -16,4 +16,5 @@ fn generic_hash<K: Hash, B: BuildHasher>(key: &K, builder: &B) -> u64 {
     hasher.finish()
 }
 
-fn create_string(len: usize) -> 
+fn create_string(len: usize) -> String {
+    let mut string = String::default()
