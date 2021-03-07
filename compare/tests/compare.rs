@@ -19,4 +19,10 @@ fn generic_hash<K: Hash, B: BuildHasher>(key: &K, builder: &B) -> u64 {
 fn create_string(len: usize) -> String {
     let mut string = String::default();
     for pos in 1..=len {
-        let c = (48 + (pos % 10) as u8) as c
+        let c = (48 + (pos % 10) as u8) as char;
+        string.push(c);
+    }
+    string
+}
+
+fn compare_aha
