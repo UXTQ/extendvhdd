@@ -25,4 +25,6 @@ fn create_string(len: usize) -> String {
     string
 }
 
-fn compare_aha
+fn compare_ahash(c: &mut Criterion) {
+    let builder = RandomState::new();
+   
