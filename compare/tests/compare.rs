@@ -27,4 +27,5 @@ fn create_string(len: usize) -> String {
 
 fn compare_ahash(c: &mut Criterion) {
     let builder = RandomState::new();
-   
+    let test = "compare_ahash";
+    for num in &[1,3,7,15,31,63,12
