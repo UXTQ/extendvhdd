@@ -31,4 +31,6 @@ fn compare_ahash(c: &mut Criterion) {
     for num in &[1,3,7,15,31,63,127,255,511,1023] {
         let name = "string".to_owned() + &num.to_string();
         let string = create_string(*num);
-        c.bench_with_input(BenchmarkId::new(test, &name)
+        c.bench_with_input(BenchmarkId::new(test, &name), &string, |bencher, s| {
+            bencher.iter(|| {
+        
