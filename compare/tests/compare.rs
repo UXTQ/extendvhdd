@@ -36,3 +36,7 @@ fn compare_ahash(c: &mut Criterion) {
                 black_box(ahash(s, &builder))
             });
         });
+    }
+}
+
+fn compare_other<B: BuildHasher>(c: &mut Criterion, test: &str,
