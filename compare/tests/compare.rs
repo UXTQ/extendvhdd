@@ -33,4 +33,6 @@ fn compare_ahash(c: &mut Criterion) {
         let string = create_string(*num);
         c.bench_with_input(BenchmarkId::new(test, &name), &string, |bencher, s| {
             bencher.iter(|| {
-        
+                black_box(ahash(s, &builder))
+            });
+        });
