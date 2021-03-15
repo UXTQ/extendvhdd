@@ -40,4 +40,5 @@ fn compare_ahash(c: &mut Criterion) {
 }
 
 fn compare_other<B: BuildHasher>(c: &mut Criterion, test: &str, builder: B) {
-    for num in &[1,3,7,15,31,63,127,255
+    for num in &[1,3,7,15,31,63,127,255,511,1023] {
+        let name = "string".to_owned() + &num.to_st
