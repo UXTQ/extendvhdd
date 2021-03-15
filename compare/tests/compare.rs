@@ -44,4 +44,5 @@ fn compare_other<B: BuildHasher>(c: &mut Criterion, test: &str, builder: B) {
         let name = "string".to_owned() + &num.to_string();
         let string = create_string(*num);
         c.bench_with_input(BenchmarkId::new(test, &name), &string, |bencher, s| {
-   
+            bencher.iter(|| {
+                black_box(gener
