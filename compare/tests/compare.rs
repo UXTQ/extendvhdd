@@ -47,4 +47,8 @@ fn compare_other<B: BuildHasher>(c: &mut Criterion, test: &str, builder: B) {
             bencher.iter(|| {
                 black_box(generic_hash(&s, &builder))
             });
-        })
+        });
+    }
+}
+
+fn compare_farmhash(c: &mut Criterion) 
