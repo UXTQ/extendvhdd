@@ -53,4 +53,5 @@ fn compare_other<B: BuildHasher>(c: &mut Criterion, test: &str, builder: B) {
 
 fn compare_farmhash(c: &mut Criterion) {
     let int: u64 = 1234;
-    let string = create_string(1
+    let string = create_string(1024);
+    let builder = BuildHasherDefault::<FarmHasher>:
