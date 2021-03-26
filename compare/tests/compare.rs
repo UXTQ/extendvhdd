@@ -55,4 +55,8 @@ fn compare_farmhash(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
     let builder = BuildHasherDefault::<FarmHasher>::default();
-    compare_other(c, "compare_farmhas
+    compare_other(c, "compare_farmhash", builder)
+}
+
+fn compare_fnvhash(c: &mut Criterion) {
+    let int: u6
