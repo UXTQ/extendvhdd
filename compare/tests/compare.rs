@@ -68,4 +68,5 @@ fn compare_fnvhash(c: &mut Criterion) {
 fn compare_fxhash(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
-    let builder = FxBuildHasher::default
+    let builder = FxBuildHasher::default();
+    compare_other(c, "compare_fxhash", buil
