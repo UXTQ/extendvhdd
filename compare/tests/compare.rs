@@ -79,4 +79,5 @@ fn compare_highway(c: &mut Criterion) {
     compare_other(c, "compare_highway", builder)
 }
 
-fn compar
+fn compare_metro(c: &mut Criterion) {
+    let int: u64 = 12
