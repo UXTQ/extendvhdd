@@ -73,4 +73,6 @@ fn compare_fxhash(c: &mut Criterion) {
 }
 
 fn compare_highway(c: &mut Criterion) {
-    let int: u64 =
+    let int: u64 = 1234;
+    let string = create_string(1024);
+    let builder 
