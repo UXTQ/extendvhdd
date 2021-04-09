@@ -96,4 +96,4 @@ fn compare_t1ha(c: &mut Criterion) {
 fn compare_sip13(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
-    l
+    let builder = BuildHasherDefault::<siphasher::sip::SipHasher1
