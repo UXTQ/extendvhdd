@@ -86,4 +86,6 @@ fn compare_metro(c: &mut Criterion) {
     compare_other(c, "compare_metro", builder)
 }
 
-fn co
+fn compare_t1ha(c: &mut Criterion) {
+    let int: u64 = 1234;
+    
