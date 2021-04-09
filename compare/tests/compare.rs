@@ -83,4 +83,7 @@ fn compare_metro(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
     let builder = metrohash::MetroBuildHasher::default();
-  
+    compare_other(c, "compare_metro", builder)
+}
+
+fn co
