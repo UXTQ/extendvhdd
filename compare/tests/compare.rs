@@ -90,4 +90,8 @@ fn compare_t1ha(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
     let builder = t1ha::T1haBuildHasher::default();
-    compare_other(c, "compare_t1ha", bu
+    compare_other(c, "compare_t1ha", builder)
+}
+
+fn compare_sip13(c: &mut Criterion) {
+    let int:
