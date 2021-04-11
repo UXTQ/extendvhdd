@@ -114,4 +114,6 @@ fn compare_wyhash(c: &mut Criterion) {
     compare_other(c, "compare_wyhash", builder)
 }
 
-fn compa
+fn compare_xxhash(c: &mut Criterion) {
+    let int: u64 = 1234;
+    l
