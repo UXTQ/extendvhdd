@@ -110,4 +110,5 @@ fn compare_sip24(c: &mut Criterion) {
 fn compare_wyhash(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
-    let
+    let builder = BuildHasherDefault::<wyhash::WyHash>::default();
+    co
