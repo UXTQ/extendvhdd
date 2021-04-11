@@ -111,4 +111,7 @@ fn compare_wyhash(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
     let builder = BuildHasherDefault::<wyhash::WyHash>::default();
-    co
+    compare_other(c, "compare_wyhash", builder)
+}
+
+fn compa
