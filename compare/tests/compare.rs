@@ -116,4 +116,5 @@ fn compare_wyhash(c: &mut Criterion) {
 
 fn compare_xxhash(c: &mut Criterion) {
     let int: u64 = 1234;
-    l
+    let string = create_string(1024);
+    let builder = twox_has
