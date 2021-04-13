@@ -125,4 +125,6 @@ criterion_main!(compare);
 criterion_group!(
     compare,
     compare_ahash,
-    compar
+    compare_farmhash,
+    compare_fnvhash,
+    compare_fx
