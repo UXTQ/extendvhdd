@@ -121,4 +121,8 @@ fn compare_xxhash(c: &mut Criterion) {
     compare_other(c, "compare_xxhash", builder)
 }
 
-criterion_main!(co
+criterion_main!(compare);
+criterion_group!(
+    compare,
+    compare_ahash,
+    compar
