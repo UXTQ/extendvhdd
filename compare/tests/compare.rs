@@ -118,4 +118,7 @@ fn compare_xxhash(c: &mut Criterion) {
     let int: u64 = 1234;
     let string = create_string(1024);
     let builder = twox_hash::RandomXxHashBuilder64::default();
-    compare_oth
+    compare_other(c, "compare_xxhash", builder)
+}
+
+criterion_main!(co
