@@ -127,4 +127,8 @@ criterion_group!(
     compare_ahash,
     compare_farmhash,
     compare_fnvhash,
-    compare_fx
+    compare_fxhash,
+    compare_highway,
+    compare_metro,
+    compare_t1ha,
+    com
