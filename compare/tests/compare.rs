@@ -131,4 +131,6 @@ criterion_group!(
     compare_highway,
     compare_metro,
     compare_t1ha,
-    com
+    compare_sip13,
+    compare_sip24,
+    compare_wyhash,
