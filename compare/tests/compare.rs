@@ -134,3 +134,5 @@ criterion_group!(
     compare_sip13,
     compare_sip24,
     compare_wyhash,
+    compare_xxhash,
+);
