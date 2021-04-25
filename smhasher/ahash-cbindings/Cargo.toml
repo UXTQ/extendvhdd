@@ -3,4 +3,4 @@ name = "ahash-cbindings"
 version = "0.1.2"
 authors = ["Tom Kaitchuck <Tom.Kaitchuck@gmail.com>"]
 edition = "2018"
-description = "C binding
+description = "C bindings for aHash so that it can be invoked by SMH
