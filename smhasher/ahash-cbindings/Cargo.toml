@@ -5,4 +5,4 @@ authors = ["Tom Kaitchuck <Tom.Kaitchuck@gmail.com>"]
 edition = "2018"
 description = "C bindings for aHash so that it can be invoked by SMHasher to verify quality."
 
-# See more keys and their 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/refe
