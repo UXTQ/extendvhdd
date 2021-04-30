@@ -11,4 +11,9 @@ name = "ahash_c"
 crate-type = ["staticlib"] # Creates static lib
 
 [profile.release]
-opt-level = 
+opt-level = 3
+debug = false
+lto = 'fat'
+debug-assertions = false
+
+[
