@@ -16,4 +16,5 @@ debug = false
 lto = 'fat'
 debug-assertions = false
 
-[
+[dependencies]
+ahash = { path = "../../", default-f
