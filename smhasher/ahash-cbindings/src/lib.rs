@@ -2,4 +2,7 @@
 
 use ahash::*;
 use core::slice;
-use std
+use std::hash::{BuildHasher};
+
+#[no_mangle]
+pub extern "C" fn ah
