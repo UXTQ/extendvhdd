@@ -7,3 +7,76 @@
 Verification value 0xE2190FCA ....... SKIP (self- or unseeded)
 Running sanity check 1     .......... PASS
 Running AppendedZeroesTest .......... PASS
+
+[[[ Speed Tests ]]]
+
+Bulk speed test - 262144-byte keys
+Alignment  7 - 19.377 bytes/cycle - 55438.91 MiB/sec @ 3 ghz
+Alignment  6 - 19.474 bytes/cycle - 55716.64 MiB/sec @ 3 ghz
+Alignment  5 - 19.361 bytes/cycle - 55392.61 MiB/sec @ 3 ghz
+Alignment  4 - 19.471 bytes/cycle - 55708.26 MiB/sec @ 3 ghz
+Alignment  3 - 19.363 bytes/cycle - 55399.03 MiB/sec @ 3 ghz
+Alignment  2 - 19.312 bytes/cycle - 55252.57 MiB/sec @ 3 ghz
+Alignment  1 - 19.248 bytes/cycle - 55068.56 MiB/sec @ 3 ghz
+Alignment  0 - 20.429 bytes/cycle - 58448.42 MiB/sec @ 3 ghz
+Average      - 19.505 bytes/cycle - 55803.12 MiB/sec @ 3 ghz
+
+Small key speed test -    1-byte keys -    17.84 cycles/hash
+Small key speed test -    2-byte keys -    17.90 cycles/hash
+Small key speed test -    3-byte keys -    17.91 cycles/hash
+Small key speed test -    4-byte keys -    17.96 cycles/hash
+Small key speed test -    5-byte keys -    18.00 cycles/hash
+Small key speed test -    6-byte keys -    18.00 cycles/hash
+Small key speed test -    7-byte keys -    18.00 cycles/hash
+Small key speed test -    8-byte keys -    18.00 cycles/hash
+Small key speed test -    9-byte keys -    17.13 cycles/hash
+Small key speed test -   10-byte keys -    18.30 cycles/hash
+Small key speed test -   11-byte keys -    18.28 cycles/hash
+Small key speed test -   12-byte keys -    18.00 cycles/hash
+Small key speed test -   13-byte keys -    18.00 cycles/hash
+Small key speed test -   14-byte keys -    18.31 cycles/hash
+Small key speed test -   15-byte keys -    18.00 cycles/hash
+Small key speed test -   16-byte keys -    18.27 cycles/hash
+Small key speed test -   17-byte keys -    20.16 cycles/hash
+Small key speed test -   18-byte keys -    19.70 cycles/hash
+Small key speed test -   19-byte keys -    19.83 cycles/hash
+Small key speed test -   20-byte keys -    19.60 cycles/hash
+Small key speed test -   21-byte keys -    19.97 cycles/hash
+Small key speed test -   22-byte keys -    19.71 cycles/hash
+Small key speed test -   23-byte keys -    19.59 cycles/hash
+Small key speed test -   24-byte keys -    19.84 cycles/hash
+Small key speed test -   25-byte keys -    19.92 cycles/hash
+Small key speed test -   26-byte keys -    19.80 cycles/hash
+Small key speed test -   27-byte keys -    19.84 cycles/hash
+Small key speed test -   28-byte keys -    19.60 cycles/hash
+Small key speed test -   29-byte keys -    20.52 cycles/hash
+Small key speed test -   30-byte keys -    20.44 cycles/hash
+Small key speed test -   31-byte keys -    20.41 cycles/hash
+Average                                    18.931 cycles/hash
+
+[[[ 'Hashmap' Speed Tests ]]]
+
+std::unordered_map
+Init std HashMapTest:     453.695 cycles/op (102401 inserts, 1% deletions)
+Running std HashMapTest:  123.393 cycles/op (2.0 stdv)
+
+greg7mdp/parallel-hashmap
+Init fast HashMapTest:    113.578 cycles/op (102401 inserts, 1% deletions)
+Running fast HashMapTest: 88.084 cycles/op (2.6 stdv)  ....... PASS
+
+[[[ Avalanche Tests ]]]
+
+Testing   24-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.624667%
+Testing   32-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.657333%
+Testing   40-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.692000%
+Testing   48-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.612667%
+Testing   56-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.746000%
+Testing   64-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.652000%
+Testing   72-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.726667%
+Testing   80-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.718667%
+Testing   96-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.710667%
+Testing  112-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.785333%
+Testing  128-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.679333%
+Testing  160-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.853333%
+Testing  512-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.747333%
+Testing 1024-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.807333%
