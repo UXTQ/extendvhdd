@@ -1,0 +1,9 @@
+
+-------------------------------------------------------------------------------
+--- Testing ahash64 "ahash 64bit" GOOD
+
+[[[ Sanity Tests ]]]
+
+Verification value 0xE2190FCA ....... SKIP (self- or unseeded)
+Running sanity check 1     .......... PASS
+Running AppendedZeroesTest .......... PASS
