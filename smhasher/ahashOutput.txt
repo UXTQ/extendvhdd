@@ -1506,3 +1506,12 @@ Testing collisions (high 32-bit) - Expected     131072.0, actual 131073 (1.00x) 
 Testing collisions (high 28-44 bits) - Worst is 41 bits: 309/255 (1.21x)
 Testing collisions (high 12-bit) - Expected   33550336.0, actual 33550336 (1.00x)
 Testing collisions (high  8-bit) - Expected   33554176.0, actual 33554176 (1.00x)
+Testing collisions (low  32-bit) - Expected     131072.0, actual 131184 (1.00x) (113)
+Testing collisions (low  28-44 bits) - Worst is 42 bits: 138/127 (1.08x)
+Testing collisions (low  12-bit) - Expected   33550336.0, actual 33550336 (1.00x)
+Testing collisions (low   8-bit) - Expected   33554176.0, actual 33554176 (1.00x)
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 646.187375 seconds
+-------------------------------------------------------------------------------
