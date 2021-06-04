@@ -1,1 +1,1 @@
-git clone https://github.com/rurban/smhasher.gi
+git clone https://github.com/rurban/smhasher.git
