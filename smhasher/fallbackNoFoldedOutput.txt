@@ -316,3 +316,55 @@ Testing collisions (high 26-40 bits) - Worst is 39 bits: 67/63 (1.05x)
 Testing collisions (low  32-bit) - Expected       8186.7, actual   8293 (1.01x) (107)
 Testing collisions (low  26-40 bits) - Worst is 37 bits: 274/255 (1.07x)
 Testing distribution - Worst bias is the 20-bit window at bit 29 - 0.037%
+
+
+Combination 64-bytes [0-last] Tests:
+Keyset 'Combination' - up to 22 blocks from a set of 2 - 8388606 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected       8186.7, actual   8335 (1.02x) (149)
+Testing collisions (high 26-40 bits) - Worst is 32 bits: 8335/8186 (1.02x)
+Testing collisions (low  32-bit) - Expected       8186.7, actual   8163 (1.00x) (-23)
+Testing collisions (low  26-40 bits) - Worst is 40 bits: 35/31 (1.09x)
+Testing distribution - Worst bias is the 20-bit window at bit 20 - 0.033%
+
+
+Combination 128-bytes [0-1] Tests:
+Keyset 'Combination' - up to 22 blocks from a set of 2 - 8388606 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected       8186.7, actual   8238 (1.01x) (52)
+Testing collisions (high 26-40 bits) - Worst is 31 bits: 16565/16362 (1.01x)
+Testing collisions (low  32-bit) - Expected       8186.7, actual   8062 (0.98x) (-124)
+Testing collisions (low  26-40 bits) - Worst is 37 bits: 262/255 (1.02x)
+Testing distribution - Worst bias is the 20-bit window at bit 16 - 0.042%
+
+
+Combination 128-bytes [0-last] Tests:
+Keyset 'Combination' - up to 22 blocks from a set of 2 - 8388606 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected       8186.7, actual   8270 (1.01x) (84)
+Testing collisions (high 26-40 bits) - Worst is 39 bits: 70/63 (1.09x)
+Testing collisions (low  32-bit) - Expected       8186.7, actual   8144 (0.99x) (-42)
+Testing collisions (low  26-40 bits) - Worst is 40 bits: 41/31 (1.28x)
+Testing distribution - Worst bias is the 20-bit window at bit 29 - 0.042%
+
+
+[[[ Keyset 'Window' Tests ]]]
+
+Keyset 'Window' -  32-bit key,  25-bit window - 32 tests, 33554432 keys per test
+Window at   0 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   1 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   2 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   3 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   4 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   5 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   6 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   7 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   8 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at   9 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  10 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  11 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  12 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  13 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  14 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  15 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Window at  16 - Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
