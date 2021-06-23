@@ -617,3 +617,67 @@ Testing collisions (high 24-36 bits) - Worst is 35 bits: 68/63 (1.06x)
 Testing collisions (low  32-bit) - Expected        511.9, actual    494 (0.97x)
 Testing collisions (low  24-36 bits) - Worst is 36 bits: 38/31 (1.19x)
 Testing distribution - Worst bias is the 18-bit window at bit 14 - 0.059%
+
+Testing bit 4
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    519 (1.01x) (8)
+Testing collisions (high 24-36 bits) - Worst is 35 bits: 72/63 (1.13x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    492 (0.96x)
+Testing collisions (low  24-36 bits) - Worst is 24 bits: 125969/125777 (1.00x)
+Testing distribution - Worst bias is the 18-bit window at bit  6 - 0.068%
+
+Testing bit 5
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    498 (0.97x)
+Testing collisions (high 24-36 bits) - Worst is 36 bits: 35/31 (1.09x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    504 (0.98x) (-7)
+Testing collisions (low  24-36 bits) - Worst is 35 bits: 75/63 (1.17x)
+Testing distribution - Worst bias is the 18-bit window at bit 39 - 0.077%
+
+Testing bit 6
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    477 (0.93x)
+Testing collisions (high 24-36 bits) - Worst is 34 bits: 134/127 (1.05x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    465 (0.91x)
+Testing collisions (low  24-36 bits) - Worst is 26 bits: 32805/32429 (1.01x)
+Testing distribution - Worst bias is the 18-bit window at bit 34 - 0.086%
+
+Testing bit 7
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    514 (1.00x) (3)
+Testing collisions (high 24-36 bits) - Worst is 36 bits: 34/31 (1.06x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    498 (0.97x)
+Testing collisions (low  24-36 bits) - Worst is 36 bits: 48/31 (1.50x)
+Testing distribution - Worst bias is the 18-bit window at bit 33 - 0.090%
+
+Testing bit 8
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    474 (0.93x)
+Testing collisions (high 24-36 bits) - Worst is 29 bits: 4132/4090 (1.01x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    483 (0.94x)
+Testing collisions (low  24-36 bits) - Worst is 28 bits: 8305/8170 (1.02x)
+Testing distribution - Worst bias is the 16-bit window at bit 37 - 0.063%
+
+Testing bit 9
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    481 (0.94x)
+Testing collisions (high 24-36 bits) - Worst is 31 bits: 1048/1023 (1.02x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    501 (0.98x)
+Testing collisions (low  24-36 bits) - Worst is 35 bits: 68/63 (1.06x)
+Testing distribution - Worst bias is the 18-bit window at bit 24 - 0.065%
+
+Testing bit 10
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    504 (0.98x) (-7)
+Testing collisions (high 24-36 bits) - Worst is 36 bits: 37/31 (1.16x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    494 (0.97x)
+Testing collisions (low  24-36 bits) - Worst is 36 bits: 36/31 (1.13x)
+Testing distribution - Worst bias is the 18-bit window at bit 43 - 0.068%
+
+Testing bit 11
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected        511.9, actual    509 (0.99x) (-2)
+Testing collisions (high 24-36 bits) - Worst is 34 bits: 140/127 (1.09x)
+Testing collisions (low  32-bit) - Expected        511.9, actual    572 (1.12x) (61)
+Testing collisions (low  24-36 bits) - Worst is 32 bits: 572/511 (1.12x)
+Testing distribution - Worst bias is the 18-bit window at bit 51 - 0.091%
