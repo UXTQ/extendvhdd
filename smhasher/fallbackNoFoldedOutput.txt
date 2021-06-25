@@ -1106,3 +1106,33 @@ Target values to approximate : 38918200.000000 - 273633.333333
 4 threads starting...  done
 Popcount 1 stats : 38918835.315783 - 273623.606930
 Popcount 0 stats : 38918226.200577 - 273605.413971
+MomentChi2 for bits 1 :  0.737544
+MomentChi2 for bits 0 :  0.00125443
+
+Derivative stats (transition from 2 consecutive values) :
+Popcount 1 stats : 38919083.803108 - 273655.817065
+Popcount 0 stats : 38919331.387736 - 273661.792772
+MomentChi2 for deriv b1 :   1.42723
+MomentChi2 for deriv b0 :   2.33884
+
+  Great
+
+
+[[[ Prng Tests ]]]
+
+Generating 33554432 random numbers :
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected     130731.3, actual 131908 (1.01x) (1177)
+Testing collisions (high 28-44 bits) - Worst is 37 bits: 4198/4095 (1.02x)
+Testing collisions (low  32-bit) - Expected     130731.3, actual 131430 (1.01x) (699)
+Testing collisions (low  28-44 bits) - Worst is 42 bits: 144/127 (1.13x)
+
+[[[ BadSeeds Tests ]]]
+
+Testing 0 internal secrets:
+0x0 PASS
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 631.594488 seconds
+-------------------------------------------------------------------------------

@@ -1,0 +1,34 @@
+
+-------------------------------------------------------------------------------
+--- Testing ahash64 "ahash 64bit" GOOD
+
+[[[ Sanity Tests ]]]
+
+Verification value 0xE15404B7 ....... SKIP (self- or unseeded)
+Running sanity check 1     .......... PASS
+Running AppendedZeroesTest .......... PASS
+
+[[[ Speed Tests ]]]
+
+Bulk speed test - 262144-byte keys
+Alignment  7 -  7.097 bytes/cycle - 20304.54 MiB/sec @ 3 ghz
+Alignment  6 -  7.075 bytes/cycle - 20242.50 MiB/sec @ 3 ghz
+Alignment  5 -  7.070 bytes/cycle - 20228.27 MiB/sec @ 3 ghz
+Alignment  4 -  7.079 bytes/cycle - 20253.31 MiB/sec @ 3 ghz
+Alignment  3 -  7.053 bytes/cycle - 20178.99 MiB/sec @ 3 ghz
+Alignment  2 -  7.059 bytes/cycle - 20194.86 MiB/sec @ 3 ghz
+Alignment  1 -  7.066 bytes/cycle - 20215.71 MiB/sec @ 3 ghz
+Alignment  0 -  7.166 bytes/cycle - 20501.12 MiB/sec @ 3 ghz
+Average      -  7.083 bytes/cycle - 20264.91 MiB/sec @ 3 ghz
+
+Small key speed test -    1-byte keys -    13.92 cycles/hash
+Small key speed test -    2-byte keys -    13.98 cycles/hash
+Small key speed test -    3-byte keys -    13.98 cycles/hash
+Small key speed test -    4-byte keys -    13.99 cycles/hash
+Small key speed test -    5-byte keys -    13.98 cycles/hash
+Small key speed test -    6-byte keys -    13.98 cycles/hash
+Small key speed test -    7-byte keys -    13.99 cycles/hash
+Small key speed test -    8-byte keys -    13.98 cycles/hash
+Small key speed test -    9-byte keys -    13.25 cycles/hash
+Small key speed test -   10-byte keys -    13.25 cycles/hash
+Small key speed test -   11-byte keys -    13.26 cycles/hash
