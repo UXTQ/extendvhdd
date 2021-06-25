@@ -32,3 +32,61 @@ Small key speed test -    8-byte keys -    13.98 cycles/hash
 Small key speed test -    9-byte keys -    13.25 cycles/hash
 Small key speed test -   10-byte keys -    13.25 cycles/hash
 Small key speed test -   11-byte keys -    13.26 cycles/hash
+Small key speed test -   12-byte keys -    13.26 cycles/hash
+Small key speed test -   13-byte keys -    13.30 cycles/hash
+Small key speed test -   14-byte keys -    13.26 cycles/hash
+Small key speed test -   15-byte keys -    13.63 cycles/hash
+Small key speed test -   16-byte keys -    13.70 cycles/hash
+Small key speed test -   17-byte keys -    21.55 cycles/hash
+Small key speed test -   18-byte keys -    27.87 cycles/hash
+Small key speed test -   19-byte keys -    27.96 cycles/hash
+Small key speed test -   20-byte keys -    14.57 cycles/hash
+Small key speed test -   21-byte keys -    15.23 cycles/hash
+Small key speed test -   22-byte keys -    15.56 cycles/hash
+Small key speed test -   23-byte keys -    15.67 cycles/hash
+Small key speed test -   24-byte keys -    15.60 cycles/hash
+Small key speed test -   25-byte keys -    15.67 cycles/hash
+Small key speed test -   26-byte keys -    15.69 cycles/hash
+Small key speed test -   27-byte keys -    15.68 cycles/hash
+Small key speed test -   28-byte keys -    15.69 cycles/hash
+Small key speed test -   29-byte keys -    16.94 cycles/hash
+Small key speed test -   30-byte keys -    16.95 cycles/hash
+Small key speed test -   31-byte keys -    16.95 cycles/hash
+Average                                    15.688 cycles/hash
+
+[[[ 'Hashmap' Speed Tests ]]]
+
+std::unordered_map
+Init std HashMapTest:     343.665 cycles/op (102401 inserts, 1% deletions)
+Running std HashMapTest:  122.429 cycles/op (1.9 stdv)
+
+greg7mdp/parallel-hashmap
+Init fast HashMapTest:    119.334 cycles/op (102401 inserts, 1% deletions)
+Running fast HashMapTest: 84.563 cycles/op (1.5 stdv)  ....... PASS
+
+[[[ Avalanche Tests ]]]
+
+Testing   24-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.784000%
+Testing   32-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.640667%
+Testing   40-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.592000%
+Testing   48-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.704667%
+Testing   56-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.772667%
+Testing   64-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.766000%
+Testing   72-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.738667%
+Testing   80-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.665333%
+Testing   96-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.744000%
+Testing  112-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.706000%
+Testing  128-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.731333%
+Testing  160-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.685333%
+Testing  512-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.830667%
+Testing 1024-bit keys ->  64-bit hashes, 300000 reps worst bias is 0.796000%
+
+[[[ Keyset 'Sparse' Tests ]]]
+
+Keyset 'Sparse' - 16-bit keys with up to 9 bits set - 50643 keys
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected          0.3, actual      0 (0.00x)
+Testing collisions (high 19-25 bits) - Worst is 25 bits: 48/38 (1.26x)
+Testing collisions (high 12-bit) - Expected      46547.0, actual  46547 (1.00x)
+Testing collisions (high  8-bit) - Expected      50387.0, actual  50387 (1.00x)
+Testing collisions (low  32-bit) - Expected          0.3, actual      0 (0.00x)
