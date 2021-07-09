@@ -1488,3 +1488,30 @@ Popcount 1 stats : 38919632.307917 - 410479.005598
 Popcount 0 stats : 38918367.673773 - 410464.964389
 MomentChi2 for bits 1 :   2.49901
 MomentChi2 for bits 0 :  0.0342478
+
+Derivative stats (transition from 2 consecutive values) :
+Popcount 1 stats : 38921086.495604 - 410506.484777
+Popcount 0 stats : 38916867.679739 - 410442.803573
+MomentChi2 for deriv b1 :    10.149
+MomentChi2 for deriv b0 :   2.16237
+
+  Good !
+
+
+[[[ Prng Tests ]]]
+
+Generating 33554432 random numbers :
+Testing collisions ( 64-bit) - Expected    0.0, actual      0 (0.00x)
+Testing collisions (high 32-bit) - Expected     131072.0, actual 130738 (1.00x) (-333)
+Testing collisions (high 28-44 bits) - Worst is 43 bits: 76/63 (1.19x)
+Testing collisions (high 12-bit) - Expected   33550336.0, actual 33550336 (1.00x)
+Testing collisions (high  8-bit) - Expected   33554176.0, actual 33554176 (1.00x)
+Testing collisions (low  32-bit) - Expected     131072.0, actual 130564 (1.00x) (-507)
+Testing collisions (low  28-44 bits) - Worst is 38 bits: 2080/2047 (1.02x)
+Testing collisions (low  12-bit) - Expected   33550336.0, actual 33550336 (1.00x)
+Testing collisions (low   8-bit) - Expected   33554176.0, actual 33554176 (1.00x)
+
+
+Input vcode 0x00000001, Output vcode 0x00000001, Result vcode 0x00000001
+Verification value is 0x00000001 - Testing took 631.756439 seconds
+-------------------------------------------------------------------------------
