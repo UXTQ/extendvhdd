@@ -110,3 +110,69 @@ impl Hasher for AHasher {
     #[inline]
     fn write_u8(&mut self, i: u8) {
         self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u16(&mut self, i: u16) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u32(&mut self, i: u32) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u128(&mut self, i: u128) {
+        self.hash_in(i);
+    }
+
+    #[inline]
+    #[cfg(any(
+        target_pointer_width = "64",
+        target_pointer_width = "32",
+        target_pointer_width = "16"
+    ))]
+    fn write_usize(&mut self, i: usize) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    #[cfg(target_pointer_width = "128")]
+    fn write_usize(&mut self, i: usize) {
+        self.write_u128(i as u128);
+    }
+
+    #[inline]
+    fn write_u64(&mut self, i: u64) {
+        self.write_u128(i as u128);
+    }
+
+    #[inline]
+    #[allow(clippy::collapsible_if)]
+    fn write(&mut self, input: &[u8]) {
+        let mut data = input;
+        let length = data.len();
+        add_in_length(&mut self.enc, length as u64);
+
+        //A 'binary search' on sizes reduces the number of comparisons.
+        if data.len() <= 8 {
+            let value = read_small(data);
+            self.hash_in(value.convert());
+        } else {
+            if data.len() > 32 {
+                if data.len() > 64 {
+                    let tail = data.read_last_u128x4();
+                    let mut current: [u128; 4] = [self.key; 4];
+                    current[0] = aesenc(current[0], tail[0]);
+                    current[1] = aesenc(current[1], tail[1]);
+                    current[2] = aesenc(current[2], tail[2]);
+                    current[3] = aesenc(current[3], tail[3]);
+                    let mut sum: [u128; 2] = [self.key, self.key];
+                    sum[0] = add_by_64s(sum[0].convert(), tail[0].convert()).convert();
+                    sum[1] = add_by_64s(sum[1].convert(), tail[1].convert()).convert();
+                    sum[0] = shuffle_and_add(sum[0], tail[2]);
+                    sum[1] = shuffle_and_add(sum[1], tail[3]);
+                    while data.len() > 64 {
+                        let (blocks, rest) = data.read_u128x4();
+                        current[0] = aesenc(current[0], blocks[0]);
