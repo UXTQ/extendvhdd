@@ -240,3 +240,56 @@ impl Hasher for AHasherU64 {
     }
 
     #[inline]
+    fn write_u16(&mut self, i: u16) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u32(&mut self, i: u32) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u64(&mut self, i: u64) {
+        self.buffer = folded_multiply(i ^ self.buffer, MULTIPLE);
+    }
+
+    #[inline]
+    fn write_u128(&mut self, _i: u128) {
+        unreachable!("Specialized hasher was called with a different type of object")
+    }
+
+    #[inline]
+    fn write_usize(&mut self, _i: usize) {
+        unreachable!("Specialized hasher was called with a different type of object")
+    }
+}
+
+#[cfg(feature = "specialize")]
+pub(crate) struct AHasherFixed(pub AHasher);
+
+/// A specialized hasher for fixed size primitives larger than 64 bits.
+#[cfg(feature = "specialize")]
+impl Hasher for AHasherFixed {
+    #[inline]
+    fn finish(&self) -> u64 {
+        self.0.short_finish()
+    }
+
+    #[inline]
+    fn write(&mut self, bytes: &[u8]) {
+        self.0.write(bytes)
+    }
+
+    #[inline]
+    fn write_u8(&mut self, i: u8) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u16(&mut self, i: u16) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u32(&mut self, i: u32) {
