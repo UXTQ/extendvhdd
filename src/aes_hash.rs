@@ -176,3 +176,67 @@ impl Hasher for AHasher {
                     while data.len() > 64 {
                         let (blocks, rest) = data.read_u128x4();
                         current[0] = aesenc(current[0], blocks[0]);
+                        current[1] = aesenc(current[1], blocks[1]);
+                        current[2] = aesenc(current[2], blocks[2]);
+                        current[3] = aesenc(current[3], blocks[3]);
+                        sum[0] = shuffle_and_add(sum[0], blocks[0]);
+                        sum[1] = shuffle_and_add(sum[1], blocks[1]);
+                        sum[0] = shuffle_and_add(sum[0], blocks[2]);
+                        sum[1] = shuffle_and_add(sum[1], blocks[3]);
+                        data = rest;
+                    }
+                    self.hash_in_2(aesenc(current[0], current[1]), aesenc(current[2], current[3]));
+                    self.hash_in(add_by_64s(sum[0].convert(), sum[1].convert()).convert());
+                } else {
+                    //len 33-64
+                    let (head, _) = data.read_u128x2();
+                    let tail = data.read_last_u128x2();
+                    self.hash_in_2(head[0], head[1]);
+                    self.hash_in_2(tail[0], tail[1]);
+                }
+            } else {
+                if data.len() > 16 {
+                    //len 17-32
+                    self.hash_in_2(data.read_u128().0, data.read_last_u128());
+                } else {
+                    //len 9-16
+                    let value: [u64; 2] = [data.read_u64().0, data.read_last_u64()];
+                    self.hash_in(value.convert());
+                }
+            }
+        }
+    }
+    #[inline]
+    fn finish(&self) -> u64 {
+        let combined = aesdec(self.sum, self.enc);
+        let result: [u64; 2] = aesenc(aesenc(combined, self.key), combined).convert();
+        result[0]
+    }
+}
+
+#[cfg(feature = "specialize")]
+pub(crate) struct AHasherU64 {
+    pub(crate) buffer: u64,
+    pub(crate) pad: u64,
+}
+
+/// A specialized hasher for only primitives under 64 bits.
+#[cfg(feature = "specialize")]
+impl Hasher for AHasherU64 {
+    #[inline]
+    fn finish(&self) -> u64 {
+        let rot = (self.pad & 63) as u32;
+        self.buffer.rotate_left(rot)
+    }
+
+    #[inline]
+    fn write(&mut self, _bytes: &[u8]) {
+        unreachable!("Specialized hasher was called with a different type of object")
+    }
+
+    #[inline]
+    fn write_u8(&mut self, i: u8) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
