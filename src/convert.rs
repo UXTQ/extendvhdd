@@ -157,3 +157,8 @@ impl ReadFromSlice for [u8] {
     }
 
     #[inline(always)]
+    fn read_last_u128x4(&self) -> [u128; 4] {
+        let (_, value) = self.split_at(self.len() - 64);
+        as_array!(value, 64).convert()
+    }
+}
