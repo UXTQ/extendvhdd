@@ -98,3 +98,62 @@ impl ReadFromSlice for [u8] {
 
     #[inline(always)]
     fn read_u32(&self) -> (u32, &[u8]) {
+        let (value, rest) = self.split_at(4);
+        (as_array!(value, 4).convert(), rest)
+    }
+
+    #[inline(always)]
+    fn read_u64(&self) -> (u64, &[u8]) {
+        let (value, rest) = self.split_at(8);
+        (as_array!(value, 8).convert(), rest)
+    }
+
+    #[inline(always)]
+    fn read_u128(&self) -> (u128, &[u8]) {
+        let (value, rest) = self.split_at(16);
+        (as_array!(value, 16).convert(), rest)
+    }
+
+    #[inline(always)]
+    fn read_u128x2(&self) -> ([u128; 2], &[u8]) {
+        let (value, rest) = self.split_at(32);
+        (as_array!(value, 32).convert(), rest)
+    }
+
+    #[inline(always)]
+    fn read_u128x4(&self) -> ([u128; 4], &[u8]) {
+        let (value, rest) = self.split_at(64);
+        (as_array!(value, 64).convert(), rest)
+    }
+
+    #[inline(always)]
+    fn read_last_u16(&self) -> u16 {
+        let (_, value) = self.split_at(self.len() - 2);
+        as_array!(value, 2).convert()
+    }
+
+    #[inline(always)]
+    fn read_last_u32(&self) -> u32 {
+        let (_, value) = self.split_at(self.len() - 4);
+        as_array!(value, 4).convert()
+    }
+
+    #[inline(always)]
+    fn read_last_u64(&self) -> u64 {
+        let (_, value) = self.split_at(self.len() - 8);
+        as_array!(value, 8).convert()
+    }
+
+    #[inline(always)]
+    fn read_last_u128(&self) -> u128 {
+        let (_, value) = self.split_at(self.len() - 16);
+        as_array!(value, 16).convert()
+    }
+
+    #[inline(always)]
+    fn read_last_u128x2(&self) -> [u128; 2] {
+        let (_, value) = self.split_at(self.len() - 32);
+        as_array!(value, 32).convert()
+    }
+
+    #[inline(always)]
