@@ -46,3 +46,53 @@ impl AHasher {
     pub(crate) fn test_with_keys(key1: u128, key2: u128) -> Self {
         let key1: [u64; 2] = key1.convert();
         let key2: [u64; 2] = key2.convert();
+        Self {
+            buffer: key1[0],
+            pad: key1[1],
+            extra_keys: key2,
+        }
+    }
+
+    #[inline]
+    #[allow(dead_code)] // Is not called if non-fallback hash is used.
+    pub(crate) fn from_random_state(rand_state: &RandomState) -> AHasher {
+        AHasher {
+            buffer: rand_state.k0,
+            pad: rand_state.k1,
+            extra_keys: [rand_state.k2, rand_state.k3],
+        }
+    }
+
+    /// This update function has the goal of updating the buffer with a single multiply
+    /// FxHash does this but is vulnerable to attack. To avoid this input needs to be masked to with an
+    /// unpredictable value. Other hashes such as murmurhash have taken this approach but were found vulnerable
+    /// to attack. The attack was based on the idea of reversing the pre-mixing (Which is necessarily
+    /// reversible otherwise bits would be lost) then placing a difference in the highest bit before the
+    /// multiply used to mix the data. Because a multiply can never affect the bits to the right of it, a
+    /// subsequent update that also differed in this bit could result in a predictable collision.
+    ///
+    /// This version avoids this vulnerability while still only using a single multiply. It takes advantage
+    /// of the fact that when a 64 bit multiply is performed the upper 64 bits are usually computed and thrown
+    /// away. Instead it creates two 128 bit values where the upper 64 bits are zeros and multiplies them.
+    /// (The compiler is smart enough to turn this into a 64 bit multiplication in the assembly)
+    /// Then the upper bits are xored with the lower bits to produce a single 64 bit result.
+    ///
+    /// To understand why this is a good scrambling function it helps to understand multiply-with-carry PRNGs:
+    /// https://en.wikipedia.org/wiki/Multiply-with-carry_pseudorandom_number_generator
+    /// If the multiple is chosen well, this creates a long period, decent quality PRNG.
+    /// Notice that this function is equivalent to this except the `buffer`/`state` is being xored with each
+    /// new block of data. In the event that data is all zeros, it is exactly equivalent to a MWC PRNG.
+    ///
+    /// This is impervious to attack because every bit buffer at the end is dependent on every bit in
+    /// `new_data ^ buffer`. For example suppose two inputs differed in only the 5th bit. Then when the
+    /// multiplication is performed the `result` will differ in bits 5-69. More specifically it will differ by
+    /// 2^5 * MULTIPLE. However in the next step bits 65-128 are turned into a separate 64 bit value. So the
+    /// differing bits will be in the lower 6 bits of this value. The two intermediate values that differ in
+    /// bits 5-63 and in bits 0-5 respectively get added together. Producing an output that differs in every
+    /// bit. The addition carries in the multiplication and at the end additionally mean that the even if an
+    /// attacker somehow knew part of (but not all) the contents of the buffer before hand,
+    /// they would not be able to predict any of the bits in the buffer at the end.
+    #[inline(always)]
+    fn update(&mut self, new_data: u64) {
+        self.buffer = folded_multiply(new_data ^ self.buffer, MULTIPLE);
+    }
