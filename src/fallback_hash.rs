@@ -160,3 +160,57 @@ impl Hasher for AHasher {
     fn write_usize(&mut self, i: usize) {
         self.write_u64(i as u64);
     }
+
+    #[inline]
+    #[cfg(target_pointer_width = "128")]
+    fn write_usize(&mut self, i: usize) {
+        self.write_u128(i as u128);
+    }
+
+    #[inline]
+    #[allow(clippy::collapsible_if)]
+    fn write(&mut self, input: &[u8]) {
+        let mut data = input;
+        let length = data.len() as u64;
+        //Needs to be an add rather than an xor because otherwise it could be canceled with carefully formed input.
+        self.buffer = self.buffer.wrapping_add(length).wrapping_mul(MULTIPLE);
+        //A 'binary search' on sizes reduces the number of comparisons.
+        if data.len() > 8 {
+            if data.len() > 16 {
+                let tail = data.read_last_u128();
+                self.large_update(tail);
+                while data.len() > 16 {
+                    let (block, rest) = data.read_u128();
+                    self.large_update(block);
+                    data = rest;
+                }
+            } else {
+                self.large_update([data.read_u64().0, data.read_last_u64()].convert());
+            }
+        } else {
+            let value = read_small(data);
+            self.large_update(value.convert());
+        }
+    }
+
+    #[inline]
+    fn finish(&self) -> u64 {
+        let rot = (self.buffer & 63) as u32;
+        folded_multiply(self.buffer, self.pad).rotate_left(rot)
+    }
+}
+
+#[cfg(feature = "specialize")]
+pub(crate) struct AHasherU64 {
+    pub(crate) buffer: u64,
+    pub(crate) pad: u64,
+}
+
+/// A specialized hasher for only primitives under 64 bits.
+#[cfg(feature = "specialize")]
+impl Hasher for AHasherU64 {
+    #[inline]
+    fn finish(&self) -> u64 {
+        let rot = (self.pad & 63) as u32;
+        self.buffer.rotate_left(rot)
+    }
