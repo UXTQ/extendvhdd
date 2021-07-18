@@ -96,3 +96,67 @@ impl AHasher {
     fn update(&mut self, new_data: u64) {
         self.buffer = folded_multiply(new_data ^ self.buffer, MULTIPLE);
     }
+
+    /// Similar to the above this function performs an update using a "folded multiply".
+    /// However it takes in 128 bits of data instead of 64. Both halves must be masked.
+    ///
+    /// This makes it impossible for an attacker to place a single bit difference between
+    /// two blocks so as to cancel each other.
+    ///
+    /// However this is not sufficient. to prevent (a,b) from hashing the same as (b,a) the buffer itself must
+    /// be updated between calls in a way that does not commute. To achieve this XOR and Rotate are used.
+    /// Add followed by xor is not the same as xor followed by add, and rotate ensures that the same out bits
+    /// can't be changed by the same set of input bits. To cancel this sequence with subsequent input would require
+    /// knowing the keys.
+    #[inline(always)]
+    fn large_update(&mut self, new_data: u128) {
+        let block: [u64; 2] = new_data.convert();
+        let combined = folded_multiply(block[0] ^ self.extra_keys[0], block[1] ^ self.extra_keys[1]);
+        self.buffer = (self.buffer.wrapping_add(self.pad) ^ combined).rotate_left(ROT);
+    }
+
+    #[inline]
+    #[cfg(feature = "specialize")]
+    fn short_finish(&self) -> u64 {
+        self.buffer.wrapping_add(self.pad)
+    }
+}
+
+/// Provides [Hasher] methods to hash all of the primitive types.
+///
+/// [Hasher]: core::hash::Hasher
+impl Hasher for AHasher {
+    #[inline]
+    fn write_u8(&mut self, i: u8) {
+        self.update(i as u64);
+    }
+
+    #[inline]
+    fn write_u16(&mut self, i: u16) {
+        self.update(i as u64);
+    }
+
+    #[inline]
+    fn write_u32(&mut self, i: u32) {
+        self.update(i as u64);
+    }
+
+    #[inline]
+    fn write_u64(&mut self, i: u64) {
+        self.update(i as u64);
+    }
+
+    #[inline]
+    fn write_u128(&mut self, i: u128) {
+        self.large_update(i);
+    }
+
+    #[inline]
+    #[cfg(any(
+        target_pointer_width = "64",
+        target_pointer_width = "32",
+        target_pointer_width = "16"
+    ))]
+    fn write_usize(&mut self, i: usize) {
+        self.write_u64(i as u64);
+    }
