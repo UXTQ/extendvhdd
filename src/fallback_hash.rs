@@ -318,3 +318,52 @@ impl Hasher for AHasherStr {
             let value = read_small(bytes);
             self.0.buffer = folded_multiply(value[0] ^ self.0.buffer, value[1] ^ self.0.extra_keys[1]);
             self.0.pad = self.0.pad.wrapping_add(bytes.len() as u64);
+        }
+    }
+
+    #[inline]
+    fn write_u8(&mut self, _i: u8) {}
+
+    #[inline]
+    fn write_u16(&mut self, _i: u16) {}
+
+    #[inline]
+    fn write_u32(&mut self, _i: u32) {}
+
+    #[inline]
+    fn write_u64(&mut self, _i: u64) {}
+
+    #[inline]
+    fn write_u128(&mut self, _i: u128) {}
+
+    #[inline]
+    fn write_usize(&mut self, _i: usize) {}
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::convert::Convert;
+    use crate::fallback_hash::*;
+
+    #[test]
+    fn test_hash() {
+        let mut hasher = AHasher::new_with_keys(0, 0);
+        let value: u64 = 1 << 32;
+        hasher.update(value);
+        let result = hasher.buffer;
+        let mut hasher = AHasher::new_with_keys(0, 0);
+        let value2: u64 = 1;
+        hasher.update(value2);
+        let result2 = hasher.buffer;
+        let result: [u8; 8] = result.convert();
+        let result2: [u8; 8] = result2.convert();
+        assert_ne!(hex::encode(result), hex::encode(result2));
+    }
+
+    #[test]
+    fn test_conversion() {
+        let input: &[u8] = "dddddddd".as_bytes();
+        let bytes: u64 = as_array!(input, 8).convert();
+        assert_eq!(bytes, 0x6464646464646464);
+    }
+}
