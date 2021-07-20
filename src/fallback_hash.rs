@@ -256,3 +256,65 @@ pub(crate) struct AHasherFixed(pub AHasher);
 
 /// A specialized hasher for fixed size primitives larger than 64 bits.
 #[cfg(feature = "specialize")]
+impl Hasher for AHasherFixed {
+    #[inline]
+    fn finish(&self) -> u64 {
+        self.0.short_finish()
+    }
+
+    #[inline]
+    fn write(&mut self, bytes: &[u8]) {
+        self.0.write(bytes)
+    }
+
+    #[inline]
+    fn write_u8(&mut self, i: u8) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u16(&mut self, i: u16) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u32(&mut self, i: u32) {
+        self.write_u64(i as u64);
+    }
+
+    #[inline]
+    fn write_u64(&mut self, i: u64) {
+        self.0.write_u64(i);
+    }
+
+    #[inline]
+    fn write_u128(&mut self, i: u128) {
+        self.0.write_u128(i);
+    }
+
+    #[inline]
+    fn write_usize(&mut self, i: usize) {
+        self.0.write_usize(i);
+    }
+}
+
+#[cfg(feature = "specialize")]
+pub(crate) struct AHasherStr(pub AHasher);
+
+/// A specialized hasher for a single string
+/// Note that the other types don't panic because the hash impl for String tacks on an unneeded call. (As does vec)
+#[cfg(feature = "specialize")]
+impl Hasher for AHasherStr {
+    #[inline]
+    fn finish(&self) -> u64 {
+        self.0.finish()
+    }
+
+    #[inline]
+    fn write(&mut self, bytes: &[u8]) {
+        if bytes.len() > 8 {
+            self.0.write(bytes)
+        } else {
+            let value = read_small(bytes);
+            self.0.buffer = folded_multiply(value[0] ^ self.0.buffer, value[1] ^ self.0.extra_keys[1]);
+            self.0.pad = self.0.pad.wrapping_add(bytes.len() as u64);
