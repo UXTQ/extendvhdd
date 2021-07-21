@@ -63,3 +63,61 @@ impl<K, V> AHashMap<K, V, RandomState> {
     pub fn with_capacity(capacity: usize) -> Self {
         AHashMap(HashMap::with_capacity_and_hasher(capacity, RandomState::new()))
     }
+}
+
+impl<K, V, S> AHashMap<K, V, S>
+where
+    S: BuildHasher,
+{
+    pub fn with_hasher(hash_builder: S) -> Self {
+        AHashMap(HashMap::with_hasher(hash_builder))
+    }
+
+    pub fn with_capacity_and_hasher(capacity: usize, hash_builder: S) -> Self {
+        AHashMap(HashMap::with_capacity_and_hasher(capacity, hash_builder))
+    }
+}
+
+impl<K, V, S> AHashMap<K, V, S>
+where
+    K: Hash + Eq,
+    S: BuildHasher,
+{
+    /// Returns a reference to the value corresponding to the key.
+    ///
+    /// The key may be any borrowed form of the map's key type, but
+    /// [`Hash`] and [`Eq`] on the borrowed form *must* match those for
+    /// the key type.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::collections::HashMap;
+    ///
+    /// let mut map = HashMap::new();
+    /// map.insert(1, "a");
+    /// assert_eq!(map.get(&1), Some(&"a"));
+    /// assert_eq!(map.get(&2), None);
+    /// ```
+    #[inline]
+    pub fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.0.get(k)
+    }
+
+    /// Returns the key-value pair corresponding to the supplied key.
+    ///
+    /// The supplied key may be any borrowed form of the map's key type, but
+    /// [`Hash`] and [`Eq`] on the borrowed form *must* match those for
+    /// the key type.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use std::collections::HashMap;
+    ///
+    /// let mut map = HashMap::new();
+    /// map.insert(1, "a");
