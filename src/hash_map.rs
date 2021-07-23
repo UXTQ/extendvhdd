@@ -280,3 +280,56 @@ impl<K, V, S> Deref for AHashMap<K, V, S> {
     type Target = HashMap<K, V, S>;
     fn deref(&self) -> &Self::Target {
         &self.0
+    }
+}
+
+impl<K, V, S> DerefMut for AHashMap<K, V, S> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+impl<K, V, S> UnwindSafe for AHashMap<K, V, S>
+where
+    K: UnwindSafe,
+    V: UnwindSafe,
+{
+}
+
+impl<K, V, S> PartialEq for AHashMap<K, V, S>
+where
+    K: Eq + Hash,
+    V: PartialEq,
+    S: BuildHasher,
+{
+    fn eq(&self, other: &AHashMap<K, V, S>) -> bool {
+        self.0.eq(&other.0)
+    }
+}
+
+impl<K, V, S> Eq for AHashMap<K, V, S>
+where
+    K: Eq + Hash,
+    V: Eq,
+    S: BuildHasher,
+{
+}
+
+impl<K, Q: ?Sized, V, S> Index<&Q> for AHashMap<K, V, S>
+where
+    K: Eq + Hash + Borrow<Q>,
+    Q: Eq + Hash,
+    S: BuildHasher,
+{
+    type Output = V;
+
+    /// Returns a reference to the value corresponding to the supplied key.
+    ///
+    /// # Panics
+    ///
+    /// Panics if the key is not present in the `HashMap`.
+    #[inline]
+    fn index(&self, key: &Q) -> &V {
+        self.0.index(key)
+    }
+}
