@@ -333,3 +333,64 @@ where
         self.0.index(key)
     }
 }
+
+impl<K, V, S> Debug for AHashMap<K, V, S>
+where
+    K: Debug,
+    V: Debug,
+    S: BuildHasher,
+{
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        self.0.fmt(fmt)
+    }
+}
+
+impl<K, V> FromIterator<(K, V)> for AHashMap<K, V, RandomState>
+where
+    K: Eq + Hash,
+{
+    /// This crates a hashmap from the provided iterator using [RandomState::new].
+    /// See the documentation in [RandomSource] for notes about key strength.
+    fn from_iter<T: IntoIterator<Item = (K, V)>>(iter: T) -> Self {
+        let mut inner = HashMap::with_hasher(RandomState::new());
+        inner.extend(iter);
+        AHashMap(inner)
+    }
+}
+
+impl<'a, K, V, S> IntoIterator for &'a AHashMap<K, V, S> {
+    type Item = (&'a K, &'a V);
+    type IntoIter = hash_map::Iter<'a, K, V>;
+    fn into_iter(self) -> Self::IntoIter {
+        (&self.0).iter()
+    }
+}
+
+impl<'a, K, V, S> IntoIterator for &'a mut AHashMap<K, V, S> {
+    type Item = (&'a K, &'a mut V);
+    type IntoIter = hash_map::IterMut<'a, K, V>;
+    fn into_iter(self) -> Self::IntoIter {
+        (&mut self.0).iter_mut()
+    }
+}
+
+impl<K, V, S> IntoIterator for AHashMap<K, V, S> {
+    type Item = (K, V);
+    type IntoIter = hash_map::IntoIter<K, V>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
+
+impl<K, V, S> Extend<(K, V)> for AHashMap<K, V, S>
+where
+    K: Eq + Hash,
+    S: BuildHasher,
+{
+    #[inline]
+    fn extend<T: IntoIterator<Item = (K, V)>>(&mut self, iter: T) {
+        self.0.extend(iter)
+    }
+}
+
+impl<'a, K, V, S> Extend<(&'a K, &'a V)> for AHashMap<K, V, S>
