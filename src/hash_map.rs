@@ -394,3 +394,43 @@ where
 }
 
 impl<'a, K, V, S> Extend<(&'a K, &'a V)> for AHashMap<K, V, S>
+where
+    K: Eq + Hash + Copy + 'a,
+    V: Copy + 'a,
+    S: BuildHasher,
+{
+    #[inline]
+    fn extend<T: IntoIterator<Item = (&'a K, &'a V)>>(&mut self, iter: T) {
+        self.0.extend(iter)
+    }
+}
+
+/// NOTE: For safety this trait impl is only available available if either of the flags `runtime-rng` (on by default) or
+/// `compile-time-rng` are enabled. This is to prevent weakly keyed maps from being accidentally created. Instead one of
+/// constructors for [RandomState] must be used.
+#[cfg(any(feature = "compile-time-rng", feature = "runtime-rng", feature = "no-rng"))]
+impl<K, V> Default for AHashMap<K, V, RandomState> {
+    #[inline]
+    fn default() -> AHashMap<K, V, RandomState> {
+        AHashMap(HashMap::default())
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<K, V> Serialize for AHashMap<K, V>
+where
+    K: Serialize + Eq + Hash,
+    V: Serialize,
+{
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        self.deref().serialize(serializer)
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<'de, K, V> Deserialize<'de> for AHashMap<K, V>
+where
+    K: Deserialize<'de> + Eq + Hash,
+    V: Deserialize<'de>,
+{
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
