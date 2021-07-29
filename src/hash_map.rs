@@ -492,3 +492,11 @@ mod test {
         let mut serialization = serde_json::to_string(&map).unwrap();
         let mut deserialization: AHashMap<String, u64> = serde_json::from_str(&serialization).unwrap();
         assert_eq!(deserialization, map);
+
+        map.insert("baz".to_string(), 2);
+        serialization = serde_json::to_string(&map).unwrap();
+        let mut deserializer = serde_json::Deserializer::from_str(&serialization);
+        AHashMap::deserialize_in_place(&mut deserializer, &mut deserialization).unwrap();
+        assert_eq!(deserialization, map);
+    }
+}
