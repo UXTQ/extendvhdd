@@ -9,4 +9,8 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
         "{:x} vs {:x}: {:}",
         a,
         b,
-        same_nibble_coun
+        same_nibble_count
+    );
+    let flipped_bits = (a ^ b).count_ones();
+    assert!(
+   
