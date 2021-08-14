@@ -14,4 +14,9 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
     let flipped_bits = (a ^ b).count_ones();
     assert!(
         flipped_bits > 12 && flipped_bits < 52,
-        "{:x} a
+        "{:x} and {:x}: {:}",
+        a,
+        b,
+        flipped_bits
+    );
+    for rotate in
