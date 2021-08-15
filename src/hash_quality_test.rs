@@ -19,4 +19,5 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
         b,
         flipped_bits
     );
-    for rotate in
+    for rotate in 0..64 {
+        let flipped_bits2 = (a ^ (b.rotate_left(rotate)
