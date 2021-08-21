@@ -32,4 +32,6 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
 }
 
 fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
-    let mut same_by
+    let mut same_byte_count = 0;
+    let mut same_nibble_count = 0;
+    for byte in 0..
