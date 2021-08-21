@@ -31,4 +31,5 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
     }
 }
 
-fn count_same_byt
+fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
+    let mut same_by
