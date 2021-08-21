@@ -26,3 +26,9 @@ fn assert_sufficiently_different(a: u64, b: u64, tolerance: i32) {
             "{:x} and {:x}: {:}",
             a,
             b.rotate_left(rotate),
+            flipped_bits2
+        );
+    }
+}
+
+fn count_same_byt
