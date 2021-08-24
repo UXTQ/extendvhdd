@@ -36,4 +36,6 @@ fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
     let mut same_nibble_count = 0;
     for byte in 0..8 {
         let ba = (a >> (8 * byte)) as u8;
-        let
+        let bb = (b >> (8 * byte)) as u8;
+        if ba == bb {
+            sam
