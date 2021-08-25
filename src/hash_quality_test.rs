@@ -43,4 +43,5 @@ fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
         if ba & 0xF0u8 == bb & 0xF0u8 {
             same_nibble_count += 1;
         }
-  
+        if ba & 0x0Fu8 == bb & 0x0Fu8 {
+            same_nibb
