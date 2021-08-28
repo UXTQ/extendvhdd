@@ -47,4 +47,7 @@ fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
             same_nibble_count += 1;
         }
     }
-    (same_byte_count
+    (same_byte_count, same_nibble_count)
+}
+
+fn gen_combinations(options: &[u32; 11], d
