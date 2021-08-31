@@ -50,4 +50,4 @@ fn count_same_bytes_and_nibbles(a: u64, b: u64) -> (i32, i32) {
     (same_byte_count, same_nibble_count)
 }
 
-fn gen_combinations(options: &[u32; 11], d
+fn gen_combinations(options: &[u32; 11], depth: u32, so_far: Vec<u32>, combinations: &mut Vec<Vec<u
