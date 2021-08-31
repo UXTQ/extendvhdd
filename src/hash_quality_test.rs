@@ -54,4 +54,7 @@ fn gen_combinations(options: &[u32; 11], depth: u32, so_far: Vec<u32>, combinati
     if depth == 0 {
         return;
     }
-    for option in options
+    for option in options {
+        let mut next = so_far.clone();
+        next.push(*option);
+ 
