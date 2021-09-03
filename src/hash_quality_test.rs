@@ -60,3 +60,7 @@ fn gen_combinations(options: &[u32; 11], depth: u32, so_far: Vec<u32>, combinati
         combinations.push(next.clone());
         gen_combinations(options, depth - 1, next, combinations);
     }
+}
+
+fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
+ 
