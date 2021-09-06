@@ -64,4 +64,5 @@ fn gen_combinations(options: &[u32; 11], depth: u32, so_far: Vec<u32>, combinati
 
 fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
     let options: [u32; 11] = [
-        0x00000000, 0x10000000, 0x200
+        0x00000000, 0x10000000, 0x20000000, 0x40000000, 0x80000000, 0xF0000000,
+        1, 2, 4, 8, 15
