@@ -68,4 +68,4 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
         1, 2, 4, 8, 15
     ];
     let mut combinations = Vec::new();
-   
+    gen_combinations(&options, 7, Vec::new(), &mut combinations);
