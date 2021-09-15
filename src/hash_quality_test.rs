@@ -71,4 +71,5 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
     gen_combinations(&options, 7, Vec::new(), &mut combinations);
     let mut map: HashMap<u64, Vec<u8>> = HashMap::new();
     for combination in combinations {
-        let array = un
+        let array = unsafe {
+            let (begin, middle, end) = combination.align_t
