@@ -72,4 +72,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
     let mut map: HashMap<u64, Vec<u8>> = HashMap::new();
     for combination in combinations {
         let array = unsafe {
-            let (begin, middle, end) = combination.align_t
+            let (begin, middle, end) = combination.align_to::<u8>();
+            assert_eq!(0, begin.len());
+            asse
