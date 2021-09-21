@@ -74,4 +74,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
         let array = unsafe {
             let (begin, middle, end) = combination.align_to::<u8>();
             assert_eq!(0, begin.len());
-            asse
+            assert_eq!(0, end.len());
+            middle.to_vec()
+        };
