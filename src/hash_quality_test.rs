@@ -78,4 +78,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
             middle.to_vec()
         };
         let mut hasher = gen_hash();
-        hasher.w
+        hasher.write(&array);
+        let hash = hasher.finish();
+        
