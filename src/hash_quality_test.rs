@@ -83,4 +83,5 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
         if let Some(value) = map.get(&hash) {
             assert_eq!(
                 value, &array,
-                "Found
+                "Found a collision between {:x?} and {:x?}. Hash: {:x?}",
+          
