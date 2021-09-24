@@ -84,4 +84,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
             assert_eq!(
                 value, &array,
                 "Found a collision between {:x?} and {:x?}. Hash: {:x?}",
-          
+                value, &array, &hash
+            );
+        } else {
