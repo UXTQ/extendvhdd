@@ -81,4 +81,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
         hasher.write(&array);
         let hash = hasher.finish();
         if let Some(value) = map.get(&hash) {
-            asser
+            assert_eq!(
+                value, &array,
+                "Found
