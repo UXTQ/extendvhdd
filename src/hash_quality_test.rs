@@ -87,3 +87,7 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
                 value, &array, &hash
             );
         } else {
+            map.insert(hash, array);
+        }
+    }
+    
