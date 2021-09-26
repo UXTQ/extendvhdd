@@ -90,4 +90,5 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
             map.insert(hash, array);
         }
     }
-    
+    assert_eq!(21435887, map.len()); //11^7 + 11^6 ...
+}
