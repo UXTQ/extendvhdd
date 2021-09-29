@@ -93,4 +93,6 @@ fn test_no_full_collisions<T: Hasher>(gen_hash: impl Fn() -> T) {
     assert_eq!(21435887, map.len()); //11^7 + 11^6 ...
 }
 
-fn test_keys_change_output<T: Hasher>(constructor: impl Fn(u128, u12
+fn test_keys_change_output<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
+    let mut a = constructor(1, 1);
+  
