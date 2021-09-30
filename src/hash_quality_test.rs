@@ -99,4 +99,6 @@ fn test_keys_change_output<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
     let mut c = constructor(2, 1);
     let mut d = constructor(2, 2);
     "test".hash(&mut a);
-    "test".hash(&m
+    "test".hash(&mut b);
+    "test".hash(&mut c);
+    "test".hash(&mut d)
