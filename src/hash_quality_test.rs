@@ -104,4 +104,5 @@ fn test_keys_change_output<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
     "test".hash(&mut d);
     assert_sufficiently_different(a.finish(), b.finish(), 1);
     assert_sufficiently_different(a.finish(), c.finish(), 1);
-    assert_sufficiently_different(a.finish(), 
+    assert_sufficiently_different(a.finish(), d.finish(), 1);
+    assert_sufficiently_different(b.finish(), c.fin
