@@ -111,4 +111,5 @@ fn test_keys_change_output<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
 }
 
 fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
+    let base = hash_with(&0, constructor(0, 0));
   
