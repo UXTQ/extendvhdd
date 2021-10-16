@@ -117,4 +117,6 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
         for v in 0..256 {
             let input = (v as u128) << (shift * 8);
             let hasher = constructor(0, 0);
-       
+            alternitives.push(hash_with(&input, hasher));
+        }
+ 
