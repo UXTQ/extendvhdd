@@ -119,4 +119,4 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
             let hasher = constructor(0, 0);
             alternitives.push(hash_with(&input, hasher));
         }
- 
+        assert_each_byte_differs(shift, base, alternitives);
