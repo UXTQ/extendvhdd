@@ -120,3 +120,7 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
             alternitives.push(hash_with(&input, hasher));
         }
         assert_each_byte_differs(shift, base, alternitives);
+    }
+}
+
+///Ensures that for every bit in the output the
