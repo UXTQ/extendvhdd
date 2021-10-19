@@ -123,4 +123,5 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
     }
 }
 
-///Ensures that for every bit in the output the
+///Ensures that for every bit in the output there is some value for each byte in the key that flips it.
+fn test_keys
