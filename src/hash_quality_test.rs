@@ -125,4 +125,6 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
 
 ///Ensures that for every bit in the output there is some value for each byte in the key that flips it.
 fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn(u128, u128) -> T) {
-    let base = hash_with(&item
+    let base = hash_with(&item, constructor(0, 0));
+    for shift in 0..16 {
+   
