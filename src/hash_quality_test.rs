@@ -127,4 +127,5 @@ fn test_input_affect_every_byte<T: Hasher>(constructor: impl Fn(u128, u128) -> T
 fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn(u128, u128) -> T) {
     let base = hash_with(&item, constructor(0, 0));
     for shift in 0..16 {
-   
+        let mut alternitives1 = vec![];
+    
