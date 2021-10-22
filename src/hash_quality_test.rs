@@ -128,4 +128,6 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
     let base = hash_with(&item, constructor(0, 0));
     for shift in 0..16 {
         let mut alternitives1 = vec![];
-    
+        let mut alternitives2 = vec![];
+        for v in 0..256 {
+  
