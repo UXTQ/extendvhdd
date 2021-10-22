@@ -130,4 +130,5 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
         let mut alternitives1 = vec![];
         let mut alternitives2 = vec![];
         for v in 0..256 {
-  
+            let input = (v as u128) << (shift * 8);
+         
