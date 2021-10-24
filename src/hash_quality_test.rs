@@ -135,4 +135,5 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
             let hasher2 = constructor(0, input);
             let h1 = hash_with(&item, hasher1);
             let h2 = hash_with(&item, hasher2);
-            a
+            alternitives1.push(h1);
+            alternitives2.push(
