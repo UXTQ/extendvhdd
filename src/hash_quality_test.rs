@@ -132,4 +132,6 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
         for v in 0..256 {
             let input = (v as u128) << (shift * 8);
             let hasher1 = constructor(input, 0);
-            let hash
+            let hasher2 = constructor(0, input);
+            let h1 = hash_with(&item, hasher1);
+ 
