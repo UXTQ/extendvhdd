@@ -139,4 +139,8 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
             alternitives2.push(h2);
         }
         assert_each_byte_differs(shift, base, alternitives1);
-        assert_each_byte_differs(shi
+        assert_each_byte_differs(shift, base, alternitives2);
+    }
+}
+
+fn assert_each_by
