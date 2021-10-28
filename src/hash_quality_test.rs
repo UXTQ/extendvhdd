@@ -143,4 +143,4 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
     }
 }
 
-fn assert_each_by
+fn assert_each_byte_differs(num: u64, base: u64, alternitives: Vec<u
