@@ -151,4 +151,7 @@ fn assert_each_byte_differs(num: u64, base: u64, alternitives: Vec<u64>) {
     assert_eq!(
         core::u64::MAX,
         changed_bits,
-        "Bits changed: {:x} on nu
+        "Bits changed: {:x} on num: {:?}. base {:x}",
+        changed_bits,
+        num,
+        base
