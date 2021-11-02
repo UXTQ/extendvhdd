@@ -146,4 +146,7 @@ fn test_keys_affect_every_byte<H: Hash, T: Hasher>(item: H, constructor: impl Fn
 fn assert_each_byte_differs(num: u64, base: u64, alternitives: Vec<u64>) {
     let mut changed_bits = 0_u64;
     for alternitive in alternitives {
-        changed_bits |= bas
+        changed_bits |= base ^ alternitive
+    }
+    assert_eq!(
+        core::u64::M
