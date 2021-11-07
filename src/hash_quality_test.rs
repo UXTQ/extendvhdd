@@ -159,4 +159,6 @@ fn assert_each_byte_differs(num: u64, base: u64, alternitives: Vec<u64>) {
 }
 
 fn test_finish_is_consistent<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
-    let mut hasher = constructor(1, 2)
+    let mut hasher = constructor(1, 2);
+    "Foo".hash(&mut hasher);
+    let a = hasher.fini
