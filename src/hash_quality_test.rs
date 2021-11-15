@@ -163,4 +163,7 @@ fn test_finish_is_consistent<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
     "Foo".hash(&mut hasher);
     let a = hasher.finish();
     let b = hasher.finish();
-    assert_eq!
+    assert_eq!(a, b);
+}
+
+fn test_single_key_bit_flip<T: Hasher>(constructor
