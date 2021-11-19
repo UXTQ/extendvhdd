@@ -169,4 +169,5 @@ fn test_finish_is_consistent<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
 fn test_single_key_bit_flip<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
     for bit in 0..128 {
         let mut a = constructor(0, 0);
-        let mut b = constructor(0
+        let mut b = constructor(0, 1 << bit);
+        let mut c = constructor(1 << bit, 0);
