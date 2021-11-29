@@ -179,4 +179,6 @@ fn test_single_key_bit_flip<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
         assert_sufficiently_different(b.finish(), c.finish(), 2);
         let mut a = constructor(0, 0);
         let mut b = constructor(0, 1 << bit);
-        let mut c = constructor(
+        let mut c = constructor(1 << bit, 0);
+        "12345678".hash(&mut a);
+        "12
