@@ -197,3 +197,6 @@ fn test_single_key_bit_flip<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
         assert_sufficiently_different(b.finish(), c.finish(), 2);
     }
 }
+
+fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
+    let mut item
