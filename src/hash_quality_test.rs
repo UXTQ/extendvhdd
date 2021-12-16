@@ -193,4 +193,5 @@ fn test_single_key_bit_flip<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
         "1234567812345678".hash(&mut b);
         "1234567812345678".hash(&mut c);
         assert_sufficiently_different(a.finish(), b.finish(), 2);
-        assert_sufficiently_diff
+        assert_sufficiently_different(a.finish(), c.finish(), 2);
+        ass
