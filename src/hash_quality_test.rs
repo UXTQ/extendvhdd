@@ -199,4 +199,5 @@ fn test_single_key_bit_flip<T: Hasher>(constructor: impl Fn(u128, u128) -> T) {
 }
 
 fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
-    let mut item
+    let mut item = vec![0; 256];
+    let base_hash = hash(&item, &
