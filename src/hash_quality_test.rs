@@ -202,4 +202,6 @@ fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
     let mut item = vec![0; 256];
     let base_hash = hash(&item, &hasher);
     for pos in 0..256 {
-        item[po
+        item[pos] = 255;
+        let hash = hash(&item, &hasher);
+      
