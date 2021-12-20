@@ -204,4 +204,9 @@ fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
     for pos in 0..256 {
         item[pos] = 255;
         let hash = hash(&item, &hasher);
-        assert_ne!(base_hash, hash, "Position {} did not affec
+        assert_ne!(base_hash, hash, "Position {} did not affect output", pos);
+        item[pos] = 0;
+    }
+}
+
+fn test_no_
