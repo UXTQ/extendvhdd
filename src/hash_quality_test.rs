@@ -209,4 +209,5 @@ fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
     }
 }
 
-fn test_no_
+fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
+    let base
