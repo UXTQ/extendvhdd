@@ -210,4 +210,5 @@ fn test_all_bytes_matter<T: Hasher>(hasher: impl Fn() -> T) {
 }
 
 fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
-    let base
+    let base = [0_u64, 0_u64];
+    let base_hash = hash(&base, &
