@@ -218,4 +218,5 @@ fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
             let b = 1_u64 << bitpos2;
             let aa = hash(&[a, a], &hasher);
             let ab = hash(&[a, b], &hasher);
-           
+            let ba = hash(&[b, a], &hasher);
+            let bb = hash(&[b,
