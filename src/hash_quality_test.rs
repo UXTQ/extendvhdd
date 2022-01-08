@@ -222,4 +222,5 @@ fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
             let bb = hash(&[b, b], &hasher);
             assert_sufficiently_different(base_hash, aa, 3);
             assert_sufficiently_different(base_hash, ab, 3);
-            assert_sufficien
+            assert_sufficiently_different(base_hash, ba, 3);
+            assert_suf
