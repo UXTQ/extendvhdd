@@ -223,4 +223,5 @@ fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
             assert_sufficiently_different(base_hash, aa, 3);
             assert_sufficiently_different(base_hash, ab, 3);
             assert_sufficiently_different(base_hash, ba, 3);
-            assert_suf
+            assert_sufficiently_different(base_hash, bb, 3);
+            as
