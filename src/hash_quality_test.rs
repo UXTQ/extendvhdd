@@ -234,4 +234,4 @@ fn test_no_pair_collisions<T: Hasher>(hasher: impl Fn() -> T) {
     }
 }
 
-fn hash<H: H
+fn hash<H: Hash, T: Hasher>(b: &H, hash_builder: &dyn Fn() -> T) -> u
