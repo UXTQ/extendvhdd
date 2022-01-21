@@ -240,4 +240,6 @@ fn hash<H: Hash, T: Hasher>(b: &H, hash_builder: &dyn Fn() -> T) -> u64 {
     hasher.finish()
 }
 
-fn hash_with<H: Hash, T: Hasher>
+fn hash_with<H: Hash, T: Hasher>(b: &H, mut hasher: T) -> u64 {
+    b.hash(&mut hasher);
+    hashe
