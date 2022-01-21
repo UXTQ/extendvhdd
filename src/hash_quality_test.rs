@@ -242,4 +242,7 @@ fn hash<H: Hash, T: Hasher>(b: &H, hash_builder: &dyn Fn() -> T) -> u64 {
 
 fn hash_with<H: Hash, T: Hasher>(b: &H, mut hasher: T) -> u64 {
     b.hash(&mut hasher);
-    hashe
+    hasher.finish()
+}
+
+fn test_single_bit_flip<T: Hasher>(hasher: im
