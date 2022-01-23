@@ -247,4 +247,6 @@ fn hash_with<H: Hash, T: Hasher>(b: &H, mut hasher: T) -> u64 {
 
 fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
     let size = 32;
-    let compare_value = h
+    let compare_value = hash(&0u32, &hasher);
+    for pos in 0..size {
+        let test_valu
