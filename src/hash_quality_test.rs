@@ -255,4 +255,5 @@ fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
     let size = 64;
     let compare_value = hash(&0u64, &hasher);
     for pos in 0..size {
-        let test_value = hash(&(1u64 <
+        let test_value = hash(&(1u64 << pos), &hasher);
+        assert_sufficiently_different(c
