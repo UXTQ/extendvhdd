@@ -261,4 +261,6 @@ fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
     let size = 128;
     let compare_value = hash(&0u128, &hasher);
     for pos in 0..size {
-        let test_value = hash(&(1u128 << pos)
+        let test_value = hash(&(1u128 << pos), &hasher);
+        dbg!(compare_value, test_value);
+        
