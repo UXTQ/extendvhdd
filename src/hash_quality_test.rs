@@ -267,4 +267,4 @@ fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
     }
 }
 
-fn te
+fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T
