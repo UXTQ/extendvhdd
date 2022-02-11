@@ -263,4 +263,8 @@ fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
     for pos in 0..size {
         let test_value = hash(&(1u128 << pos), &hasher);
         dbg!(compare_value, test_value);
-        
+        assert_sufficiently_different(compare_value, test_value, 2);
+    }
+}
+
+fn te
