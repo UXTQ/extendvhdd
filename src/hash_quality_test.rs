@@ -274,4 +274,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
             string.hash(&mut short);
             let value = short.finish();
             let mut padded = string.to_string();
-           
+            for num in 1..=128 {
+                let mut long = hasher();
+        
