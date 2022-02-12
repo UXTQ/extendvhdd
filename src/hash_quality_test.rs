@@ -272,4 +272,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
         for string in ["", "\0", "\x01", "1234", "12345678", "1234567812345678"].iter() {
             let mut short = hasher();
             string.hash(&mut short);
-            let value = sho
+            let value = short.finish();
+            let mut padded = string.to_string();
+           
