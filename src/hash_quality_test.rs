@@ -269,4 +269,6 @@ fn test_single_bit_flip<T: Hasher>(hasher: impl Fn() -> T) {
 
 fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
     for c in 0..128u8 {
-        for string in ["", "\0", "\x01", "1234", "12345678", "1234567812345678"].it
+        for string in ["", "\0", "\x01", "1234", "12345678", "1234567812345678"].iter() {
+            let mut short = hasher();
+            str
