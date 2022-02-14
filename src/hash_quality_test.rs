@@ -278,4 +278,5 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                 let mut long = hasher();
                 padded.push(c as char);
                 padded.hash(&mut long);
-                let (same_bytes, same_nibbles) = c
+                let (same_bytes, same_nibbles) = count_same_bytes_and_nibbles(value, long.finish());
+    
