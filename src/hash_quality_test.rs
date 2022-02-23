@@ -281,4 +281,5 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                 let (same_bytes, same_nibbles) = count_same_bytes_and_nibbles(value, long.finish());
                 assert!(
                     same_bytes <= 3,
-     
+                    "{} bytes of {} -> {:x} vs {:x}",
+                    num
