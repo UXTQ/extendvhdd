@@ -292,4 +292,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                     "{} bytes of {} -> {:x} vs {:x}",
                     num,
                     c,
-          
+                    value,
+                    long.finish()
+         
