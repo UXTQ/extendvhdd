@@ -295,4 +295,5 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                     value,
                     long.finish()
                 );
-                let flipped_bits = (va
+                let flipped_bits = (value ^ long.finish()).count_ones();
+                assert!
