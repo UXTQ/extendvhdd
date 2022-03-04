@@ -299,4 +299,5 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                 assert!(flipped_bits > 10);
             }
             if string.len() > 0 {
-                let mut padded = string[1..].to
+                let mut padded = string[1..].to_string();
+                padded.push(c as c
