@@ -300,4 +300,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
             }
             if string.len() > 0 {
                 let mut padded = string[1..].to_string();
-                padded.push(c as c
+                padded.push(c as char);
+                for num in 2..=128 {
+                    let m
