@@ -315,4 +315,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                         value,
                         long.finish()
                     );
-          
+                    assert!(
+                        same_nibbles <= 8,
+ 
