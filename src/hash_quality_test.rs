@@ -313,3 +313,6 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                         num,
                         c,
                         value,
+                        long.finish()
+                    );
+          
