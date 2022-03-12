@@ -319,4 +319,7 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
                         same_nibbles <= 8,
                         "string {:?} + {} bytes of {} -> {:x} vs {:x}",
                         string,
-                  
+                        num,
+                        c,
+                        value,
+       
