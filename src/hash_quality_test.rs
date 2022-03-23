@@ -336,4 +336,5 @@ fn test_length_extension<T: Hasher>(hasher: impl Fn(u128, u128) -> T) {
     for key in 0..256 {
         let h1 = hasher(key, key);
         let v1 = hash_with(&[0_u8, 0, 0, 0, 0, 0, 0, 0], h1);
-        let 
+        let h2 = hasher(key, key);
+        let v2 = hash_with(&[1_u8, 0, 0,
