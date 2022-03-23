@@ -335,4 +335,5 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
 fn test_length_extension<T: Hasher>(hasher: impl Fn(u128, u128) -> T) {
     for key in 0..256 {
         let h1 = hasher(key, key);
-   
+        let v1 = hash_with(&[0_u8, 0, 0, 0, 0, 0, 0, 0], h1);
+        let 
