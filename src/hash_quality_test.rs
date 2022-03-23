@@ -332,4 +332,4 @@ fn test_padding_doesnot_collide<T: Hasher>(hasher: impl Fn() -> T) {
     }
 }
 
-fn t
+fn test_length_extension<T: Hasher>(hasher: impl Fn(u128, u128) -
