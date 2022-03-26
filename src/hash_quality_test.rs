@@ -343,4 +343,6 @@ fn test_length_extension<T: Hasher>(hasher: impl Fn(u128, u128) -> T) {
 }
 
 #[cfg(test)]
-mod fallback_t
+mod fallback_tests {
+    use crate::fallback_hash::*;
+    use crate::hash_qual
