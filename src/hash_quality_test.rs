@@ -354,4 +354,7 @@ mod fallback_tests {
 
     #[test]
     fn fallback_single_key_bit_flip() {
-        test_singl
+        test_single_key_bit_flip(AHasher::new_with_keys)
+    }
+
+    #
