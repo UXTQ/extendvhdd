@@ -352,4 +352,6 @@ mod fallback_tests {
         test_single_bit_flip(|| AHasher::new_with_keys(0, 0))
     }
 
-    
+    #[test]
+    fn fallback_single_key_bit_flip() {
+        test_singl
