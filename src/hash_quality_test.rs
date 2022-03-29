@@ -359,4 +359,8 @@ mod fallback_tests {
 
     #[test]
     fn fallback_all_bytes_matter() {
-        test_all_bytes_matter(
+        test_all_bytes_matter(|| AHasher::new_with_keys(0, 0));
+    }
+
+    #[test]
+    fn fallba
