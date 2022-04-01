@@ -364,4 +364,5 @@ mod fallback_tests {
 
     #[test]
     fn fallback_test_no_pair_collisions() {
-        test_no_pa
+        test_no_pair_collisions(|| AHasher::new_with_keys(0, 0));
+    
