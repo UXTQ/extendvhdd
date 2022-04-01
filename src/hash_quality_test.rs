@@ -363,4 +363,5 @@ mod fallback_tests {
     }
 
     #[test]
-    fn fallba
+    fn fallback_test_no_pair_collisions() {
+        test_no_pa
