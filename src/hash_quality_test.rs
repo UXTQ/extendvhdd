@@ -369,4 +369,4 @@ mod fallback_tests {
 
     #[test]
     fn fallback_test_no_full_collisions() {
-  
+        test_no_full_collisions(|| AHasher::new_with_keys(0,
