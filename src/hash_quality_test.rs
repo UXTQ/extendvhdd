@@ -374,4 +374,4 @@ mod fallback_tests {
 
     #[test]
     fn fallback_keys_change_output() {
-    
+        test_keys_change_output(AHasher::new_with_keys);
