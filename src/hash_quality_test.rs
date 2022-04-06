@@ -379,4 +379,8 @@ mod fallback_tests {
 
     #[test]
     fn fallback_input_affect_every_byte() {
-        test_input_affect_every_by
+        test_input_affect_every_byte(AHasher::new_with_keys);
+    }
+
+    #[test]
+    fn f
