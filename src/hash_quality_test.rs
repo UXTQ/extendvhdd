@@ -378,4 +378,5 @@ mod fallback_tests {
     }
 
     #[test]
-    fn fallback_input_affec
+    fn fallback_input_affect_every_byte() {
+        test_input_affect_every_by
