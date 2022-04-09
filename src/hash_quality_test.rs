@@ -384,4 +384,5 @@ mod fallback_tests {
 
     #[test]
     fn fallback_keys_affect_every_byte() {
-        //For fall
+        //For fallback second key is not used in every hash.
+        #[cfg(all(
