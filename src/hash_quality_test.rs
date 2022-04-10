@@ -387,4 +387,5 @@ mod fallback_tests {
         //For fallback second key is not used in every hash.
         #[cfg(all(not(feature = "specialize"), feature = "folded_multiply"))]
         test_keys_affect_every_byte(0, |a, b| AHasher::new_with_keys(a ^ b, a));
-        test_keys_affect_every_byte
+        test_keys_affect_every_byte("", |a, b| AHasher::new_with_keys(a ^ b, a));
+        test_k
