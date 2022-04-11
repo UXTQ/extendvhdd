@@ -388,4 +388,8 @@ mod fallback_tests {
         #[cfg(all(not(feature = "specialize"), feature = "folded_multiply"))]
         test_keys_affect_every_byte(0, |a, b| AHasher::new_with_keys(a ^ b, a));
         test_keys_affect_every_byte("", |a, b| AHasher::new_with_keys(a ^ b, a));
-        test_keys_affect_every_byte((0, 0), |a, b| AHasher::new_w
+        test_keys_affect_every_byte((0, 0), |a, b| AHasher::new_with_keys(a ^ b, a));
+    }
+
+    #[test]
+    fn fallback_finis
