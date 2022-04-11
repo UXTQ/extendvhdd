@@ -392,4 +392,5 @@ mod fallback_tests {
     }
 
     #[test]
-    fn fallback_finis
+    fn fallback_finish_is_consistant() {
+        test_finish_is_consistent(
