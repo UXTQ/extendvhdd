@@ -393,4 +393,8 @@ mod fallback_tests {
 
     #[test]
     fn fallback_finish_is_consistant() {
-        test_finish_is_consistent(
+        test_finish_is_consistent(AHasher::test_with_keys)
+    }
+
+    #[test]
+    fn fallback_padd
