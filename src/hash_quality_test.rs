@@ -397,4 +397,5 @@ mod fallback_tests {
     }
 
     #[test]
-    fn fallback_padd
+    fn fallback_padding_doesnot_collide() {
+        test_padding_doesnot_collide(|| AHasher::new_w
