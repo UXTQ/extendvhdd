@@ -400,4 +400,5 @@ mod fallback_tests {
     fn fallback_padding_doesnot_collide() {
         test_padding_doesnot_collide(|| AHasher::new_with_keys(0, 0));
         test_padding_doesnot_collide(|| AHasher::new_with_keys(0, 2));
-        test_padding_doesnot_collide(|| AHas
+        test_padding_doesnot_collide(|| AHasher::new_with_keys(2, 0));
+        test_padding_doesnot_col
