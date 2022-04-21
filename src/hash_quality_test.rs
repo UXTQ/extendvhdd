@@ -405,3 +405,5 @@ mod fallback_tests {
     }
 
     #[test]
+    fn fallback_length_extension() {
+        t
