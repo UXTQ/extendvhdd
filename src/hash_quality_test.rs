@@ -406,4 +406,8 @@ mod fallback_tests {
 
     #[test]
     fn fallback_length_extension() {
-        test_length_extension(|a, b| AHasher::new_with_keys(a, b))
+        test_length_extension(|a, b| AHasher::new_with_keys(a, b));
+    }
+}
+
+///Basic sanity tests of the cy
