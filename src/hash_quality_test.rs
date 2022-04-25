@@ -410,4 +410,6 @@ mod fallback_tests {
     }
 }
 
-///Basic sanity tests of the cy
+///Basic sanity tests of the cypto properties of aHash.
+#[cfg(any(
+    all(any(target_arch = "x86", target
