@@ -417,4 +417,9 @@ mod fallback_tests {
         any(target_arch = "arm", target_arch = "aarch64"),
         any(target_feature = "aes", target_feature = "crypto"),
         not(miri),
-        feature = "stdsim
+        feature = "stdsimd"
+    )
+))]
+#[cfg(test)]
+mod aes_tests {
+    use crate::aes
