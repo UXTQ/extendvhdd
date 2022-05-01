@@ -414,4 +414,5 @@ mod fallback_tests {
 #[cfg(any(
     all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "aes", not(miri)),
     all(
-        any(target_arch = "arm", target_arch = 
+        any(target_arch = "arm", target_arch = "aarch64"),
+        any(target_feature = "aes", target_feat
