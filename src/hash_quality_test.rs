@@ -424,3 +424,7 @@ mod fallback_tests {
 mod aes_tests {
     use crate::aes_hash::*;
     use crate::hash_quality_test::*;
+    use std::hash::{Hash, Hasher};
+
+    //This encrypts to 0.
+    cons
