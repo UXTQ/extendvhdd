@@ -427,4 +427,4 @@ mod aes_tests {
     use std::hash::{Hash, Hasher};
 
     //This encrypts to 0.
-    cons
+    const BAD_KEY2: u128 = 0x6363_6363_6363_6363_6363_63
