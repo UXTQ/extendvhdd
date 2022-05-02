@@ -422,4 +422,5 @@ mod fallback_tests {
 ))]
 #[cfg(test)]
 mod aes_tests {
-    use crate::aes
+    use crate::aes_hash::*;
+    use crate::hash_quality_test::*;
