@@ -429,4 +429,7 @@ mod aes_tests {
     //This encrypts to 0.
     const BAD_KEY2: u128 = 0x6363_6363_6363_6363_6363_6363_6363_6363;
     //This decrypts to 0.
-    const BAD_KEY: 
+    const BAD_KEY: u128 = 0x5252_5252_5252_5252_5252_5252_5252_5252;
+
+    #[test]
+    fn 
