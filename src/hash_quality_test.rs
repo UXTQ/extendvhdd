@@ -432,4 +432,5 @@ mod aes_tests {
     const BAD_KEY: u128 = 0x5252_5252_5252_5252_5252_5252_5252_5252;
 
     #[test]
-    fn 
+    fn test_single_bit_in_byte() {
+        let mut hasher1 = AHash
