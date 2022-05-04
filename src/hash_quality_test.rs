@@ -433,4 +433,6 @@ mod aes_tests {
 
     #[test]
     fn test_single_bit_in_byte() {
-        let mut hasher1 = AHash
+        let mut hasher1 = AHasher::test_with_keys(0, 0);
+        8_u32.hash(&mut hasher1);
+       
