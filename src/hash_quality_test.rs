@@ -437,4 +437,4 @@ mod aes_tests {
         8_u32.hash(&mut hasher1);
         let mut hasher2 = AHasher::test_with_keys(0, 0);
         0_u32.hash(&mut hasher2);
-        assert_su
+        assert_sufficiently_different(hasher1.finish(), hasher2.finis
