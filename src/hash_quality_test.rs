@@ -441,4 +441,5 @@ mod aes_tests {
     }
 
     #[test]
-    fn aes_single_bit_fli
+    fn aes_single_bit_flip() {
+        test_single_bit_flip(|| AHasher::test_with_keys(BAD_
