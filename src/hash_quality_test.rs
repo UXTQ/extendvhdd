@@ -452,4 +452,5 @@ mod aes_tests {
     }
 
     #[test]
-    fn aes
+    fn aes_all_bytes_matter() {
+        test_all_bytes_matter(|| AHashe
