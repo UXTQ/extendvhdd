@@ -448,4 +448,8 @@ mod aes_tests {
 
     #[test]
     fn aes_single_key_bit_flip() {
-        test_single_key_bit_flip(AH
+        test_single_key_bit_flip(AHasher::test_with_keys)
+    }
+
+    #[test]
+    fn aes
