@@ -456,3 +456,6 @@ mod aes_tests {
         test_all_bytes_matter(|| AHasher::test_with_keys(BAD_KEY, BAD_KEY));
         test_all_bytes_matter(|| AHasher::test_with_keys(BAD_KEY2, BAD_KEY2));
     }
+
+    #[test]
+    fn aes_test_no_pair_collisions()
