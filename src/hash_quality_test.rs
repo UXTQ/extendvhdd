@@ -454,4 +454,5 @@ mod aes_tests {
     #[test]
     fn aes_all_bytes_matter() {
         test_all_bytes_matter(|| AHasher::test_with_keys(BAD_KEY, BAD_KEY));
-        test_all_bytes_
+        test_all_bytes_matter(|| AHasher::test_with_keys(BAD_KEY2, BAD_KEY2));
+    }
