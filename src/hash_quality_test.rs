@@ -458,4 +458,5 @@ mod aes_tests {
     }
 
     #[test]
-    fn aes_test_no_pair_collisions()
+    fn aes_test_no_pair_collisions() {
+        test_no_pair_collisions(|| AHasher::test_with_ke
