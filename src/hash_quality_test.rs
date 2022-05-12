@@ -464,3 +464,5 @@ mod aes_tests {
     }
 
     #[test]
+    fn ase_test_no_full_collisions() {
+        test_no_ful
