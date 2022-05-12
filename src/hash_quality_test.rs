@@ -460,4 +460,7 @@ mod aes_tests {
     #[test]
     fn aes_test_no_pair_collisions() {
         test_no_pair_collisions(|| AHasher::test_with_keys(BAD_KEY, BAD_KEY));
-        test_no_pair_collisions(|| AHas
+        test_no_pair_collisions(|| AHasher::test_with_keys(BAD_KEY2, BAD_KEY2));
+    }
+
+    #[test]
