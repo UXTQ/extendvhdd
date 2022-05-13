@@ -465,4 +465,4 @@ mod aes_tests {
 
     #[test]
     fn ase_test_no_full_collisions() {
-        test_no_ful
+        test_no_full_collisions(|| AHasher::test_with_keys(12345, 
