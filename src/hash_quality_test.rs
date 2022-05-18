@@ -470,4 +470,7 @@ mod aes_tests {
 
     #[test]
     fn aes_keys_change_output() {
-        te
+        test_keys_change_output(AHasher::test_with_keys);
+    }
+
+    #
