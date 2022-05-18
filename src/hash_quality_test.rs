@@ -473,4 +473,6 @@ mod aes_tests {
         test_keys_change_output(AHasher::test_with_keys);
     }
 
-    #
+    #[test]
+    fn aes_input_affect_every_byte() {
+        test_
