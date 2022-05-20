@@ -475,4 +475,9 @@ mod aes_tests {
 
     #[test]
     fn aes_input_affect_every_byte() {
-        test_input_affect_every_byte(AHasher::test_with_key
+        test_input_affect_every_byte(AHasher::test_with_keys);
+    }
+
+    #[test]
+    fn aes_keys_affect_every_byte() {
+    
