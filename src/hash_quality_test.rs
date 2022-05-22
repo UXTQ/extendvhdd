@@ -480,4 +480,5 @@ mod aes_tests {
 
     #[test]
     fn aes_keys_affect_every_byte() {
-    
+        #[cfg(not(feature = "specialize"))]
+        test_keys_affec
