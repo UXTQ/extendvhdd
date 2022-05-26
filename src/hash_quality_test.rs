@@ -482,4 +482,5 @@ mod aes_tests {
     fn aes_keys_affect_every_byte() {
         #[cfg(not(feature = "specialize"))]
         test_keys_affect_every_byte(0, AHasher::test_with_keys);
-   
+        test_keys_affect_every_byte("", AHasher::test_with_keys);
+     
