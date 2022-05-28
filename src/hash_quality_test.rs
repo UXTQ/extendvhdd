@@ -484,4 +484,8 @@ mod aes_tests {
         test_keys_affect_every_byte(0, AHasher::test_with_keys);
         test_keys_affect_every_byte("", AHasher::test_with_keys);
         test_keys_affect_every_byte((0, 0), AHasher::test_with_keys);
-    
+    }
+
+    #[test]
+    fn aes_finish_is_consistant() {
+        test_fin
