@@ -488,4 +488,7 @@ mod aes_tests {
 
     #[test]
     fn aes_finish_is_consistant() {
-        test_fin
+        test_finish_is_consistent(AHasher::test_with_keys)
+    }
+
+    #[test]
