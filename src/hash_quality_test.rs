@@ -493,4 +493,5 @@ mod aes_tests {
 
     #[test]
     fn aes_padding_doesnot_collide() {
-        test_padding_doesnot_collide(|| AHasher::test_with_keys(BAD_KEY, BAD_KEY)
+        test_padding_doesnot_collide(|| AHasher::test_with_keys(BAD_KEY, BAD_KEY));
+        test_padding_doesnot_collide(|| AHasher::tes
