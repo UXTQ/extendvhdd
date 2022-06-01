@@ -499,4 +499,6 @@ mod aes_tests {
 
     #[test]
     fn aes_length_extension() {
-        test_length_ext
+        test_length_extension(|a, b| AHasher::test_with_keys(a, b));
+    }
+}
