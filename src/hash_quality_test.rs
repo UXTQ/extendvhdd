@@ -497,4 +497,6 @@ mod aes_tests {
         test_padding_doesnot_collide(|| AHasher::test_with_keys(BAD_KEY2, BAD_KEY2));
     }
 
-  
+    #[test]
+    fn aes_length_extension() {
+        test_length_ext
