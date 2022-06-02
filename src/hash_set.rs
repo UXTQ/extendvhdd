@@ -108,3 +108,64 @@ impl<T, S> BitOr<&AHashSet<T, S>> for &AHashSet<T, S>
 where
     T: Eq + Hash + Clone,
     S: BuildHasher + Default,
+{
+    type Output = AHashSet<T, S>;
+
+    /// Returns the union of `self` and `rhs` as a new `AHashSet<T, S>`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ahash::AHashSet;
+    ///
+    /// let a: AHashSet<_> = vec![1, 2, 3].into_iter().collect();
+    /// let b: AHashSet<_> = vec![3, 4, 5].into_iter().collect();
+    ///
+    /// let set = &a | &b;
+    ///
+    /// let mut i = 0;
+    /// let expected = [1, 2, 3, 4, 5];
+    /// for x in &set {
+    ///     assert!(expected.contains(x));
+    ///     i += 1;
+    /// }
+    /// assert_eq!(i, expected.len());
+    /// ```
+    fn bitor(self, rhs: &AHashSet<T, S>) -> AHashSet<T, S> {
+        AHashSet(self.0.bitor(&rhs.0))
+    }
+}
+
+impl<T, S> BitAnd<&AHashSet<T, S>> for &AHashSet<T, S>
+where
+    T: Eq + Hash + Clone,
+    S: BuildHasher + Default,
+{
+    type Output = AHashSet<T, S>;
+
+    /// Returns the intersection of `self` and `rhs` as a new `AHashSet<T, S>`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ahash::AHashSet;
+    ///
+    /// let a: AHashSet<_> = vec![1, 2, 3].into_iter().collect();
+    /// let b: AHashSet<_> = vec![2, 3, 4].into_iter().collect();
+    ///
+    /// let set = &a & &b;
+    ///
+    /// let mut i = 0;
+    /// let expected = [2, 3];
+    /// for x in &set {
+    ///     assert!(expected.contains(x));
+    ///     i += 1;
+    /// }
+    /// assert_eq!(i, expected.len());
+    /// ```
+    fn bitand(self, rhs: &AHashSet<T, S>) -> AHashSet<T, S> {
+        AHashSet(self.0.bitand(&rhs.0))
+    }
+}
+
+impl<T, S> BitXor<&AHashSet<T, S>> for &AHashSet<T, S>
