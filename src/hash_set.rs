@@ -56,3 +56,55 @@ impl<T> AHashSet<T, RandomState> {
 
     /// This crates a hashset with the specified capacity using [RandomState::new].
     /// See the documentation in [RandomSource] for notes about key strength.
+    pub fn with_capacity(capacity: usize) -> Self {
+        AHashSet(HashSet::with_capacity_and_hasher(capacity, RandomState::new()))
+    }
+}
+
+impl<T, S> AHashSet<T, S>
+where
+    S: BuildHasher,
+{
+    pub fn with_hasher(hash_builder: S) -> Self {
+        AHashSet(HashSet::with_hasher(hash_builder))
+    }
+
+    pub fn with_capacity_and_hasher(capacity: usize, hash_builder: S) -> Self {
+        AHashSet(HashSet::with_capacity_and_hasher(capacity, hash_builder))
+    }
+}
+
+impl<T, S> Deref for AHashSet<T, S> {
+    type Target = HashSet<T, S>;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl<T, S> DerefMut for AHashSet<T, S> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+impl<T, S> PartialEq for AHashSet<T, S>
+where
+    T: Eq + Hash,
+    S: BuildHasher,
+{
+    fn eq(&self, other: &AHashSet<T, S>) -> bool {
+        self.0.eq(&other.0)
+    }
+}
+
+impl<T, S> Eq for AHashSet<T, S>
+where
+    T: Eq + Hash,
+    S: BuildHasher,
+{
+}
+
+impl<T, S> BitOr<&AHashSet<T, S>> for &AHashSet<T, S>
+where
+    T: Eq + Hash + Clone,
+    S: BuildHasher + Default,
