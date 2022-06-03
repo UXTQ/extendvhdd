@@ -169,3 +169,72 @@ where
 }
 
 impl<T, S> BitXor<&AHashSet<T, S>> for &AHashSet<T, S>
+where
+    T: Eq + Hash + Clone,
+    S: BuildHasher + Default,
+{
+    type Output = AHashSet<T, S>;
+
+    /// Returns the symmetric difference of `self` and `rhs` as a new `AHashSet<T, S>`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ahash::AHashSet;
+    ///
+    /// let a: AHashSet<_> = vec![1, 2, 3].into_iter().collect();
+    /// let b: AHashSet<_> = vec![3, 4, 5].into_iter().collect();
+    ///
+    /// let set = &a ^ &b;
+    ///
+    /// let mut i = 0;
+    /// let expected = [1, 2, 4, 5];
+    /// for x in &set {
+    ///     assert!(expected.contains(x));
+    ///     i += 1;
+    /// }
+    /// assert_eq!(i, expected.len());
+    /// ```
+    fn bitxor(self, rhs: &AHashSet<T, S>) -> AHashSet<T, S> {
+        AHashSet(self.0.bitxor(&rhs.0))
+    }
+}
+
+impl<T, S> Sub<&AHashSet<T, S>> for &AHashSet<T, S>
+where
+    T: Eq + Hash + Clone,
+    S: BuildHasher + Default,
+{
+    type Output = AHashSet<T, S>;
+
+    /// Returns the difference of `self` and `rhs` as a new `AHashSet<T, S>`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ahash::AHashSet;
+    ///
+    /// let a: AHashSet<_> = vec![1, 2, 3].into_iter().collect();
+    /// let b: AHashSet<_> = vec![3, 4, 5].into_iter().collect();
+    ///
+    /// let set = &a - &b;
+    ///
+    /// let mut i = 0;
+    /// let expected = [1, 2];
+    /// for x in &set {
+    ///     assert!(expected.contains(x));
+    ///     i += 1;
+    /// }
+    /// assert_eq!(i, expected.len());
+    /// ```
+    fn sub(self, rhs: &AHashSet<T, S>) -> AHashSet<T, S> {
+        AHashSet(self.0.sub(&rhs.0))
+    }
+}
+
+impl<T, S> Debug for AHashSet<T, S>
+where
+    T: Debug,
+    S: BuildHasher,
+{
+    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
