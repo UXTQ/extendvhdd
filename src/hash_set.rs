@@ -238,3 +238,47 @@ where
     S: BuildHasher,
 {
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.0.fmt(fmt)
+    }
+}
+
+impl<T> FromIterator<T> for AHashSet<T, RandomState>
+where
+    T: Eq + Hash,
+{
+    /// This crates a hashset from the provided iterator using [RandomState::new].
+    /// See the documentation in [RandomSource] for notes about key strength.
+    #[inline]
+    fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> AHashSet<T> {
+        let mut inner = HashSet::with_hasher(RandomState::new());
+        inner.extend(iter);
+        AHashSet(inner)
+    }
+}
+
+impl<'a, T, S> IntoIterator for &'a AHashSet<T, S> {
+    type Item = &'a T;
+    type IntoIter = hash_set::Iter<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        (&self.0).iter()
+    }
+}
+
+impl<T, S> IntoIterator for AHashSet<T, S> {
+    type Item = T;
+    type IntoIter = hash_set::IntoIter<T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
+
+impl<T, S> Extend<T> for AHashSet<T, S>
+where
+    T: Eq + Hash,
+    S: BuildHasher,
+{
+    #[inline]
+    fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
+        self.0.extend(iter)
+    }
+}
