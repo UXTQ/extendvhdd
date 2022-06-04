@@ -50,3 +50,62 @@ It is also possible to instantiate [RandomState] directly:
 ```
 use ahash::HashMap;
 use ahash::RandomState;
+
+let mut m = HashMap::with_hasher(RandomState::with_seed(42));
+ # m.insert(1, 2);
+```
+Or for uses besides a hashhmap:
+```
+use std::hash::BuildHasher;
+use ahash::RandomState;
+
+let hash_builder = RandomState::with_seed(42);
+let hash = hash_builder.hash_one("Some Data");
+```
+There are several constructors for [RandomState] with different ways to supply seeds.
+
+# Convenience wrappers
+
+For convenience, both new-type wrappers and type aliases are provided.
+
+The new type wrappers are called called `AHashMap` and `AHashSet`.
+```
+use ahash::AHashMap;
+
+let mut map: AHashMap<i32, i32> = AHashMap::new();
+map.insert(12, 34);
+```
+This avoids the need to type "RandomState". (For convience `From`, `Into`, and `Deref` are provided).
+
+# Aliases
+
+For even less typing and better interop with existing libraries (such as rayon) which require a `std::collection::HashMap` ,
+the type aliases [HashMap], [HashSet] are provided.
+
+```
+use ahash::{HashMap, HashMapExt};
+
+let mut map: HashMap<i32, i32> = HashMap::new();
+map.insert(12, 34);
+```
+Note the import of [HashMapExt]. This is needed for the constructor.
+
+"##
+)]
+#![deny(clippy::correctness, clippy::complexity, clippy::perf)]
+#![allow(clippy::pedantic, clippy::cast_lossless, clippy::unreadable_literal)]
+#![cfg_attr(all(not(test), not(feature = "std")), no_std)]
+#![cfg_attr(feature = "specialize", feature(min_specialization))]
+#![cfg_attr(feature = "specialize", feature(build_hasher_simple_hash_one))]
+#![cfg_attr(feature = "stdsimd", feature(stdsimd))]
+
+#[macro_use]
+mod convert;
+
+mod fallback_hash;
+
+cfg_if::cfg_if! {
+    if #[cfg(any(
+            all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "aes", not(miri)),
+            all(any(target_arch = "arm", target_arch = "aarch64"),
+                any(target_feature = "aes", target_feature = "crypto"),
