@@ -282,3 +282,59 @@ where
         self.0.extend(iter)
     }
 }
+
+impl<'a, T, S> Extend<&'a T> for AHashSet<T, S>
+where
+    T: 'a + Eq + Hash + Copy,
+    S: BuildHasher,
+{
+    #[inline]
+    fn extend<I: IntoIterator<Item = &'a T>>(&mut self, iter: I) {
+        self.0.extend(iter)
+    }
+}
+
+/// NOTE: For safety this trait impl is only available available if either of the flags `runtime-rng` (on by default) or
+/// `compile-time-rng` are enabled. This is to prevent weakly keyed maps from being accidentally created. Instead one of
+/// constructors for [RandomState] must be used.
+#[cfg(any(feature = "compile-time-rng", feature = "runtime-rng", feature = "no-rng"))]
+impl<T> Default for AHashSet<T, RandomState> {
+    /// Creates an empty `AHashSet<T, S>` with the `Default` value for the hasher.
+    #[inline]
+    fn default() -> AHashSet<T, RandomState> {
+        AHashSet(HashSet::default())
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<T> Serialize for AHashSet<T>
+where
+    T: Serialize + Eq + Hash,
+{
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        self.deref().serialize(serializer)
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<'de, T> Deserialize<'de> for AHashSet<T>
+where
+    T: Deserialize<'de> + Eq + Hash,
+{
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let hash_set = HashSet::deserialize(deserializer);
+        hash_set.map(|hash_set| Self(hash_set))
+    }
+
+    fn deserialize_in_place<D: Deserializer<'de>>(deserializer: D, place: &mut Self) -> Result<(), D::Error> {
+        HashSet::deserialize_in_place(deserializer, place)
+    }
+}
+
+#[cfg(all(test, feature = "serde"))]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_serde() {
+        let mut set = AHashSet::new();
