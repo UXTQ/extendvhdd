@@ -109,3 +109,58 @@ cfg_if::cfg_if! {
             all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "aes", not(miri)),
             all(any(target_arch = "arm", target_arch = "aarch64"),
                 any(target_feature = "aes", target_feature = "crypto"),
+                not(miri),
+                feature = "stdsimd")
+            ))] {
+        mod aes_hash;
+        pub use crate::aes_hash::AHasher;
+    } else {
+        pub use crate::fallback_hash::AHasher;
+    }
+}
+
+cfg_if::cfg_if! {
+    if #[cfg(feature = "std")] {
+        mod hash_map;
+        mod hash_set;
+
+        pub use crate::hash_map::AHashMap;
+        pub use crate::hash_set::AHashSet;
+
+        /// [Hasher]: std::hash::Hasher
+        /// [HashMap]: std::collections::HashMap
+        /// Type alias for [HashMap]<K, V, ahash::RandomState>
+        pub type HashMap<K, V> = std::collections::HashMap<K, V, crate::RandomState>;
+
+        /// Type alias for [HashSet]<K, ahash::RandomState>
+        pub type HashSet<K> = std::collections::HashSet<K, crate::RandomState>;
+    }
+}
+
+#[cfg(test)]
+mod hash_quality_test;
+
+mod operations;
+pub mod random_state;
+mod specialize;
+
+pub use crate::random_state::RandomState;
+
+use core::hash::BuildHasher;
+use core::hash::Hash;
+use core::hash::Hasher;
+
+#[cfg(feature = "std")]
+/// A convenience trait that can be used together with the type aliases defined to
+/// get access to the `new()` and `with_capacity()` methods for the HashMap type alias.
+pub trait HashMapExt {
+    /// Constructs a new HashMap
+    fn new() -> Self;
+    /// Constructs a new HashMap with a given initial capacity
+    fn with_capacity(capacity: usize) -> Self;
+}
+
+#[cfg(feature = "std")]
+/// A convenience trait that can be used together with the type aliases defined to
+/// get access to the `new()` and `with_capacity()` methods for the HashSet type aliases.
+pub trait HashSetExt {
