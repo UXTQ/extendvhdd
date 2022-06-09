@@ -164,3 +164,60 @@ pub trait HashMapExt {
 /// A convenience trait that can be used together with the type aliases defined to
 /// get access to the `new()` and `with_capacity()` methods for the HashSet type aliases.
 pub trait HashSetExt {
+    /// Constructs a new HashSet
+    fn new() -> Self;
+    /// Constructs a new HashSet with a given initial capacity
+    fn with_capacity(capacity: usize) -> Self;
+}
+
+#[cfg(feature = "std")]
+impl<K, V, S> HashMapExt for std::collections::HashMap<K, V, S>
+where
+    S: BuildHasher + Default,
+{
+    fn new() -> Self {
+        std::collections::HashMap::with_hasher(S::default())
+    }
+
+    fn with_capacity(capacity: usize) -> Self {
+        std::collections::HashMap::with_capacity_and_hasher(capacity, S::default())
+    }
+}
+
+#[cfg(feature = "std")]
+impl<K, S> HashSetExt for std::collections::HashSet<K, S>
+where
+    S: BuildHasher + Default,
+{
+    fn new() -> Self {
+        std::collections::HashSet::with_hasher(S::default())
+    }
+
+    fn with_capacity(capacity: usize) -> Self {
+        std::collections::HashSet::with_capacity_and_hasher(capacity, S::default())
+    }
+}
+
+/// Provides a default [Hasher] with fixed keys.
+/// This is typically used in conjunction with [BuildHasherDefault] to create
+/// [AHasher]s in order to hash the keys of the map.
+///
+/// Generally it is preferable to use [RandomState] instead, so that different
+/// hashmaps will have different keys. However if fixed keys are desirable this
+/// may be used instead.
+///
+/// # Example
+/// ```
+/// use std::hash::BuildHasherDefault;
+/// use ahash::{AHasher, RandomState};
+/// use std::collections::HashMap;
+///
+/// let mut map: HashMap<i32, i32, BuildHasherDefault<AHasher>> = HashMap::default();
+/// map.insert(12, 34);
+/// ```
+///
+/// [BuildHasherDefault]: std::hash::BuildHasherDefault
+/// [Hasher]: std::hash::Hasher
+/// [HashMap]: std::collections::HashMap
+impl Default for AHasher {
+    /// Constructs a new [AHasher] with fixed keys.
