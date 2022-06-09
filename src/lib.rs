@@ -221,3 +221,62 @@ where
 /// [HashMap]: std::collections::HashMap
 impl Default for AHasher {
     /// Constructs a new [AHasher] with fixed keys.
+    /// If `std` is enabled these will be generated upon first invocation.
+    /// Otherwise if the `compile-time-rng`feature is enabled these will be generated at compile time.
+    /// If neither of these features are available, hardcoded constants will be used.
+    ///
+    /// Because the values are fixed, different hashers will all hash elements the same way.
+    /// This could make hash values predictable, if DOS attacks are a concern. If this behaviour is
+    /// not required, it may be preferable to use [RandomState] instead.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ahash::AHasher;
+    /// use std::hash::Hasher;
+    ///
+    /// let mut hasher_1 = AHasher::default();
+    /// let mut hasher_2 = AHasher::default();
+    ///
+    /// hasher_1.write_u32(1234);
+    /// hasher_2.write_u32(1234);
+    ///
+    /// assert_eq!(hasher_1.finish(), hasher_2.finish());
+    /// ```
+    #[inline]
+    fn default() -> AHasher {
+        RandomState::with_fixed_keys().build_hasher()
+    }
+}
+
+/// Used for specialization. (Sealed)
+pub(crate) trait BuildHasherExt: BuildHasher {
+    #[doc(hidden)]
+    fn hash_as_u64<T: Hash + ?Sized>(&self, value: &T) -> u64;
+
+    #[doc(hidden)]
+    fn hash_as_fixed_length<T: Hash + ?Sized>(&self, value: &T) -> u64;
+
+    #[doc(hidden)]
+    fn hash_as_str<T: Hash + ?Sized>(&self, value: &T) -> u64;
+}
+
+impl<B: BuildHasher> BuildHasherExt for B {
+    #[inline]
+    #[cfg(feature = "specialize")]
+    default fn hash_as_u64<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+    #[inline]
+    #[cfg(not(feature = "specialize"))]
+    fn hash_as_u64<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+    #[inline]
+    #[cfg(feature = "specialize")]
+    default fn hash_as_fixed_length<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
