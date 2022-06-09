@@ -280,3 +280,55 @@ impl<B: BuildHasher> BuildHasherExt for B {
     #[cfg(feature = "specialize")]
     default fn hash_as_fixed_length<T: Hash + ?Sized>(&self, value: &T) -> u64 {
         let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+    #[inline]
+    #[cfg(not(feature = "specialize"))]
+    fn hash_as_fixed_length<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+    #[inline]
+    #[cfg(feature = "specialize")]
+    default fn hash_as_str<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+    #[inline]
+    #[cfg(not(feature = "specialize"))]
+    fn hash_as_str<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = self.build_hasher();
+        value.hash(&mut hasher);
+        hasher.finish()
+    }
+}
+
+// #[inline(never)]
+// #[doc(hidden)]
+// pub fn hash_test(input: &[u8]) -> u64 {
+//     let a = RandomState::with_seeds(11, 22, 33, 44);
+//     <[u8]>::get_hash(input, &a)
+// }
+
+#[cfg(feature = "std")]
+#[cfg(test)]
+mod test {
+    use crate::convert::Convert;
+    use crate::specialize::CallHasher;
+    use crate::*;
+    use std::collections::HashMap;
+    use std::hash::Hash;
+
+    #[test]
+    fn test_ahash_alias_map_construction() {
+        let mut map = super::HashMap::with_capacity(1234);
+        map.insert(1, "test");
+    }
+
+    #[test]
+    fn test_ahash_alias_set_construction() {
+        let mut set = super::HashSet::with_capacity(1234);
+        set.insert(1);
