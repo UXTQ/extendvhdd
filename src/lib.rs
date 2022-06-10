@@ -386,3 +386,13 @@ mod test {
 
         let h1 = u64::get_hash(&3_u64, &hasher_build);
         let h2 = u64::get_hash(&4_u64, &hasher_build);
+        assert_ne!(h1, 0);
+        assert_ne!(h2, 0);
+        assert_ne!(h1, h2);
+    }
+
+    #[test]
+    fn test_ahasher_construction() {
+        let _ = AHasher::new_with_keys(1234, 5678);
+    }
+}
