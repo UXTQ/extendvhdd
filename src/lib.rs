@@ -332,3 +332,57 @@ mod test {
     fn test_ahash_alias_set_construction() {
         let mut set = super::HashSet::with_capacity(1234);
         set.insert(1);
+    }
+
+    #[test]
+    fn test_default_builder() {
+        use core::hash::BuildHasherDefault;
+
+        let mut map = HashMap::<u32, u64, BuildHasherDefault<AHasher>>::default();
+        map.insert(1, 3);
+    }
+
+    #[test]
+    fn test_builder() {
+        let mut map = HashMap::<u32, u64, RandomState>::default();
+        map.insert(1, 3);
+    }
+
+    #[test]
+    fn test_conversion() {
+        let input: &[u8] = b"dddddddd";
+        let bytes: u64 = as_array!(input, 8).convert();
+        assert_eq!(bytes, 0x6464646464646464);
+    }
+
+    #[test]
+    fn test_non_zero() {
+        let mut hasher1 = AHasher::new_with_keys(0, 0);
+        let mut hasher2 = AHasher::new_with_keys(0, 0);
+        "foo".hash(&mut hasher1);
+        "bar".hash(&mut hasher2);
+        assert_ne!(hasher1.finish(), 0);
+        assert_ne!(hasher2.finish(), 0);
+        assert_ne!(hasher1.finish(), hasher2.finish());
+
+        let mut hasher1 = AHasher::new_with_keys(0, 0);
+        let mut hasher2 = AHasher::new_with_keys(0, 0);
+        3_u64.hash(&mut hasher1);
+        4_u64.hash(&mut hasher2);
+        assert_ne!(hasher1.finish(), 0);
+        assert_ne!(hasher2.finish(), 0);
+        assert_ne!(hasher1.finish(), hasher2.finish());
+    }
+
+    #[test]
+    fn test_non_zero_specialized() {
+        let hasher_build = RandomState::with_seeds(0, 0, 0, 0);
+
+        let h1 = str::get_hash("foo", &hasher_build);
+        let h2 = str::get_hash("bar", &hasher_build);
+        assert_ne!(h1, 0);
+        assert_ne!(h2, 0);
+        assert_ne!(h1, h2);
+
+        let h1 = u64::get_hash(&3_u64, &hasher_build);
+        let h2 = u64::get_hash(&4_u64, &hasher_build);
