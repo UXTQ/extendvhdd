@@ -34,3 +34,66 @@ pub(crate) fn read_small(data: &[u8]) -> [u64; 2] {
     if data.len() >= 2 {
         if data.len() >= 4 {
             //len 4-8
+            [data.read_u32().0 as u64, data.read_last_u32() as u64]
+        } else {
+            //len 2-3
+            [data.read_u16().0 as u64, data[data.len() - 1] as u64]
+        }
+    } else {
+        if data.len() > 0 {
+            [data[0] as u64, data[0] as u64]
+        } else {
+            [0, 0]
+        }
+    }
+}
+
+#[inline(always)]
+pub(crate) fn shuffle(a: u128) -> u128 {
+    #[cfg(all(target_feature = "ssse3", not(miri)))]
+    {
+        #[cfg(target_arch = "x86")]
+        use core::arch::x86::*;
+        #[cfg(target_arch = "x86_64")]
+        use core::arch::x86_64::*;
+        use core::mem::transmute;
+        unsafe { transmute(_mm_shuffle_epi8(transmute(a), transmute(SHUFFLE_MASK))) }
+    }
+    #[cfg(not(all(target_feature = "ssse3", not(miri))))]
+    {
+        a.swap_bytes()
+    }
+}
+
+#[allow(unused)] //not used by fallback
+#[inline(always)]
+pub(crate) fn add_and_shuffle(a: u128, b: u128) -> u128 {
+    let sum = add_by_64s(a.convert(), b.convert());
+    shuffle(sum.convert())
+}
+
+#[allow(unused)] //not used by fallback
+#[inline(always)]
+pub(crate) fn shuffle_and_add(base: u128, to_add: u128) -> u128 {
+    let shuffled: [u64; 2] = shuffle(base).convert();
+    add_by_64s(shuffled, to_add.convert()).convert()
+}
+
+#[cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "sse2", not(miri)))]
+#[inline(always)]
+pub(crate) fn add_by_64s(a: [u64; 2], b: [u64; 2]) -> [u64; 2] {
+    use core::mem::transmute;
+    unsafe {
+        #[cfg(target_arch = "x86")]
+        use core::arch::x86::*;
+        #[cfg(target_arch = "x86_64")]
+        use core::arch::x86_64::*;
+        transmute(_mm_add_epi64(transmute(a), transmute(b)))
+    }
+}
+
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "sse2", not(miri))))]
+#[inline(always)]
+pub(crate) fn add_by_64s(a: [u64; 2], b: [u64; 2]) -> [u64; 2] {
+    [a[0].wrapping_add(b[0]), a[1].wrapping_add(b[1])]
+}
