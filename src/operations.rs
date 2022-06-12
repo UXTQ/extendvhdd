@@ -218,3 +218,61 @@ mod test {
     //     use SliceRandom;
     //     use std::panic;
     //     use std::io::Write;
+    //
+    //     let mut value: [u8; 16] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ,13, 14, 15];
+    //     let mut rand = thread_rng();
+    //     let mut successful_list = HashMap::new();
+    //     for _attempt in 0..10000000 {
+    //         rand.shuffle(&mut value);
+    //         let test_val = value.convert();
+    //         MASK.with(|mask| {
+    //             mask.set(test_val);
+    //         });
+    //         if let Ok(successful) = panic::catch_unwind(|| {
+    //             test_shuffle_does_not_collide_with_aes();
+    //             test_shuffle_moves_high_bits();
+    //             test_shuffle_moves_every_value();
+    //             //test_shuffle_does_not_loop();
+    //             value
+    //         }) {
+    //             let successful: u128 = successful.convert();
+    //             successful_list.insert(successful, iters_before_loop());
+    //         }
+    //     }
+    //     let write_file = File::create("/tmp/output").unwrap();
+    //     let mut writer = BufWriter::new(&write_file);
+    //
+    //     for success in successful_list {
+    //         writeln!(writer, "Found successful: {:x?} - {:?}", success.0, success.1);
+    //     }
+    // }
+    //
+    // fn iters_before_loop() -> u32 {
+    //     let numbered = 0x00112233_44556677_8899AABB_CCDDEEFF;
+    //     let mut shuffled = shuffle(numbered);
+    //     let mut count = 0;
+    //     loop {
+    //         // println!("{:>16x}", shuffled);
+    //         if numbered == shuffled {
+    //             break;
+    //         }
+    //         count += 1;
+    //         shuffled = shuffle(shuffled);
+    //     }
+    //     count
+    // }
+
+    #[cfg(all(
+        any(target_arch = "x86", target_arch = "x86_64"),
+        target_feature = "ssse3",
+        target_feature = "aes",
+        not(miri)
+    ))]
+    #[test]
+    fn test_shuffle_does_not_collide_with_aes() {
+        let mut value: [u8; 16] = [0; 16];
+        let zero_mask_enc = aesenc(0, 0);
+        let zero_mask_dec = aesdec(0, 0);
+        for index in 0..16 {
+            value[index] = 1;
+            let excluded_positions_enc: [u8; 16] = aesenc(value.convert(), zero_mask_enc).convert();
