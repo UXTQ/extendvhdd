@@ -276,3 +276,73 @@ mod test {
         for index in 0..16 {
             value[index] = 1;
             let excluded_positions_enc: [u8; 16] = aesenc(value.convert(), zero_mask_enc).convert();
+            let excluded_positions_dec: [u8; 16] = aesdec(value.convert(), zero_mask_dec).convert();
+            let actual_location: [u8; 16] = shuffle(value.convert()).convert();
+            for pos in 0..16 {
+                if actual_location[pos] != 0 {
+                    assert_eq!(
+                        0, excluded_positions_enc[pos],
+                        "Forward Overlap between {:?} and {:?} at {}",
+                        excluded_positions_enc, actual_location, index
+                    );
+                    assert_eq!(
+                        0, excluded_positions_dec[pos],
+                        "Reverse Overlap between {:?} and {:?} at {}",
+                        excluded_positions_dec, actual_location, index
+                    );
+                }
+            }
+            value[index] = 0;
+        }
+    }
+
+    #[test]
+    fn test_shuffle_contains_each_value() {
+        let value: [u8; 16] = 0x00010203_04050607_08090A0B_0C0D0E0F_u128.convert();
+        let shuffled: [u8; 16] = shuffle(value.convert()).convert();
+        for index in 0..16_u8 {
+            assert!(shuffled.contains(&index), "Value is missing {}", index);
+        }
+    }
+
+    #[test]
+    fn test_shuffle_moves_every_value() {
+        let mut value: [u8; 16] = [0; 16];
+        for index in 0..16 {
+            value[index] = 1;
+            let shuffled: [u8; 16] = shuffle(value.convert()).convert();
+            assert_eq!(0, shuffled[index], "Value is not moved {}", index);
+            value[index] = 0;
+        }
+    }
+
+    #[test]
+    fn test_shuffle_moves_high_bits() {
+        assert!(
+            shuffle(1) > (1_u128 << 80),
+            "Low bits must be moved to other half {:?} -> {:?}",
+            0,
+            shuffle(1)
+        );
+
+        assert!(
+            shuffle(1_u128 << 58) >= (1_u128 << 64),
+            "High bits must be moved to other half {:?} -> {:?}",
+            7,
+            shuffle(1_u128 << 58)
+        );
+        assert!(
+            shuffle(1_u128 << 58) < (1_u128 << 112),
+            "High bits must not remain high {:?} -> {:?}",
+            7,
+            shuffle(1_u128 << 58)
+        );
+        assert!(
+            shuffle(1_u128 << 64) < (1_u128 << 64),
+            "Low bits must be moved to other half {:?} -> {:?}",
+            8,
+            shuffle(1_u128 << 64)
+        );
+        assert!(
+            shuffle(1_u128 << 64) >= (1_u128 << 16),
+            "Low bits must not remain low {:?} -> {:?}",
