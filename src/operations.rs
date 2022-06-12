@@ -154,3 +154,67 @@ pub(crate) fn aesdec(value: u128, xor: u128) -> u128 {
     not(miri),
     feature = "stdsimd"
 ))]
+#[allow(unused)]
+#[inline(always)]
+pub(crate) fn aesdec(value: u128, xor: u128) -> u128 {
+    #[cfg(target_arch = "aarch64")]
+    use core::arch::aarch64::*;
+    #[cfg(target_arch = "arm")]
+    use core::arch::arm::*;
+    use core::mem::transmute;
+    unsafe {
+        let value = transmute(value);
+        transmute(vaesimcq_u8(vaesdq_u8(value, transmute(xor))))
+    }
+}
+
+#[allow(unused)]
+#[inline(always)]
+pub(crate) fn add_in_length(enc: &mut u128, len: u64) {
+    #[cfg(all(target_arch = "x86_64", target_feature = "sse2", not(miri)))]
+    {
+        #[cfg(target_arch = "x86_64")]
+        use core::arch::x86_64::*;
+
+        unsafe {
+            let enc = enc as *mut u128;
+            let len = _mm_cvtsi64_si128(len as i64);
+            let data = _mm_loadu_si128(enc.cast());
+            let sum = _mm_add_epi64(data, len);
+            _mm_storeu_si128(enc.cast(), sum);
+        }
+    }
+    #[cfg(not(all(target_arch = "x86_64", target_feature = "sse2", not(miri))))]
+    {
+        let mut t: [u64; 2] = enc.convert();
+        t[0] = t[0].wrapping_add(len);
+        *enc = t.convert();
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use crate::convert::Convert;
+
+    // This is code to search for the shuffle constant
+    //
+    //thread_local! { static MASK: Cell<u128> = Cell::new(0); }
+    //
+    // fn shuffle(a: u128) -> u128 {
+    //     use std::intrinsics::transmute;
+    //     #[cfg(target_arch = "x86")]
+    //     use core::arch::x86::*;
+    //     #[cfg(target_arch = "x86_64")]
+    //     use core::arch::x86_64::*;
+    //     MASK.with(|mask| {
+    //         unsafe { transmute(_mm_shuffle_epi8(transmute(a), transmute(mask.get()))) }
+    //     })
+    // }
+    //
+    // #[test]
+    // fn find_shuffle() {
+    //     use rand::prelude::*;
+    //     use SliceRandom;
+    //     use std::panic;
+    //     use std::io::Write;
