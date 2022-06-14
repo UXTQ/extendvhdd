@@ -346,3 +346,39 @@ mod test {
         assert!(
             shuffle(1_u128 << 64) >= (1_u128 << 16),
             "Low bits must not remain low {:?} -> {:?}",
+            8,
+            shuffle(1_u128 << 64)
+        );
+
+        assert!(
+            shuffle(1_u128 << 120) < (1_u128 << 50),
+            "High bits must be moved to low half {:?} -> {:?}",
+            15,
+            shuffle(1_u128 << 120)
+        );
+    }
+
+    #[cfg(all(
+        any(target_arch = "x86", target_arch = "x86_64"),
+        target_feature = "ssse3",
+        not(miri)
+    ))]
+    #[test]
+    fn test_shuffle_does_not_loop() {
+        let numbered = 0x00112233_44556677_8899AABB_CCDDEEFF;
+        let mut shuffled = shuffle(numbered);
+        for count in 0..100 {
+            // println!("{:>16x}", shuffled);
+            assert_ne!(numbered, shuffled, "Equal after {} vs {:x}", count, shuffled);
+            shuffled = shuffle(shuffled);
+        }
+    }
+
+    #[test]
+    fn test_add_length() {
+        let mut enc = (u64::MAX as u128) << 64 | 50;
+        add_in_length(&mut enc, u64::MAX);
+        assert_eq!(enc >> 64, u64::MAX as u128);
+        assert_eq!(enc as u64, 49);
+    }
+}
