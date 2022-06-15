@@ -158,3 +158,74 @@ impl RandomSource for DefaultRandomSource {
             fn gen_hasher_seed(&self) -> usize {
                 let stack = self as *const _ as usize;
                 let previous = self.counter.load(Ordering::Relaxed);
+                let new = previous.wrapping_add(stack);
+                self.counter.store(new, Ordering::Relaxed);
+                new
+            }
+        } else {
+            fn gen_hasher_seed(&self) -> usize {
+                let stack = self as *const _ as usize;
+                self.counter.fetch_add(stack, Ordering::Relaxed)
+            }
+        }
+    }
+}
+
+cfg_if::cfg_if! {
+        if #[cfg(all(target_arch = "arm", target_os = "none"))] {
+            #[inline]
+            fn get_src() -> &'static dyn RandomSource {
+                static RAND_SOURCE: DefaultRandomSource = DefaultRandomSource::default();
+                &RAND_SOURCE
+            }
+        } else {
+            /// Provides an optional way to manually supply a source of randomness for Hasher keys.
+            ///
+            /// The provided [RandomSource] will be used to be used as a source of randomness by [RandomState] to generate new states.
+            /// If this method is not invoked the standard source of randomness is used as described in the Readme.
+            ///
+            /// The source of randomness can only be set once, and must be set before the first RandomState is created.
+            /// If the source has already been specified `Err` is returned with a `bool` indicating if the set failed because
+            /// method was previously invoked (true) or if the default source is already being used (false).
+            #[cfg(not(all(target_arch = "arm", target_os = "none")))]
+            pub fn set_random_source(source: impl RandomSource + Send + Sync + 'static) -> Result<(), bool> {
+                RAND_SOURCE.set(Box::new(Box::new(source))).map_err(|s| s.as_ref().type_id() != TypeId::of::<&DefaultRandomSource>())
+            }
+
+            #[inline]
+            fn get_src() -> &'static dyn RandomSource {
+                RAND_SOURCE.get_or_init(|| Box::new(Box::new(DefaultRandomSource::new()))).as_ref()
+            }
+        }
+}
+
+/// Provides a [Hasher] factory. This is typically used (e.g. by [HashMap]) to create
+/// [AHasher]s in order to hash the keys of the map. See `build_hasher` below.
+///
+/// [build_hasher]: ahash::
+/// [Hasher]: std::hash::Hasher
+/// [BuildHasher]: std::hash::BuildHasher
+/// [HashMap]: std::collections::HashMap
+///
+/// There are multiple constructors each is documented in more detail below:
+///
+/// | Constructor   | Dynamically random? | Seed |
+/// |---------------|---------------------|------|
+/// |`new`          | Each instance unique|_[RandomSource]_|
+/// |`generate_with`| Each instance unique|`u64` x 4 + [RandomSource]|
+/// |`with_seed`    | Fixed per process   |`u64` + static random number|
+/// |`with_seeds`   | Fixed               |`u64` x 4|
+///
+#[derive(Clone)]
+pub struct RandomState {
+    pub(crate) k0: u64,
+    pub(crate) k1: u64,
+    pub(crate) k2: u64,
+    pub(crate) k3: u64,
+}
+
+impl fmt::Debug for RandomState {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.pad("RandomState { .. }")
+    }
+}
