@@ -229,3 +229,61 @@ impl fmt::Debug for RandomState {
         f.pad("RandomState { .. }")
     }
 }
+
+impl RandomState {
+
+    /// Create a new `RandomState` `BuildHasher` using random keys.
+    ///
+    /// Each instance will have a unique set of keys derived from [RandomSource].
+    ///
+    #[inline]
+    pub fn new() -> RandomState {
+        let src = get_src();
+        let fixed = get_fixed_seeds();
+        Self::from_keys(&fixed[0], &fixed[1], src.gen_hasher_seed())
+    }
+
+    /// Create a new `RandomState` `BuildHasher` based on the provided seeds, but in such a way
+    /// that each time it is called the resulting state will be different and of high quality.
+    /// This allows fixed constant or poor quality seeds to be provided without the problem of different
+    /// `BuildHasher`s being identical or weak.
+    ///
+    /// This is done via permuting the provided values with the value of a static counter and memory address.
+    /// (This makes this method somewhat more expensive than `with_seeds` below which does not do this).
+    ///
+    /// The provided values (k0-k3) do not need to be of high quality but they should not all be the same value.
+    #[inline]
+    pub fn generate_with(k0: u64, k1: u64, k2: u64, k3: u64) -> RandomState {
+        let src = get_src();
+        let fixed = get_fixed_seeds();
+        RandomState::from_keys(&fixed[0], &[k0, k1, k2, k3], src.gen_hasher_seed())
+    }
+
+    fn from_keys(a: &[u64; 4], b: &[u64; 4], c: usize) -> RandomState {
+        let &[k0, k1, k2, k3] = a;
+        let mut hasher = AHasher::from_random_state(&RandomState { k0, k1, k2, k3 });
+        hasher.write_usize(c);
+        let mix = |l: u64, r: u64| {
+            let mut h = hasher.clone();
+            h.write_u64(l);
+            h.write_u64(r);
+            h.finish()
+        };
+        RandomState {
+            k0: mix(b[0], b[2]),
+            k1: mix(b[1], b[3]),
+            k2: mix(b[2], b[1]),
+            k3: mix(b[3], b[0]),
+        }
+    }
+
+    /// Internal. Used by Default.
+    #[inline]
+    pub(crate) fn with_fixed_keys() -> RandomState {
+        let [k0, k1, k2, k3] = get_fixed_seeds()[0];
+        RandomState { k0, k1, k2, k3 }
+    }
+
+    /// Build a `RandomState` from a single key. The provided key does not need to be of high quality,
+    /// but all `RandomState`s created from the same key will produce identical hashers.
+    /// (In contrast to `generate_with` above)
