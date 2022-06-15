@@ -287,3 +287,66 @@ impl RandomState {
     /// Build a `RandomState` from a single key. The provided key does not need to be of high quality,
     /// but all `RandomState`s created from the same key will produce identical hashers.
     /// (In contrast to `generate_with` above)
+    ///
+    /// This allows for explicitly setting the seed to be used.
+    ///
+    /// Note: This method does not require the provided seed to be strong.
+    #[inline]
+    pub fn with_seed(key: usize) -> RandomState {
+        let fixed = get_fixed_seeds();
+        RandomState::from_keys(&fixed[0], &fixed[1], key)
+    }
+
+    /// Allows for explicitly setting the seeds to used.
+    /// All `RandomState`s created with the same set of keys key will produce identical hashers.
+    /// (In contrast to `generate_with` above)
+    ///
+    /// Note: If DOS resistance is desired one of these should be a decent quality random number.
+    /// If 4 high quality random number are not cheaply available this method is robust against 0s being passed for
+    /// one or more of the parameters or the same value being passed for more than one parameter.
+    /// It is recommended to pass numbers in order from highest to lowest quality (if there is any difference).
+    #[inline]
+    pub const fn with_seeds(k0: u64, k1: u64, k2: u64, k3: u64) -> RandomState {
+        RandomState {
+            k0: k0 ^ PI2[0],
+            k1: k1 ^ PI2[1],
+            k2: k2 ^ PI2[2],
+            k3: k3 ^ PI2[3],
+        }
+    }
+
+    /// Calculates the hash of a single value. This provides a more convenient (and faster) way to obtain a hash:
+    /// For example:
+    #[cfg_attr(
+    feature = "std",
+    doc = r##" # Examples
+```
+    use std::hash::BuildHasher;
+    use ahash::RandomState;
+
+    let hash_builder = RandomState::new();
+    let hash = hash_builder.hash_one("Some Data");
+```
+    "##
+    )]
+    /// This is similar to:
+    #[cfg_attr(
+    feature = "std",
+    doc = r##" # Examples
+```
+    use std::hash::{BuildHasher, Hash, Hasher};
+    use ahash::RandomState;
+
+    let hash_builder = RandomState::new();
+    let mut hasher = hash_builder.build_hasher();
+    "Some Data".hash(&mut hasher);
+    let hash = hasher.finish();
+```
+    "##
+    )]
+    /// (Note that these two ways to get a hash may not produce the same value for the same data)
+    ///
+    /// This is intended as a convenience for code which *consumes* hashes, such
+    /// as the implementation of a hash table or in unit tests that check
+    /// whether a custom [`Hash`] implementation behaves as expected.
+    ///
