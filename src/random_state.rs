@@ -90,3 +90,71 @@ cfg_if::cfg_if! {
 
             const RAND: [[u64; 4]; 2] = [
                 [
+                    const_random!(u64),
+                    const_random!(u64),
+                    const_random!(u64),
+                    const_random!(u64),
+                ], [
+                    const_random!(u64),
+                    const_random!(u64),
+                    const_random!(u64),
+                    const_random!(u64),
+                ]
+            ];
+            &RAND
+        }
+    } else {
+        #[inline]
+        fn get_fixed_seeds() -> &'static [[u64; 4]; 2] {
+            &[PI, PI2]
+        }
+    }
+}
+
+cfg_if::cfg_if! {
+    if #[cfg(not(all(target_arch = "arm", target_os = "none")))] {
+        use once_cell::race::OnceBox;
+
+        static RAND_SOURCE: OnceBox<Box<dyn RandomSource + Send + Sync>> = OnceBox::new();
+    }
+}
+/// A supplier of Randomness used for different hashers.
+/// See [set_random_source].
+///
+/// If [set_random_source] aHash will default to the best available source of randomness.
+/// In order this is:
+/// 1. OS provided random number generator (available if the `runtime-rng` flag is enabled which it is by default) - This should be very strong.
+/// 2. Strong compile time random numbers used to permute a static "counter". (available if `compile-time-rng` is enabled.
+/// __Enabling this is recommended if `runtime-rng` is not possible__)
+/// 3. A static counter that adds the memory address of each [RandomState] created permuted with fixed constants.
+/// (Similar to above but with fixed keys) - This is the weakest option. The strength of this heavily depends on whether or not ASLR is enabled.
+/// (Rust enables ASLR by default)
+pub trait RandomSource {
+    fn gen_hasher_seed(&self) -> usize;
+}
+
+struct DefaultRandomSource {
+    counter: AtomicUsize,
+}
+
+impl DefaultRandomSource {
+    fn new() -> DefaultRandomSource {
+        DefaultRandomSource {
+            counter: AtomicUsize::new(&PI as *const _ as usize),
+        }
+    }
+
+    #[cfg(all(target_arch = "arm", target_os = "none"))]
+    const fn default() -> DefaultRandomSource {
+        DefaultRandomSource {
+            counter: AtomicUsize::new(PI[3] as usize),
+        }
+    }
+}
+
+impl RandomSource for DefaultRandomSource {
+    cfg_if::cfg_if! {
+        if #[cfg(all(target_arch = "arm", target_os = "none"))] {
+            fn gen_hasher_seed(&self) -> usize {
+                let stack = self as *const _ as usize;
+                let previous = self.counter.load(Ordering::Relaxed);
