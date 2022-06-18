@@ -350,3 +350,65 @@ impl RandomState {
     /// as the implementation of a hash table or in unit tests that check
     /// whether a custom [`Hash`] implementation behaves as expected.
     ///
+    /// This must not be used in any code which *creates* hashes, such as in an
+    /// implementation of [`Hash`].  The way to create a combined hash of
+    /// multiple values is to call [`Hash::hash`] multiple times using the same
+    /// [`Hasher`], not to call this method repeatedly and combine the results.
+    #[inline]
+    pub fn hash_one<T: Hash>(&self, x: T) -> u64
+    where
+        Self: Sized,
+    {
+        use crate::specialize::CallHasher;
+        T::get_hash(&x, self)
+    }
+}
+
+/// Creates an instance of RandomState using keys obtained from the random number generator.
+/// Each instance created in this way will have a unique set of keys. (But the resulting instance
+/// can be used to create many hashers each or which will have the same keys.)
+///
+/// This is the same as [RandomState::new()]
+///
+/// NOTE: For safety this trait impl is only available available if either of the flags `runtime-rng` (on by default) or
+/// `compile-time-rng` are enabled. This is to prevent weakly keyed maps from being accidentally created. Instead one of
+/// constructors for [RandomState] must be used.
+#[cfg(any(feature = "compile-time-rng", feature = "runtime-rng", feature = "no-rng"))]
+impl Default for RandomState {
+    #[inline]
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl BuildHasher for RandomState {
+    type Hasher = AHasher;
+
+    /// Constructs a new [AHasher] with keys based on this [RandomState] object.
+    /// This means that two different [RandomState]s will will generate
+    /// [AHasher]s that will return different hashcodes, but [Hasher]s created from the same [BuildHasher]
+    /// will generate the same hashes for the same input data.
+    ///
+    #[cfg_attr(
+        feature = "std",
+        doc = r##" # Examples
+```
+        use ahash::{AHasher, RandomState};
+        use std::hash::{Hasher, BuildHasher};
+    
+        let build_hasher = RandomState::new();
+        let mut hasher_1 = build_hasher.build_hasher();
+        let mut hasher_2 = build_hasher.build_hasher();
+    
+        hasher_1.write_u32(1234);
+        hasher_2.write_u32(1234);
+    
+        assert_eq!(hasher_1.finish(), hasher_2.finish());
+    
+        let other_build_hasher = RandomState::new();
+        let mut different_hasher = other_build_hasher.build_hasher();
+        different_hasher.write_u32(1234);
+        assert_ne!(different_hasher.finish(), hasher_1.finish());
+```
+    "##
+    )]
