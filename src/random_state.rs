@@ -412,3 +412,63 @@ impl BuildHasher for RandomState {
 ```
     "##
     )]
+    /// [Hasher]: std::hash::Hasher
+    /// [BuildHasher]: std::hash::BuildHasher
+    /// [HashMap]: std::collections::HashMap
+    #[inline]
+    fn build_hasher(&self) -> AHasher {
+        AHasher::from_random_state(self)
+    }
+
+
+    /// Calculates the hash of a single value. This provides a more convenient (and faster) way to obtain a hash:
+    /// For example:
+    #[cfg_attr(
+    feature = "std",
+    doc = r##" # Examples
+```
+    use std::hash::BuildHasher;
+    use ahash::RandomState;
+
+    let hash_builder = RandomState::new();
+    let hash = hash_builder.hash_one("Some Data");
+```
+    "##
+    )]
+    /// This is similar to:
+    #[cfg_attr(
+    feature = "std",
+    doc = r##" # Examples
+```
+    use std::hash::{BuildHasher, Hash, Hasher};
+    use ahash::RandomState;
+
+    let hash_builder = RandomState::new();
+    let mut hasher = hash_builder.build_hasher();
+    "Some Data".hash(&mut hasher);
+    let hash = hasher.finish();
+```
+    "##
+    )]
+    /// (Note that these two ways to get a hash may not produce the same value for the same data)
+    ///
+    /// This is intended as a convenience for code which *consumes* hashes, such
+    /// as the implementation of a hash table or in unit tests that check
+    /// whether a custom [`Hash`] implementation behaves as expected.
+    ///
+    /// This must not be used in any code which *creates* hashes, such as in an
+    /// implementation of [`Hash`].  The way to create a combined hash of
+    /// multiple values is to call [`Hash::hash`] multiple times using the same
+    /// [`Hasher`], not to call this method repeatedly and combine the results.
+    #[cfg(feature = "specialize")]
+    #[inline]
+    fn hash_one<T: Hash>(&self, x: T) -> u64 {
+        RandomState::hash_one(self, x)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl BuildHasherExt for RandomState {
+    #[inline]
+    fn hash_as_u64<T: Hash + ?Sized>(&self, value: &T) -> u64 {
+        let mut hasher = AHasherU64 {
