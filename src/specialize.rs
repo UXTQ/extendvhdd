@@ -123,3 +123,70 @@ impl CallHasher for str {
         build_hasher.hash_as_str(value)
     }
 }
+
+#[cfg(all(feature = "specialize"))]
+impl CallHasher for String {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_str(value)
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use crate::*;
+
+    #[test]
+    #[cfg(feature = "specialize")]
+    pub fn test_specialized_invoked() {
+        let build_hasher = RandomState::with_seeds(1, 2, 3, 4);
+        let shortened = u64::get_hash(&0, &build_hasher);
+        let mut hasher = AHasher::new_with_keys(1, 2);
+        0_u64.hash(&mut hasher);
+        assert_ne!(hasher.finish(), shortened);
+    }
+
+    /// Tests that some non-trivial transformation takes place.
+    #[test]
+    pub fn test_input_processed() {
+        let build_hasher = RandomState::with_seeds(2, 2, 2, 2);
+        assert_ne!(0, u64::get_hash(&0, &build_hasher));
+        assert_ne!(1, u64::get_hash(&0, &build_hasher));
+        assert_ne!(2, u64::get_hash(&0, &build_hasher));
+        assert_ne!(3, u64::get_hash(&0, &build_hasher));
+        assert_ne!(4, u64::get_hash(&0, &build_hasher));
+        assert_ne!(5, u64::get_hash(&0, &build_hasher));
+
+        assert_ne!(0, u64::get_hash(&1, &build_hasher));
+        assert_ne!(1, u64::get_hash(&1, &build_hasher));
+        assert_ne!(2, u64::get_hash(&1, &build_hasher));
+        assert_ne!(3, u64::get_hash(&1, &build_hasher));
+        assert_ne!(4, u64::get_hash(&1, &build_hasher));
+        assert_ne!(5, u64::get_hash(&1, &build_hasher));
+
+        let xored = u64::get_hash(&0, &build_hasher) ^ u64::get_hash(&1, &build_hasher);
+        assert_ne!(0, xored);
+        assert_ne!(1, xored);
+        assert_ne!(2, xored);
+        assert_ne!(3, xored);
+        assert_ne!(4, xored);
+        assert_ne!(5, xored);
+    }
+
+    #[test]
+    pub fn test_ref_independent() {
+        let build_hasher = RandomState::with_seeds(1, 2, 3, 4);
+        assert_eq!(u8::get_hash(&&1, &build_hasher), u8::get_hash(&1, &build_hasher));
+        assert_eq!(u16::get_hash(&&2, &build_hasher), u16::get_hash(&2, &build_hasher));
+        assert_eq!(u32::get_hash(&&3, &build_hasher), u32::get_hash(&3, &build_hasher));
+        assert_eq!(u64::get_hash(&&4, &build_hasher), u64::get_hash(&4, &build_hasher));
+        assert_eq!(u128::get_hash(&&5, &build_hasher), u128::get_hash(&5, &build_hasher));
+        assert_eq!(
+            str::get_hash(&"test", &build_hasher),
+            str::get_hash("test", &build_hasher)
+        );
+        assert_eq!(
+            str::get_hash(&"test", &build_hasher),
+            String::get_hash(&"test".to_string(), &build_hasher)
+        );
