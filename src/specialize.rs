@@ -60,3 +60,66 @@ macro_rules! call_hasher_impl {
     };
 }
 call_hasher_impl!(u8);
+call_hasher_impl!(u16);
+call_hasher_impl!(u32);
+call_hasher_impl!(u64);
+call_hasher_impl!(i8);
+call_hasher_impl!(i16);
+call_hasher_impl!(i32);
+call_hasher_impl!(i64);
+
+#[cfg(feature = "specialize")]
+impl CallHasher for u128 {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_fixed_length(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for i128 {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_fixed_length(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for usize {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_fixed_length(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for isize {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_fixed_length(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for [u8] {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_str(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for Vec<u8> {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_str(value)
+    }
+}
+
+#[cfg(feature = "specialize")]
+impl CallHasher for str {
+    #[inline]
+    fn get_hash<H: Hash + ?Sized, B: BuildHasher>(value: &H, build_hasher: &B) -> u64 {
+        build_hasher.hash_as_str(value)
+    }
+}
