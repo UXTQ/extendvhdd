@@ -95,3 +95,66 @@ fn bench_ahash(c: &mut Criterion) {
 fn bench_fx(c: &mut Criterion) {
     let mut group = c.benchmark_group("fx");
     bench_inputs!(group, fxhash);
+}
+
+fn bench_fnv(c: &mut Criterion) {
+    let mut group = c.benchmark_group("fnv");
+    bench_inputs!(group, fnvhash);
+}
+
+fn bench_sea(c: &mut Criterion) {
+    let mut group = c.benchmark_group("sea");
+    bench_inputs!(group, seahash);
+}
+
+fn bench_sip(c: &mut Criterion) {
+    let mut group = c.benchmark_group("sip");
+    bench_inputs!(group, siphash);
+}
+
+fn bench_map(c: &mut Criterion) {
+    #[cfg(feature = "std")]
+    {
+        let mut group = c.benchmark_group("map");
+        group.bench_function("aHash-alias", |b| {
+            b.iter(|| {
+                let hm: ahash::HashMap<i32, i32> = (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
+            })
+        });
+        group.bench_function("aHash-hashBrown", |b| {
+            b.iter(|| {
+                let hm: hashbrown::HashMap<i32, i32> = (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
+            })
+        });
+        group.bench_function("aHash-hashBrown-explicit", |b| {
+            b.iter(|| {
+                let hm: hashbrown::HashMap<i32, i32, RandomState> = (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
+            })
+        });
+        group.bench_function("aHash-wrapper", |b| {
+            b.iter(|| {
+                let hm: ahash::AHashMap<i32, i32> = (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
