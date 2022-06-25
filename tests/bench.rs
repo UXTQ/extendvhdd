@@ -158,3 +158,42 @@ fn bench_map(c: &mut Criterion) {
                         sum += x;
                     }
                 }
+            })
+        });
+        group.bench_function("aHash-rand", |b| {
+            b.iter(|| {
+                let hm: std::collections::HashMap<i32, i32, RandomState> = (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
+            })
+        });
+        group.bench_function("aHash-default", |b| {
+            b.iter(|| {
+                let hm: std::collections::HashMap<i32, i32, BuildHasherDefault<AHasher>> =
+                    (0..1_000_000).map(|i| (i, i)).collect();
+                let mut sum = 0;
+                for i in 0..1_000_000 {
+                    if let Some(x) = hm.get(&i) {
+                        sum += x;
+                    }
+                }
+            })
+        });
+    }
+}
+
+criterion_main!(benches);
+
+criterion_group!(
+    benches,
+    bench_ahash,
+    bench_fx,
+    bench_fnv,
+    bench_sea,
+    bench_sip,
+    bench_map
+);
