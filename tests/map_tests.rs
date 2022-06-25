@@ -1,1 +1,1 @@
-#![cfg_attr(featu
+#![cfg_attr(feature = "specialize", feature(build_hasher_simple_hash_o
