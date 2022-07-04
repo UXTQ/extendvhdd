@@ -4,4 +4,7 @@ use std::hash::{BuildHasher, Hash, Hasher};
 
 use ahash::RandomState;
 use criterion::*;
-use 
+use fxhash::FxHasher;
+
+fn gen_word_pairs() -> Vec<String> {
+    let wo
