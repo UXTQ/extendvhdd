@@ -7,4 +7,5 @@ use criterion::*;
 use fxhash::FxHasher;
 
 fn gen_word_pairs() -> Vec<String> {
-    let wo
+    let words: Vec<_> = r#"
+a, ability, able, about, above, accept, accordi
