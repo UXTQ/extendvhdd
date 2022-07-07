@@ -9,4 +9,5 @@ use fxhash::FxHasher;
 fn gen_word_pairs() -> Vec<String> {
     let words: Vec<_> = r#"
 a, ability, able, about, above, accept, according, account, across, act, action,
-activity, actually, add, address, administration, admit, adult, affect, 
+activity, actually, add, address, administration, admit, adult, affect, after,
+again, against, age, agency, agent, ago, agree, agr
