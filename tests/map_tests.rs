@@ -14,4 +14,5 @@ again, against, age, agency, agent, ago, agree, agreement, ahead, air, all,
 allow, almost, alone, along, already, also, although, always, American, among,
 amount, analysis, and, animal, another, answer, any, anyone, anything, appear,
 apply, approach, area, argue, arm, around, arrive, art, article, artist, as,
-ask, assume, at, attack, attention, attorney, audience, author, authori
+ask, assume, at, attack, attention, attorney, audience, author, authority,
+available, avoid, away, baby, back, bad, bag, ball,
