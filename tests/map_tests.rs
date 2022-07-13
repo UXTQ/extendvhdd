@@ -20,4 +20,4 @@ beautiful, because, become, bed, before, begin, behavior, behind, believe,
 benefit, best, better, between, beyond, big, bill, billion, bit, black, blood,
 blue, board, body, book, born, both, box, boy, break, bring, brother, budget,
 build, building, business, but, buy, by, call, camera, campaign, can, cancer,
-candida
+candidate, capital, car, card, care, career, carry, case, catch, 
