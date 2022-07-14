@@ -21,4 +21,5 @@ benefit, best, better, between, beyond, big, bill, billion, bit, black, blood,
 blue, board, body, book, born, both, box, boy, break, bring, brother, budget,
 build, building, business, but, buy, by, call, camera, campaign, can, cancer,
 candidate, capital, car, card, care, career, carry, case, catch, cause, cell,
-center, central, century, certain, certainly, chair, c
+center, central, century, certain, certainly, chair, challenge, chance, change,
+character, charge, check, child, choice, choo
