@@ -25,4 +25,5 @@ center, central, century, certain, certainly, chair, challenge, chance, change,
 character, charge, check, child, choice, choose, church, citizen, city, civil,
 claim, class, clear, clearly, close, coach, cold, collection, college, color,
 come, commercial, common, community, company, compare, computer, concern,
-condition, conference, 
+condition, conference, Congress, consider, consumer, contain, continue, control,
+cost, co
