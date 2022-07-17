@@ -24,4 +24,5 @@ candidate, capital, car, card, care, career, carry, case, catch, cause, cell,
 center, central, century, certain, certainly, chair, challenge, chance, change,
 character, charge, check, child, choice, choose, church, citizen, city, civil,
 claim, class, clear, clearly, close, coach, cold, collection, college, color,
-come, commercial, common, community, com
+come, commercial, common, community, company, compare, computer, concern,
+condition, conference, 
