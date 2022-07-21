@@ -26,4 +26,5 @@ character, charge, check, child, choice, choose, church, citizen, city, civil,
 claim, class, clear, clearly, close, coach, cold, collection, college, color,
 come, commercial, common, community, company, compare, computer, concern,
 condition, conference, Congress, consider, consumer, contain, continue, control,
-cost, could, country, couple, course, court, cover, create, crime, 
+cost, could, country, couple, course, court, cover, create, crime, cultural,
+culture, cup, current, customer, cut, dark, da
