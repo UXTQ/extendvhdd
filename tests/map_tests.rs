@@ -29,4 +29,4 @@ condition, conference, Congress, consider, consumer, contain, continue, control,
 cost, could, country, couple, course, court, cover, create, crime, cultural,
 culture, cup, current, customer, cut, dark, data, daughter, day, dead, deal,
 death, debate, decade, decide, decision, deep, defense, degree, Democrat,
-democr
+democratic, describe, design, despite, detail, determine, de
