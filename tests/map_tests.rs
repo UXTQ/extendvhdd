@@ -30,4 +30,5 @@ cost, could, country, couple, course, court, cover, create, crime, cultural,
 culture, cup, current, customer, cut, dark, data, daughter, day, dead, deal,
 death, debate, decade, decide, decision, deep, defense, degree, Democrat,
 democratic, describe, design, despite, detail, determine, develop, development,
-die, difference, different, difficult,
+die, difference, different, difficult, dinner, direction, director, discover,
+discuss, di
