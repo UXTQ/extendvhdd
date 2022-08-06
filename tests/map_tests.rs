@@ -32,4 +32,5 @@ death, debate, decade, decide, decision, deep, defense, degree, Democrat,
 democratic, describe, design, despite, detail, determine, develop, development,
 die, difference, different, difficult, dinner, direction, director, discover,
 discuss, discussion, disease, do, doctor, dog, door, down, draw, dream, drive,
-drop, drug, during, each, early, east, easy, eat, economic, econom
+drop, drug, during, each, early, east, easy, eat, economic, economy, edge,
+education, effect, effort, eight, either, election, e
