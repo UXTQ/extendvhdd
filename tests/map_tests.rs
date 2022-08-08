@@ -34,4 +34,5 @@ die, difference, different, difficult, dinner, direction, director, discover,
 discuss, discussion, disease, do, doctor, dog, door, down, draw, dream, drive,
 drop, drug, during, each, early, east, easy, eat, economic, economy, edge,
 education, effect, effort, eight, either, election, else, employee, end, energy,
-enjoy, enough, enter, entire, environm
+enjoy, enough, enter, entire, environment, environmental, especially, establish,
+even, evening, event, eve
