@@ -35,4 +35,5 @@ discuss, discussion, disease, do, doctor, dog, door, down, draw, dream, drive,
 drop, drug, during, each, early, east, easy, eat, economic, economy, edge,
 education, effect, effort, eight, either, election, else, employee, end, energy,
 enjoy, enough, enter, entire, environment, environmental, especially, establish,
-even, evening, event, eve
+even, evening, event, ever, every, everybody, everyone, everything, evidence,
+exactly, exampl
