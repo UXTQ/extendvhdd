@@ -36,4 +36,4 @@ drop, drug, during, each, early, east, easy, eat, economic, economy, edge,
 education, effect, effort, eight, either, election, else, employee, end, energy,
 enjoy, enough, enter, entire, environment, environmental, especially, establish,
 even, evening, event, ever, every, everybody, everyone, everything, evidence,
-exactly, exampl
+exactly, example, executive, exist, expect, experience, expert, expla
