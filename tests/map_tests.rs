@@ -38,4 +38,5 @@ enjoy, enough, enter, entire, environment, environmental, especially, establish,
 even, evening, event, ever, every, everybody, everyone, everything, evidence,
 exactly, example, executive, exist, expect, experience, expert, explain, eye,
 face, fact, factor, fail, fall, family, far, fast, father, fear, federal, feel,
-feeling, few, field, fight, figu
+feeling, few, field, fight, figure, fill, film, final, finally, financial, find,
+fine, finger, finish
