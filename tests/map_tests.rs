@@ -40,4 +40,5 @@ exactly, example, executive, exist, expect, experience, expert, explain, eye,
 face, fact, factor, fail, fall, family, far, fast, father, fear, federal, feel,
 feeling, few, field, fight, figure, fill, film, final, finally, financial, find,
 fine, finger, finish, fire, firm, first, fish, five, floor, fly, focus, follow,
-food, foot, for, force, foreign, forget, form, former, forwa
+food, foot, for, force, foreign, forget, form, former, forward, four, free,
+friend, from, front, full, fund, future, gam
