@@ -45,4 +45,4 @@ friend, from, front, full, fund, future, game, garden, gas, general, generation,
 get, girl, give, glass, go, goal, good, government, great, green, ground, group,
 grow, growth, guess, gun, guy, hair, half, hand, hang, happen, happy, hard,
 have, he, head, health, hear, heart, heat, heavy, help, her, here, herself,
-high, him, hims
+high, him, himself, his, history, hit, hold, home, hope, hospital, hot, hotel,
