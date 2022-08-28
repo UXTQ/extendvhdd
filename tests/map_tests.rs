@@ -48,4 +48,5 @@ have, he, head, health, hear, heart, heat, heavy, help, her, here, herself,
 high, him, himself, his, history, hit, hold, home, hope, hospital, hot, hotel,
 hour, house, how, however, huge, human, hundred, husband, I, idea, identify, if,
 image, imagine, impact, important, improve, in, include, including, increase,
-indeed, indicate, individual, 
+indeed, indicate, individual, industry, information, inside, instead,
+institution, inte
