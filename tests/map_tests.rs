@@ -52,4 +52,5 @@ indeed, indicate, individual, industry, information, inside, instead,
 institution, interest, interesting, international, interview, into, investment,
 involve, issue, it, item, its, itself, job, join, just, keep, key, kid, kill,
 kind, kitchen, know, knowledge, land, language, large, last, late, later, laugh,
-law, lawyer, lay, lead, leader, learn, least, l
+law, lawyer, lay, lead, leader, learn, least, leave, left, leg, legal, less,
+let, letter, level, lie, life, light, lik
