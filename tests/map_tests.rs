@@ -54,4 +54,4 @@ involve, issue, it, item, its, itself, job, join, just, keep, key, kid, kill,
 kind, kitchen, know, knowledge, land, language, large, last, late, later, laugh,
 law, lawyer, lay, lead, leader, learn, least, leave, left, leg, legal, less,
 let, letter, level, lie, life, light, like, likely, line, list, listen, little,
-live, local, l
+live, local, long, look, lose, loss, lot, love, low, machine, m
