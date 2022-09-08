@@ -57,4 +57,4 @@ let, letter, level, lie, life, light, like, likely, line, list, listen, little,
 live, local, long, look, lose, loss, lot, love, low, machine, magazine, main,
 maintain, major, majority, make, man, manage, management, manager, many, market,
 marriage, material, matter, may, maybe, me, mean, measure, media, medical, meet,
-meeting
+meeting, member, memory, mention, message, method, middle, might, militar
