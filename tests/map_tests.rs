@@ -58,4 +58,5 @@ live, local, long, look, lose, loss, lot, love, low, machine, magazine, main,
 maintain, major, majority, make, man, manage, management, manager, many, market,
 marriage, material, matter, may, maybe, me, mean, measure, media, medical, meet,
 meeting, member, memory, mention, message, method, middle, might, military,
-million, mind, minute, miss, mission, model, modern, moment, 
+million, mind, minute, miss, mission, model, modern, moment, money, month, more,
+morning, most, mother, mouth, move, movement
