@@ -61,4 +61,4 @@ meeting, member, memory, mention, message, method, middle, might, military,
 million, mind, minute, miss, mission, model, modern, moment, money, month, more,
 morning, most, mother, mouth, move, movement, movie, Mr, Mrs, much, music, must,
 my, myself, name, nation, national, natural, nature, near, nearly, necessary,
-need, ne
+need, network, never, new, news, newspaper, next, nice, night
