@@ -62,4 +62,5 @@ million, mind, minute, miss, mission, model, modern, moment, money, month, more,
 morning, most, mother, mouth, move, movement, movie, Mr, Mrs, much, music, must,
 my, myself, name, nation, national, natural, nature, near, nearly, necessary,
 need, network, never, new, news, newspaper, next, nice, night, no, none, nor,
-north, not, note, nothing, notice, no
+north, not, note, nothing, notice, now, n't, number, occur, of, off, offer,
+office, office
