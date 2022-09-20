@@ -64,4 +64,5 @@ my, myself, name, nation, national, natural, nature, near, nearly, necessary,
 need, network, never, new, news, newspaper, next, nice, night, no, none, nor,
 north, not, note, nothing, notice, now, n't, number, occur, of, off, offer,
 office, officer, official, often, oh, oil, ok, old, on, once, one, only, onto,
-open, operation, opportunity, option, or, order, orga
+open, operation, opportunity, option, or, order, organization, other, others,
+our, out, outside, over, own, owner, pag
