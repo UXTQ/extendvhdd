@@ -66,4 +66,4 @@ north, not, note, nothing, notice, now, n't, number, occur, of, off, offer,
 office, officer, official, often, oh, oil, ok, old, on, once, one, only, onto,
 open, operation, opportunity, option, or, order, organization, other, others,
 our, out, outside, over, own, owner, page, pain, painting, paper, parent, part,
-participant, particul
+participant, particular, particularly, partner, party, pass, past,
