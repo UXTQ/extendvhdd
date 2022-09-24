@@ -69,4 +69,4 @@ our, out, outside, over, own, owner, page, pain, painting, paper, parent, part,
 participant, particular, particularly, partner, party, pass, past, patient,
 pattern, pay, peace, people, per, perform, performance, perhaps, period, person,
 personal, phone, physical, pick, picture, piece, place, plan, plant, play,
-player, PM, po
+player, PM, point, police, policy, political, politics, poor, po
