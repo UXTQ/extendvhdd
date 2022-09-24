@@ -68,4 +68,5 @@ open, operation, opportunity, option, or, order, organization, other, others,
 our, out, outside, over, own, owner, page, pain, painting, paper, parent, part,
 participant, particular, particularly, partner, party, pass, past, patient,
 pattern, pay, peace, people, per, perform, performance, perhaps, period, person,
-personal, phone, physical, 
+personal, phone, physical, pick, picture, piece, place, plan, plant, play,
+player, PM, po
