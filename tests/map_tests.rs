@@ -70,4 +70,5 @@ participant, particular, particularly, partner, party, pass, past, patient,
 pattern, pay, peace, people, per, perform, performance, perhaps, period, person,
 personal, phone, physical, pick, picture, piece, place, plan, plant, play,
 player, PM, point, police, policy, political, politics, poor, popular,
-population, position, positive, possible, power, practice, pre
+population, position, positive, possible, power, practice, prepare, present,
+president, pressure, pretty, prevent, p
