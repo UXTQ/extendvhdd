@@ -79,4 +79,4 @@ reach, read, ready, real, reality, realize, really, reason, receive, recent,
 recently, recognize, record, red, reduce, reflect, region, relate, relationship,
 religious, remain, remember, remove, report, represent, Republican, require,
 research, resource, respond, response, responsibility, rest, result, return,
-reveal, 
+reveal, rich, right, rise, risk, road, rock, role, room, ru
