@@ -80,4 +80,5 @@ recently, recognize, record, red, reduce, reflect, region, relate, relationship,
 religious, remain, remember, remove, report, represent, Republican, require,
 research, resource, respond, response, responsibility, rest, result, return,
 reveal, rich, right, rise, risk, road, rock, role, room, rule, run, safe, same,
-save, say, scene, school, science, sci
+save, say, scene, school, science, scientist, score, sea, season, seat, second,
+section, securit
