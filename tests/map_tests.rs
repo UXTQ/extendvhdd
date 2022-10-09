@@ -83,4 +83,5 @@ reveal, rich, right, rise, risk, road, rock, role, room, rule, run, safe, same,
 save, say, scene, school, science, scientist, score, sea, season, seat, second,
 section, security, see, seek, seem, sell, send, senior, sense, series, serious,
 serve, service, set, seven, several, sex, sexual, shake, share, she, shoot,
-short, shot, should, shoulder, s
+short, shot, should, shoulder, show, side, sign, significant, similar, simple,
+simply, 
