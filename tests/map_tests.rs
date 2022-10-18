@@ -86,4 +86,5 @@ serve, service, set, seven, several, sex, sexual, shake, share, she, shoot,
 short, shot, should, shoulder, show, side, sign, significant, similar, simple,
 simply, since, sing, single, sister, sit, site, situation, six, size, skill,
 skin, small, smile, so, social, society, soldier, some, somebody, someone,
-something, so
+something, sometimes, son, song, soon, sort, sound, source, south, southern,
+space,
