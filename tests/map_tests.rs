@@ -89,4 +89,5 @@ skin, small, smile, so, social, society, soldier, some, somebody, someone,
 something, sometimes, son, song, soon, sort, sound, source, south, southern,
 space, speak, special, specific, speech, spend, sport, spring, staff, stage,
 stand, standard, star, start, state, statement, station, stay, step, still,
-stock, stop, store, story, s
+stock, stop, store, story, strategy, street, strong, structure, student, study,
+stuff, style, 
