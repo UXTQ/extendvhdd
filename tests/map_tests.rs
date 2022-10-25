@@ -91,4 +91,5 @@ space, speak, special, specific, speech, spend, sport, spring, staff, stage,
 stand, standard, star, start, state, statement, station, stay, step, still,
 stock, stop, store, story, strategy, street, strong, structure, student, study,
 stuff, style, subject, success, successful, such, suddenly, suffer, suggest,
-summer, support, sure, surface, system, table, tak
+summer, support, sure, surface, system, table, take, talk, task, tax, teach,
+teacher, team, technology,
