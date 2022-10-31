@@ -94,4 +94,5 @@ stuff, style, subject, success, successful, such, suddenly, suffer, suggest,
 summer, support, sure, surface, system, table, take, talk, task, tax, teach,
 teacher, team, technology, television, tell, ten, tend, term, test, than, thank,
 that, the, their, them, themselves, then, theory, there, these, they, thing,
-think, third, this, those, though, thought, thou
+think, third, this, those, though, thought, thousand, threat, three, through,
+throughout, throw, thus, time, to
