@@ -96,4 +96,4 @@ teacher, team, technology, television, tell, ten, tend, term, test, than, thank,
 that, the, their, them, themselves, then, theory, there, these, they, thing,
 think, third, this, those, though, thought, thousand, threat, three, through,
 throughout, throw, thus, time, to, today, together, tonight, too, top, total,
-to
+tough, toward, town, trade, traditional, training, trav
