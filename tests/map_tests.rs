@@ -97,4 +97,5 @@ that, the, their, them, themselves, then, theory, there, these, they, thing,
 think, third, this, those, though, thought, thousand, threat, three, through,
 throughout, throw, thus, time, to, today, together, tonight, too, top, total,
 tough, toward, town, trade, traditional, training, travel, treat, treatment,
-tree, trial, trip, trouble, true, truth
+tree, trial, trip, trouble, true, truth, try, turn, TV, two, type, under,
+understand, unit, until, up, upon, us, use, us
