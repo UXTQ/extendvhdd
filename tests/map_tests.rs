@@ -98,4 +98,5 @@ think, third, this, those, though, thought, thousand, threat, three, through,
 throughout, throw, thus, time, to, today, together, tonight, too, top, total,
 tough, toward, town, trade, traditional, training, travel, treat, treatment,
 tree, trial, trip, trouble, true, truth, try, turn, TV, two, type, under,
-understand, unit, until, up, upon, us, use, us
+understand, unit, until, up, upon, us, use, usually, value, various, very,
+victim, view, violence, visit, 
