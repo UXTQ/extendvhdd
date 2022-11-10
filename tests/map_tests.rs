@@ -101,4 +101,5 @@ tree, trial, trip, trouble, true, truth, try, turn, TV, two, type, under,
 understand, unit, until, up, upon, us, use, usually, value, various, very,
 victim, view, violence, visit, voice, vote, wait, walk, wall, want, war, watch,
 water, way, we, weapon, wear, week, weight, well, west, western, what, whatever,
-when, where, whether, which, while, white, who, whole, whom
+when, where, whether, which, while, white, who, whole, whom, whose, why, wide,
+wife, will, win, wind, window, wis
