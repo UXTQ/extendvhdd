@@ -103,4 +103,5 @@ victim, view, violence, visit, voice, vote, wait, walk, wall, want, war, watch,
 water, way, we, weapon, wear, week, weight, well, west, western, what, whatever,
 when, where, whether, which, while, white, who, whole, whom, whose, why, wide,
 wife, will, win, wind, window, wish, with, within, without, woman, wonder, word,
-work, worker, world, worry, would, write, writer, wrong, yard, yea
+work, worker, world, worry, would, write, writer, wrong, yard, yeah, year, yes,
+yet, you, young, your, yourself"
