@@ -107,3 +107,6 @@ work, worker, world, worry, would, write, writer, wrong, yard, yeah, year, yes,
 yet, you, young, your, yourself"#
         .split(',')
         .map(|word| word.trim())
+        .collect();
+
+    let mut word_pairs: Vec<_> = V
