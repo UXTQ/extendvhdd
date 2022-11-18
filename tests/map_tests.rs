@@ -109,4 +109,6 @@ yet, you, young, your, yourself"#
         .map(|word| word.trim())
         .collect();
 
-    let mut word_pairs: Vec<_> = V
+    let mut word_pairs: Vec<_> = Vec::new();
+    for word in &words {
+        for other_word in &wor
