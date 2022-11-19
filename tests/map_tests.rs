@@ -111,4 +111,5 @@ yet, you, young, your, yourself"#
 
     let mut word_pairs: Vec<_> = Vec::new();
     for word in &words {
-        for other_word in &wor
+        for other_word in &words {
+            word_pairs.push(word.to_string() + " " + other_word
