@@ -115,4 +115,9 @@ yet, you, young, your, yourself"#
             word_pairs.push(word.to_string() + " " + other_word);
         }
     }
-    assert_eq!(1_000_000, word_pairs.le
+    assert_eq!(1_000_000, word_pairs.len());
+    word_pairs
+}
+
+#[allow(unused)] // False positive
+fn tes
