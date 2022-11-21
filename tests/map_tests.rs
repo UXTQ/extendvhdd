@@ -120,4 +120,5 @@ yet, you, young, your, yourself"#
 }
 
 #[allow(unused)] // False positive
-fn tes
+fn test_hash_common_words<B: BuildHasher>(build_hasher: &B) {
+    le
