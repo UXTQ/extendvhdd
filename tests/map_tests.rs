@@ -121,4 +121,5 @@ yet, you, young, your, yourself"#
 
 #[allow(unused)] // False positive
 fn test_hash_common_words<B: BuildHasher>(build_hasher: &B) {
-    le
+    let word_pairs: Vec<_> = gen_word_pairs();
+    check_for_collis
