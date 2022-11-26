@@ -122,4 +122,7 @@ yet, you, young, your, yourself"#
 #[allow(unused)] // False positive
 fn test_hash_common_words<B: BuildHasher>(build_hasher: &B) {
     let word_pairs: Vec<_> = gen_word_pairs();
-    check_for_collis
+    check_for_collisions(build_hasher, &word_pairs, 32);
+}
+
+#[allow(unused)] // Fa
