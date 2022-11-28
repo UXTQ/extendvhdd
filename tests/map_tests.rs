@@ -126,4 +126,4 @@ fn test_hash_common_words<B: BuildHasher>(build_hasher: &B) {
 }
 
 #[allow(unused)] // False positive
-fn check_for_collisions<H: Hash, B: B
+fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], bucket_
