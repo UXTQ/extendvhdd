@@ -128,4 +128,5 @@ fn test_hash_common_words<B: BuildHasher>(build_hasher: &B) {
 #[allow(unused)] // False positive
 fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], bucket_count: usize) {
     let mut buckets = vec![0; bucket_count];
-    for item 
+    for item in items {
+        let value = hash(item, build_hasher) as usiz
