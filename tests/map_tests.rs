@@ -134,4 +134,6 @@ fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], 
     }
     let mean = items.len() / bucket_count;
     let max = *buckets.iter().max().unwrap();
-    let min = *buckets.iter().min
+    let min = *buckets.iter().min().unwrap();
+    assert!(
+        (min as f64) > (mean
