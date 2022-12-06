@@ -136,4 +136,6 @@ fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], 
     let max = *buckets.iter().max().unwrap();
     let min = *buckets.iter().min().unwrap();
     assert!(
-        (min as f64) > (mean
+        (min as f64) > (mean as f64) * 0.95,
+        "min: {}, max:{}, {:?}",
+   
