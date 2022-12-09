@@ -143,3 +143,5 @@ fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], 
         buckets
     );
     assert!(
+        (max as f64) < (mean as f64) * 1.05,
+        "min: {}, 
