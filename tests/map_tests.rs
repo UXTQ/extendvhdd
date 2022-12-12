@@ -147,4 +147,9 @@ fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], 
         "min: {}, max:{}, {:?}",
         min,
         max,
-        buc
+        buckets
+    );
+}
+
+#[cfg(feature = "specialize")]
+#[allo
