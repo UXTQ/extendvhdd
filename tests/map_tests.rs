@@ -153,4 +153,5 @@ fn check_for_collisions<H: Hash, B: BuildHasher>(build_hasher: &B, items: &[H], 
 
 #[cfg(feature = "specialize")]
 #[allow(unused)] // False positive
-fn hash<H: Hash, B: Build
+fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
+    build_hashe
