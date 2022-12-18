@@ -158,4 +158,5 @@ fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
 }
 
 #[cfg(not(feature = "specialize"))]
-#[allo
+#[allow(unused)] // False positive
+fn hash<H: Hash, B:
