@@ -160,4 +160,5 @@ fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
 #[cfg(not(feature = "specialize"))]
 #[allow(unused)] // False positive
 fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
-    let mut ha
+    let mut hasher = build_hasher.build_hasher();
+    b.hash(&mut hashe
