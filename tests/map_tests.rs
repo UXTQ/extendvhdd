@@ -161,4 +161,9 @@ fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
 #[allow(unused)] // False positive
 fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
     let mut hasher = build_hasher.build_hasher();
-    b.hash(&mut hashe
+    b.hash(&mut hasher);
+    hasher.finish()
+}
+
+#[test]
+fn test_bucket
