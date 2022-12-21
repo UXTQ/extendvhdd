@@ -166,4 +166,5 @@ fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
 }
 
 #[test]
-fn test_bucket
+fn test_bucket_distribution() {
+    let build_hasher = RandomS
