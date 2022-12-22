@@ -168,4 +168,6 @@ fn hash<H: Hash, B: BuildHasher>(b: &H, build_hasher: &B) -> u64 {
 #[test]
 fn test_bucket_distribution() {
     let build_hasher = RandomState::with_seeds(1, 2, 3, 4);
-    test_hash_common_words(&bu
+    test_hash_common_words(&build_hasher);
+    let sequence: Vec<_> = (0..320000).collect();
+ 
