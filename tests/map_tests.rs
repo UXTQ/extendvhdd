@@ -170,4 +170,4 @@ fn test_bucket_distribution() {
     let build_hasher = RandomState::with_seeds(1, 2, 3, 4);
     test_hash_common_words(&build_hasher);
     let sequence: Vec<_> = (0..320000).collect();
- 
+    check_for_collisions(&build_hasher, &sequence, 32)
