@@ -173,4 +173,4 @@ fn test_bucket_distribution() {
     check_for_collisions(&build_hasher, &sequence, 32);
     let sequence: Vec<_> = (0..2560000).collect();
     check_for_collisions(&build_hasher, &sequence, 256);
-   
+    let sequence: Vec<_> = (0..320000).map(|i| i * 1024).colle
