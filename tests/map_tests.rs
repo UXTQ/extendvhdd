@@ -179,4 +179,7 @@ fn test_bucket_distribution() {
     check_for_collisions(&build_hasher, &sequence, 256);
 }
 
-#[cfg(featu
+#[cfg(feature = "std")]
+#[test]
+fn test_ahash_alias_map_construction() {
+    
