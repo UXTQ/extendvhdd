@@ -182,4 +182,5 @@ fn test_bucket_distribution() {
 #[cfg(feature = "std")]
 #[test]
 fn test_ahash_alias_map_construction() {
-    
+    let mut map = ahash::HashMap::default();
+    map.insert(1, 
