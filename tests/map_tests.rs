@@ -183,4 +183,6 @@ fn test_bucket_distribution() {
 #[test]
 fn test_ahash_alias_map_construction() {
     let mut map = ahash::HashMap::default();
-    map.insert(1, 
+    map.insert(1, "test");
+    use ahash::HashMapExt;
+    let mut map = ahash:
