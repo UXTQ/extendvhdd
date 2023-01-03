@@ -189,4 +189,6 @@ fn test_ahash_alias_map_construction() {
     map.insert(1, "test");
 }
 
-#[cfg(f
+#[cfg(feature = "std")]
+#[test]
+fn test_ahash_alias_set_construction() {
