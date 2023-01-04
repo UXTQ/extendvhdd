@@ -192,3 +192,5 @@ fn test_ahash_alias_map_construction() {
 #[cfg(feature = "std")]
 #[test]
 fn test_ahash_alias_set_construction() {
+    let mut set = ahash::HashSet::default();
+   
