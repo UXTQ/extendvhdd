@@ -196,4 +196,8 @@ fn test_ahash_alias_set_construction() {
     set.insert(1);
 
     use ahash::HashSetExt;
-    let mut set = a
+    let mut set = ahash::HashSet::with_capacity(1235);
+    set.insert(1);
+}
+
+fn a
