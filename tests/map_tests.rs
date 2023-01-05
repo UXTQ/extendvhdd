@@ -193,4 +193,7 @@ fn test_ahash_alias_map_construction() {
 #[test]
 fn test_ahash_alias_set_construction() {
     let mut set = ahash::HashSet::default();
-   
+    set.insert(1);
+
+    use ahash::HashSetExt;
+    let mut set = a
