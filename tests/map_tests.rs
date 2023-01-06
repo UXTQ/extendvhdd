@@ -200,4 +200,5 @@ fn test_ahash_alias_set_construction() {
     set.insert(1);
 }
 
-fn a
+fn ahash_vec<H: Hash>(b: &Vec<H>) -> u64 {
+    let mut total: 
