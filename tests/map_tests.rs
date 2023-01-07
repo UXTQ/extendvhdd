@@ -201,4 +201,6 @@ fn test_ahash_alias_set_construction() {
 }
 
 fn ahash_vec<H: Hash>(b: &Vec<H>) -> u64 {
-    let mut total: 
+    let mut total: u64 = 0;
+    for item in b {
+        let mut hasher = Rando
