@@ -205,4 +205,6 @@ fn ahash_vec<H: Hash>(b: &Vec<H>) -> u64 {
     for item in b {
         let mut hasher = RandomState::with_seeds(12, 34, 56, 78).build_hasher();
         item.hash(&mut hasher);
-        total
+        total = total.wrapping_add(hasher.finish());
+    }
+  
