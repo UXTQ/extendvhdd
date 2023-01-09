@@ -207,4 +207,8 @@ fn ahash_vec<H: Hash>(b: &Vec<H>) -> u64 {
         item.hash(&mut hasher);
         total = total.wrapping_add(hasher.finish());
     }
-  
+    total
+}
+
+fn fxhash_vec<H: Hash>(b: &Vec<H>) -> u64 {
+    let m
