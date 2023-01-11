@@ -211,4 +211,6 @@ fn ahash_vec<H: Hash>(b: &Vec<H>) -> u64 {
 }
 
 fn fxhash_vec<H: Hash>(b: &Vec<H>) -> u64 {
-    let m
+    let mut total: u64 = 0;
+    for item in b {
+        let mut hashe
