@@ -215,4 +215,7 @@ fn fxhash_vec<H: Hash>(b: &Vec<H>) -> u64 {
     for item in b {
         let mut hasher = FxHasher::default();
         item.hash(&mut hasher);
-  
+        total = total.wrapping_add(hasher.finish());
+    }
+    total
+}
