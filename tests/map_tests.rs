@@ -219,3 +219,6 @@ fn fxhash_vec<H: Hash>(b: &Vec<H>) -> u64 {
     }
     total
 }
+
+fn bench_ahash_words(c: &mut Criterion) {
+ 
