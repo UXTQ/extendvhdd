@@ -224,3 +224,6 @@ fn bench_ahash_words(c: &mut Criterion) {
     let words = gen_word_pairs();
     c.bench_function("aes_words", |b| b.iter(|| black_box(ahash_vec(&words))));
 }
+
+fn bench_fx_words(c: &mut Criterion) {
+    let words = 
