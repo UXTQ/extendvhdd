@@ -222,4 +222,5 @@ fn fxhash_vec<H: Hash>(b: &Vec<H>) -> u64 {
 
 fn bench_ahash_words(c: &mut Criterion) {
     let words = gen_word_pairs();
-    c.bench_function("aes_words"
+    c.bench_function("aes_words", |b| b.iter(|| black_box(ahash_vec(&words))));
+}
