@@ -226,4 +226,5 @@ fn bench_ahash_words(c: &mut Criterion) {
 }
 
 fn bench_fx_words(c: &mut Criterion) {
-    let words = 
+    let words = gen_word_pairs();
+    c.bench_function("fx_words", |b| b.iter(|| bla
