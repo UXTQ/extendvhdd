@@ -231,4 +231,4 @@ fn bench_fx_words(c: &mut Criterion) {
 }
 
 criterion_main!(benches);
-criterion_gro
+criterion_group!(benches, bench_ahash_words, bench_fx_words,);
