@@ -5,4 +5,5 @@ use std::hash::{BuildHasher, Hash, Hasher};
 extern crate no_panic;
 
 #[inline(never)]
-#[no_p
+#[no_panic]
+fn hash_test_final(num: i32, string: &str) -
