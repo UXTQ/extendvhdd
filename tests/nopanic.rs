@@ -11,3 +11,5 @@ fn hash_test_final(num: i32, string: &str) -> (u64, u64) {
     let mut hasher1 = RandomState::with_seeds(1, 2, 3, 4).build_hasher();
     let mut hasher2 = RandomState::with_seeds(3, 4, 5, 6).build_hasher();
     hasher1.write_i32(num);
+    hasher2.write(string.as_bytes());
+    (hasher1.finish(), h
