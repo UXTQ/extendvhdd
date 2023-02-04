@@ -19,3 +19,9 @@ fn hash_test_final(num: i32, string: &str) -> (u64, u64) {
 fn hash_test_final_wrapper(num: i32, string: &str) {
     hash_test_final(num, string);
 }
+
+struct SimpleBuildHasher {
+    hasher: AHasher,
+}
+
+impl
