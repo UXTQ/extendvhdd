@@ -24,4 +24,5 @@ struct SimpleBuildHasher {
     hasher: AHasher,
 }
 
-impl
+impl SimpleBuildHasher {
+    fn hash_one<T: Hash>(&self, x: T) -> u64
