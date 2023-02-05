@@ -26,3 +26,7 @@ struct SimpleBuildHasher {
 
 impl SimpleBuildHasher {
     fn hash_one<T: Hash>(&self, x: T) -> u64
+    where
+        Self: Sized,
+    {
+        let mut
