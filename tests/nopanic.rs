@@ -29,4 +29,5 @@ impl SimpleBuildHasher {
     where
         Self: Sized,
     {
-        let mut
+        let mut hasher = self.build_hasher();
+        x.hash(&mut hasher)
