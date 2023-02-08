@@ -30,4 +30,9 @@ impl SimpleBuildHasher {
         Self: Sized,
     {
         let mut hasher = self.build_hasher();
-        x.hash(&mut hasher)
+        x.hash(&mut hasher);
+        hasher.finish()
+    }
+}
+
+impl BuildHasher for Sim
