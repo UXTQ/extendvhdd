@@ -35,4 +35,7 @@ impl SimpleBuildHasher {
     }
 }
 
-impl BuildHasher for Sim
+impl BuildHasher for SimpleBuildHasher {
+    type Hasher = AHasher;
+
+    fn build_hasher(&se
