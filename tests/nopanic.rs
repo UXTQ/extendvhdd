@@ -38,4 +38,7 @@ impl SimpleBuildHasher {
 impl BuildHasher for SimpleBuildHasher {
     type Hasher = AHasher;
 
-    fn build_hasher(&se
+    fn build_hasher(&self) -> Self::Hasher {
+        self.hasher.clone()
+    }
+}
