@@ -42,3 +42,7 @@ impl BuildHasher for SimpleBuildHasher {
         self.hasher.clone()
     }
 }
+
+#[inline(never)]
+#[no_panic]
+fn hash_test_specialize(num:
