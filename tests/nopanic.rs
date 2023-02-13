@@ -45,4 +45,5 @@ impl BuildHasher for SimpleBuildHasher {
 
 #[inline(never)]
 #[no_panic]
-fn hash_test_specialize(num:
+fn hash_test_specialize(num: i32, string: &str) -> (u64, u64) {
+    let hasher1 = RandomState
