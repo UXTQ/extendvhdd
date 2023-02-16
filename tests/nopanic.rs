@@ -47,4 +47,6 @@ impl BuildHasher for SimpleBuildHasher {
 #[no_panic]
 fn hash_test_specialize(num: i32, string: &str) -> (u64, u64) {
     let hasher1 = RandomState::with_seeds(1, 2, 3, 4).build_hasher();
-    let hasher2 = R
+    let hasher2 = RandomState::with_seeds(1, 2, 3, 4).build_hasher();
+    (
+  
