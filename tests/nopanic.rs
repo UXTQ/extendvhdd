@@ -50,4 +50,4 @@ fn hash_test_specialize(num: i32, string: &str) -> (u64, u64) {
     let hasher2 = RandomState::with_seeds(1, 2, 3, 4).build_hasher();
     (
         SimpleBuildHasher { hasher: hasher1 }.hash_one(num),
-   
+        SimpleBuildHasher { hasher: hasher2 }.hash_one(string.as_
