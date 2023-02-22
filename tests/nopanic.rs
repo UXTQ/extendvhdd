@@ -63,4 +63,5 @@ fn hash_test_random_wrapper(num: i32, string: &str) {
 #[no_panic]
 fn hash_test_random(num: i32, string: &str) -> (u64, u64) {
     let build_hasher1 = RandomState::with_seeds(1, 2, 3, 4);
-    let build_hasher2 = RandomState::w
+    let build_hasher2 = RandomState::with_seeds(1, 2, 3, 4);
+    (build_hasher1.hash_one(&n
