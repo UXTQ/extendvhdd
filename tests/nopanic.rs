@@ -68,4 +68,9 @@ fn hash_test_random(num: i32, string: &str) -> (u64, u64) {
 }
 
 #[inline(never)]
-fn hash_test_specialize_wrapper(num: i32, string: &str) 
+fn hash_test_specialize_wrapper(num: i32, string: &str) {
+    hash_test_specialize(num, string);
+}
+
+#[test]
+fn test
