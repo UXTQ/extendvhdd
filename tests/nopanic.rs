@@ -67,4 +67,5 @@ fn hash_test_random(num: i32, string: &str) -> (u64, u64) {
     (build_hasher1.hash_one(&num), build_hasher2.hash_one(string.as_bytes()))
 }
 
-#[
+#[inline(never)]
+fn hash_test_specialize_wrapper(num: i32, string: &str) 
