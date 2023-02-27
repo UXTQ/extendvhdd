@@ -75,4 +75,5 @@ fn hash_test_specialize_wrapper(num: i32, string: &str) {
 #[test]
 fn test_no_panic() {
     hash_test_final_wrapper(2, "Foo");
-   
+    hash_test_specialize_wrapper(2, "Bar");
+    hash_test_r
